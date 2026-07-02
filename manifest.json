@@ -1,0 +1,9 @@
+{
+  "name": "Jardín de Oración ",
+  "short_name": "Jardín Oración",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fbf2ff",
+  "theme_color": "#6f2dbd",
+  "icons": []
+}
