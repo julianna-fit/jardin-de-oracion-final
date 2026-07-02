@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jardín de Oración</title>
+<link rel="stylesheet" href="styles.css?v=20260702-final-777">
+<link rel="manifest" href="manifest.json">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-46QY175SK2');
+</script>
+
+</head>
+<body>
+<header><img src="portada.png?v=20260702-final-777" class="cover" alt="Jardín de Oración"></header>
+<nav>
+<button onclick="show('inicio')">Inicio</button>
+<button onclick="show('devocional')">Devocional</button>
+<button onclick="show('musica')">Música</button>
+<button onclick="show('oracion')">Oración</button>
+<button onclick="show('diario')">Diario</button>
+<button onclick="show('juegos')">Juegos</button>
+<button onclick="show('calendario')">Calendario</button>
+<button onclick="show('promesas')">Promesas</button>
+<button onclick="show('progreso')">Progreso</button><button onclick="show('creadora')">Creadora</button><button onclick="show('certificado')">Certificado</button>
+<button onclick="show('privacidad')">Privacidad</button></nav>
+<main>
+<section id="inicio" class="tab active">
+<div class="card center welcomeCard">
+<h1>🌿 Jardín de Oración</h1>
+<h3>Mujeres en las Manos de Dios</h3><img src="julianna-foto-app.jpeg?v=20260702-final-777" class="fullPhotoWelcome" alt="Julianna Guerrero">
+<p>Bienvenida al Jardín de Oración, una experiencia devocional diseñada para mujeres que desean caminar cada día más cerca de Dios.</p>
+<p class="verse">“Confía en Jehová con todo tu corazón.”<br><b>Proverbios 3:5</b></p>
+<p class="creatorLine">Creada por <b>Julianna Guerrero</b></p>
+</div>
+<div class="grid">
+<button class="tile" onclick="show('devocional')">📖<span>Devocional</span></button>
+<button class="tile" onclick="show('musica')">🎵<span>Música</span></button>
+<button class="tile" onclick="show('oracion')">🙏<span>Oración</span></button>
+<button class="tile" onclick="show('diario')">📝<span>Diario</span></button>
+<button class="tile" onclick="show('juegos')">🏆<span>Juegos</span></button>
+<button class="tile" onclick="show('promesas')">💜<span>Promesas</span></button>
+</div>
+
+<div class="card center">
+  <h3>🌷 Creadora de la App</h3>
+  <img src="julianna-foto-app.jpeg?v=20260702-final-777" class="creatorFullPhotoSmall" alt="Julianna Guerrero">
+  <p><b>Julianna Guerrero</b></p>
+  <p>Creado con amor para la gloria de Dios.</p>
+</div>
+
+</section>
+<section id="devocional" class="tab">
+  <h2>📖 Devocionales</h2>
+  <div class="card center">
+    <h3>🌷 Devocional de Julio</h3>
+    <p>Reflexiones diarias para orar, escribir y crecer en tu relación con Dios.</p>
+  </div>
+  <div id="jdDevoBox"></div>
+</section>
+
+<section id="musica" class="tab"><h2>🎵 Música para el Alma</h2><div class="card center"><h3>Instrumental para oración</h3><p>Toca ▶️ dentro del reproductor.</p><div class="videoBox"><iframe src="https://www.youtube.com/embed/zk9qRkJ4Pso" allowfullscreen></iframe></div></div></section>
+<section id="oracion" class="tab"><h2>🙏 Jardín de Oración</h2><input id="pName" placeholder="Nombre"><textarea id="pNeed" placeholder="Petición"></textarea><button class="primary" onclick="addPrayer()">Añadir petición</button><div id="prayerBox"></div></section>
+<section id="diario" class="tab"><h2>📝 Diario Espiritual</h2><p class="soft center">Formato de fecha: Mes/Día/Año — ejemplo 07/01/2026</p><input type="text" id="jDate" inputmode="numeric" placeholder="MM/DD/YYYY"><p class="dateHint">Ejemplo: 07/01/2026</p><textarea id="jText" placeholder="¿Qué habló Dios a tu corazón?"></textarea><textarea id="jThanks" placeholder="3 bendiciones de hoy"></textarea><button class="primary" onclick="saveJournal()">Guardar</button><div id="journalBox"></div></section>
+<section id="juegos" class="tab"><h2>🏆 Juegos Bíblicos Diarios</h2><div class="card center"><h3>🌸 Jardín Espiritual</h3><div id="gardenBox" class="gardenBox"></div><p id="gameProgressText">Juegos completados: 0/31</p></div><div class="filters"><button onclick="filterGames('todos')">🌿 Todos</button><button onclick="filterGames('pendientes')">🕊️ Pendientes</button><button onclick="filterGames('completados')">🌸 Completados</button></div><div id="gamesBox"></div></section>
+<section id="calendario" class="tab">
+  <h2>📅 Calendario Espiritual</h2>
+  <div class="card center">
+    <h3 id="jdCalTitle">Calendario</h3>
+    <p>Marca tus días completados y mira tu progreso espiritual del mes.</p>
+  </div>
+  <div id="jdCalendarBox" class="calendarGrid"></div>
+  <div class="card center">
+    <p id="jdCalendarSummary"></p>
+  </div>
+</section>
+
+<section id="promesas" class="tab">
+  <h2>💜 Promesas</h2>
+
+  <div class="card promiseHero">
+    <h3>🌸 Promesa del día</h3>
+    <p id="jdDailyText" class="promiseBig">Cargando promesa...</p>
+    <p id="jdDailyRef" class="promiseRef"></p>
+    <button class="secondary" onclick="jdFavoriteDaily()">❤️ Guardar en favoritas</button>
+  </div>
+
+  <div class="promiseTabs">
+    <button onclick="jdSetView('todas')">📖 Todas</button>
+    <button onclick="jdSetView('categorias')">📚 Categorías</button>
+    <button onclick="jdSetView('favoritas')">❤️ Favoritas</button>
+    <button onclick="jdSetView('mias')">➕ Mis promesas</button>
+  </div>
+
+  <input id="jdSearch" placeholder="Buscar promesa, palabra o referencia..." oninput="jdRenderPromises()">
+  <div id="jdCategoryBox" class="categoryGrid"></div>
+
+  <div class="card addPromiseCard">
+    <h3>➕ Agregar mi promesa</h3>
+    <input id="jdNewRef" placeholder="Referencia bíblica, ej. Filipenses 4:13">
+    <textarea id="jdNewText" placeholder="Escribe o pega el texto de la promesa..."></textarea>
+    <textarea id="jdNewNote" placeholder="Reflexión personal opcional..."></textarea>
+    <select id="jdNewCat">
+      <option value="Fe">Fe</option>
+      <option value="Paz">Paz</option>
+      <option value="Esperanza">Esperanza</option>
+      <option value="Fortaleza">Fortaleza</option>
+      <option value="Sanidad">Sanidad</option>
+      <option value="Familia">Familia</option>
+      <option value="Matrimonio">Matrimonio</option>
+      <option value="Protección">Protección</option>
+      <option value="Salvación">Salvación</option>
+      <option value="Espíritu Santo">Espíritu Santo</option>
+      <option value="Oración">Oración</option>
+    </select>
+    <button class="primary" onclick="jdAddPromise()">Guardar promesa</button>
+  </div>
+
+  <div id="jdPromisesBox"></div>
+</section>
+
+<section id="progreso" class="tab"><h2>📊 Progreso</h2><div class="card center"><div class="circle" id="progressCircle">0%</div><p id="progressText"></p></div><button class="primary" onclick="downloadBackup()">Descargar respaldo</button></section>
+
+<section id="creadora" class="tab">
+  <h2>🌷 Sobre la Creadora</h2>
+  <div class="card center creatorCard">
+    <img src="julianna-foto-app.jpeg?v=20260702-final-777" class="creatorFullPhoto" alt="Julianna Guerrero">
+    <h3>Julianna Guerrero</h3>
+    <p>Esta aplicación fue creada con amor y oración para ayudar a las mujeres a fortalecer su relación con Dios a través del estudio de la Biblia, la oración, la gratitud y la reflexión diaria.</p>
+    <p>Mi deseo es que cada persona que utilice este espacio encuentre paz, esperanza y una comunión más profunda con Cristo.</p>
+    <p class="verse">“Acercaos a Dios, y él se acercará a vosotros.”<br><b>Santiago 4:8</b></p>
+  </div>
+
+  <div class="card">
+    <h3>💌 Enviar petición de oración</h3>
+    <p>Escribe aquí una petición especial. Se enviará de forma privada al ministerio de oración y también quedará guardada en tu dispositivo.</p>
+
+    <form name="peticiones-oracion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="specialPrayerForm">
+      <input type="hidden" name="form-name" value="peticiones-oracion">
+      <p style="display:none">
+        <label>No llenar: <input name="bot-field"></label>
+      </p>
+
+      <input id="specialPrayerName" name="nombre" placeholder="Nombre o título de la petición" required>
+      <textarea id="specialPrayerText" name="peticion" placeholder="Escribe la petición..." required></textarea>
+      <input type="hidden" id="specialPrayerDate" name="fecha">
+      <button class="primary" type="submit">Enviar petición</button>
+    </form>
+
+    <p id="specialPrayerStatus" class="formStatus"></p>
+  </div>
+</section>
+
+<section id="certificado" class="tab">
+  <h2>🏆 Certificado Espiritual</h2>
+  <div class="certificate" id="certificateBox">
+    <div class="certFlowers">🌸 🌿 🦋 🌷 💜</div>
+    <img src="julianna-foto-app.jpeg?v=20260702-final-777" class="certificateFullPhoto" alt="Julianna Guerrero"><h1>¡Felicidades!</h1>
+    <p>Has completado tu recorrido espiritual de este mes.</p>
+    <p>Que Dios continúe guiando tus pasos y fortaleciendo tu fe.</p>
+    <h2>Jardín de Oración</h2>
+    <p>Creado por <b>Julianna Guerrero</b></p>
+    <p class="verse">“El que comenzó en vosotros la buena obra, la perfeccionará.”<br><b>Filipenses 1:6</b></p>
+  </div>
+  <button class="primary" onclick="window.print()">Imprimir / Guardar certificado</button>
+  <p class="soft center" id="certificateStatus"></p>
+</section>
+
+
+<section id="privacidad" class="tab">
+  <h2>🔒 Privacidad</h2>
+  <div class="card">
+    <p><strong>Tu privacidad es importante para nosotros.</strong></p>
+    <p>Jardín de Oración utiliza estadísticas anónimas para comprender cómo se usa la aplicación y mejorar la experiencia de los usuarios.</p>
+    <p>La información recopilada es únicamente de carácter general, como número de visitas, secciones más utilizadas y tipo de dispositivo.</p>
+    <p><strong>Tus notas personales, diario espiritual, promesas guardadas y reflexiones permanecen almacenadas únicamente en tu dispositivo. Las peticiones enviadas desde el formulario de oración serán compartidas con el ministerio de oración para poder interceder por ellas.</strong></p>
+    <p>No compartimos ni vendemos información personal de los usuarios.</p>
+    <p>🌷 Creado por Julianna Guerrero</p>
+  </div>
+</section>
+
+</main><footer>✨ Jardín de Oración <br>Creado con amor para la gloria de Dios<br><b>Por Julianna Guerrero © 2026</b></footer>
+<script src="app.js?v=20260702-final-777"></script>
+
+<script>
+window.JD_PROMISES = [{"ref": "Filipenses 4:13", "text": "Todo lo puedo en Cristo que me fortalece.", "cat": "Fortaleza"}, {"ref": "Jeremías 29:11", "text": "Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.", "cat": "Esperanza"}, {"ref": "Salmo 23:1", "text": "Jehová es mi pastor; nada me faltará.", "cat": "Paz"}, {"ref": "Isaías 41:10", "text": "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.", "cat": "Fortaleza"}, {"ref": "Mateo 6:33", "text": "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.", "cat": "Fe"}, {"ref": "Salmo 46:1", "text": "Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.", "cat": "Protección"}, {"ref": "Juan 14:27", "text": "La paz os dejo, mi paz os doy; no se turbe vuestro corazón, ni tenga miedo.", "cat": "Paz"}, {"ref": "Romanos 8:28", "text": "A los que aman a Dios, todas las cosas les ayudan a bien.", "cat": "Esperanza"}, {"ref": "Josué 1:9", "text": "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes.", "cat": "Fortaleza"}, {"ref": "Salmo 91:1", "text": "El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente.", "cat": "Protección"}, {"ref": "Proverbios 3:5", "text": "Confía en Jehová con todo tu corazón, y no te apoyes en tu propia prudencia.", "cat": "Fe"}, {"ref": "Isaías 40:31", "text": "Los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.", "cat": "Esperanza"}, {"ref": "Salmo 37:4", "text": "Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón.", "cat": "Esperanza"}, {"ref": "Salmo 34:18", "text": "Cercano está Jehová a los quebrantados de corazón; y salva a los contritos de espíritu.", "cat": "Sanidad"}, {"ref": "Jeremías 33:3", "text": "Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.", "cat": "Oración"}, {"ref": "Mateo 11:28", "text": "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", "cat": "Paz"}, {"ref": "1 Pedro 5:7", "text": "Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.", "cat": "Paz"}, {"ref": "Éxodo 14:14", "text": "Jehová peleará por vosotros, y vosotros estaréis tranquilos.", "cat": "Protección"}, {"ref": "Deuteronomio 31:8", "text": "Jehová va delante de ti; él estará contigo, no te dejará, ni te desamparará.", "cat": "Protección"}, {"ref": "2 Corintios 12:9", "text": "Bástate mi gracia; porque mi poder se perfecciona en la debilidad.", "cat": "Fortaleza"}, {"ref": "Santiago 1:5", "text": "Si alguno de vosotros tiene falta de sabiduría, pídala a Dios.", "cat": "Fe"}, {"ref": "Juan 3:16", "text": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", "cat": "Salvación"}, {"ref": "Romanos 10:9", "text": "Si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo.", "cat": "Salvación"}, {"ref": "Hechos 16:31", "text": "Cree en el Señor Jesucristo, y serás salvo, tú y tu casa.", "cat": "Salvación"}, {"ref": "Isaías 53:5", "text": "Por su llaga fuimos nosotros curados.", "cat": "Sanidad"}, {"ref": "Jeremías 30:17", "text": "Mas yo haré venir sanidad para ti, y sanaré tus heridas, dice Jehová.", "cat": "Sanidad"}, {"ref": "3 Juan 1:2", "text": "Amado, yo deseo que tú seas prosperado en todas las cosas, y que tengas salud.", "cat": "Sanidad"}, {"ref": "Isaías 54:13", "text": "Y todos tus hijos serán enseñados por Jehová; y se multiplicará la paz de tus hijos.", "cat": "Familia"}, {"ref": "Josué 24:15", "text": "Yo y mi casa serviremos a Jehová.", "cat": "Familia"}, {"ref": "Efesios 4:32", "text": "Sed benignos unos con otros, misericordiosos, perdonándoos unos a otros.", "cat": "Matrimonio"}, {"ref": "Eclesiastés 4:12", "text": "Cordón de tres dobleces no se rompe pronto.", "cat": "Matrimonio"}, {"ref": "1 Corintios 13:4", "text": "El amor es sufrido, es benigno; el amor no tiene envidia.", "cat": "Matrimonio"}, {"ref": "Lucas 11:13", "text": "Vuestro Padre celestial dará el Espíritu Santo a los que se lo pidan.", "cat": "Espíritu Santo"}, {"ref": "Hechos 1:8", "text": "Recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo.", "cat": "Espíritu Santo"}, {"ref": "Gálatas 5:22-23", "text": "El fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza.", "cat": "Espíritu Santo"}, {"ref": "2 Timoteo 1:7", "text": "No nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.", "cat": "Fortaleza"}, {"ref": "Salmo 55:22", "text": "Echa sobre Jehová tu carga, y él te sustentará.", "cat": "Paz"}, {"ref": "Lamentaciones 3:22-23", "text": "Por la misericordia de Jehová no hemos sido consumidos... nuevas son cada mañana.", "cat": "Esperanza"}, {"ref": "Apocalipsis 21:4", "text": "Enjugará Dios toda lágrima de los ojos de ellos.", "cat": "Esperanza"}, {"ref": "Hebreos 11:1", "text": "Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve.", "cat": "Fe"}, {"ref": "Marcos 11:24", "text": "Todo lo que pidiereis orando, creed que lo recibiréis, y os vendrá.", "cat": "Fe"}, {"ref": "Salmo 121:7-8", "text": "Jehová te guardará de todo mal; él guardará tu alma.", "cat": "Protección"}, {"ref": "Nahúm 1:7", "text": "Jehová es bueno, fortaleza en el día de la angustia; y conoce a los que en él confían.", "cat": "Fortaleza"}, {"ref": "Sofonías 3:17", "text": "Jehová está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría.", "cat": "Esperanza"}, {"ref": "Mateo 28:20", "text": "He aquí yo estoy con vosotros todos los días, hasta el fin del mundo.", "cat": "Fe"}];
+
+(function(){
+  let view = 'todas';
+  let selectedCat = '';
+  let current = [];
+
+  function getLS(k, fallback){
+    try { return JSON.parse(localStorage.getItem(k)) ?? fallback; } catch(e){ return fallback; }
+  }
+  function setLS(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+
+  function allPromises(){
+    return window.JD_PROMISES.concat(getLS('jdCustomPromises', []));
+  }
+
+  window.jdSetView = function(v){
+    view = v;
+    selectedCat = '';
+    window.jdRenderPromises();
+  };
+
+  window.jdSetCategory = function(cat){
+    view = 'categorias';
+    selectedCat = cat;
+    window.jdRenderPromises();
+  };
+
+  function renderDaily(){
+    const p = window.JD_PROMISES[new Date().getDate() % window.JD_PROMISES.length];
+    const t = document.getElementById('jdDailyText');
+    const r = document.getElementById('jdDailyRef');
+    if(t) t.textContent = '“' + p.text + '”';
+    if(r) r.textContent = p.ref;
+  }
+
+  window.jdFavoriteDaily = function(){
+    const p = window.JD_PROMISES[new Date().getDate() % window.JD_PROMISES.length];
+    toggleFav(p);
+  };
+
+  function renderCats(){
+    const box = document.getElementById('jdCategoryBox');
+    if(!box) return;
+    const cats = ['Paz','Fe','Esperanza','Fortaleza','Sanidad','Familia','Matrimonio','Protección','Salvación','Espíritu Santo','Oración'];
+    if(view !== 'categorias'){
+      box.innerHTML = '';
+      return;
+    }
+    box.innerHTML = cats.map(c => '<button class="categoryBtn" onclick="jdSetCategory(\'' + c + '\')">💜 ' + c + '</button>').join('');
+  }
+
+  window.jdRenderPromises = function(){
+    renderDaily();
+    renderCats();
+    const box = document.getElementById('jdPromisesBox');
+    if(!box) return;
+
+    const q = (document.getElementById('jdSearch')?.value || '').toLowerCase();
+    const favs = getLS('jdFavoritePromises', []);
+    let list = allPromises();
+
+    if(view === 'favoritas'){
+      list = list.filter(p => favs.some(f => f.ref === p.ref && f.text === p.text));
+    }
+    if(view === 'mias'){
+      list = getLS('jdCustomPromises', []);
+    }
+    if(view === 'categorias' && selectedCat){
+      list = list.filter(p => p.cat === selectedCat);
+    }
+    if(q){
+      list = list.filter(p => (p.ref + ' ' + p.text + ' ' + (p.cat || '')).toLowerCase().includes(q));
+    }
+
+    current = list;
+    if(!list.length){
+      box.innerHTML = '<div class="card">No hay promesas en esta sección todavía.</div>';
+      return;
+    }
+
+    box.innerHTML = list.map((p, i) => {
+      const isFav = favs.some(f => f.ref === p.ref && f.text === p.text);
+      return '<div class="card promiseCard">' +
+        '<span class="categoryPill">' + (p.cat || 'Promesa') + '</span>' +
+        '<h3>' + p.ref + '</h3>' +
+        '<p>' + p.text + '</p>' +
+        (p.note ? '<p><b>Reflexión:</b> ' + p.note + '</p>' : '') +
+        '<div class="promiseActions">' +
+        '<button class="secondary" onclick="jdToggleFavorite(' + i + ')">' + (isFav ? '❤️ Favorita' : '🤍 Guardar') + '</button>' +
+        '<button class="secondary" onclick="jdCopyPromise(' + i + ')">📋 Copiar</button>' +
+        '</div></div>';
+    }).join('');
+  };
+
+  function toggleFav(p){
+    let favs = getLS('jdFavoritePromises', []);
+    const exists = favs.some(f => f.ref === p.ref && f.text === p.text);
+    favs = exists ? favs.filter(f => !(f.ref === p.ref && f.text === p.text)) : favs.concat([p]);
+    setLS('jdFavoritePromises', favs);
+    window.jdRenderPromises();
+  }
+
+  window.jdToggleFavorite = function(i){
+    if(current[i]) toggleFav(current[i]);
+  };
+
+  window.jdCopyPromise = function(i){
+    const p = current[i];
+    if(!p) return;
+    const full = p.ref + ' - ' + p.text;
+    if(navigator.clipboard) navigator.clipboard.writeText(full);
+    alert('Promesa copiada 💜');
+  };
+
+  window.jdAddPromise = function(){
+    const ref = document.getElementById('jdNewRef')?.value.trim();
+    const text = document.getElementById('jdNewText')?.value.trim();
+    const note = document.getElementById('jdNewNote')?.value.trim();
+    const cat = document.getElementById('jdNewCat')?.value || 'Fe';
+    if(!ref || !text){
+      alert('Escribe la referencia y el texto de la promesa 💜');
+      return;
+    }
+    const custom = getLS('jdCustomPromises', []);
+    custom.push({ref, text, note, cat});
+    setLS('jdCustomPromises', custom);
+    document.getElementById('jdNewRef').value = '';
+    document.getElementById('jdNewText').value = '';
+    document.getElementById('jdNewNote').value = '';
+    view = 'mias';
+    window.jdRenderPromises();
+    alert('Promesa guardada 💜');
+  };
+
+  document.addEventListener('DOMContentLoaded', window.jdRenderPromises);
+  setTimeout(window.jdRenderPromises, 200);
+  setTimeout(window.jdRenderPromises, 800);
+})();
+</script>
+
+
+<script>
+window.JD_DEVOS_FIX = [{"day": 1, "title": "Confía en los planes de Dios", "verse": "Jeremías 29:11", "reflection": "Hay momentos en los que no entendemos por qué Dios permite ciertos procesos. A veces oramos, esperamos y aun así parece que nada cambia. Pero Dios no improvisa con nuestra vida. Él conoce el final desde el principio y sus pensamientos hacia nosotras son de paz y esperanza.\n\nConfiar en Dios no significa que todo será fácil, sino que podemos descansar sabiendo que Él dirige nuestros pasos aun cuando el camino no se vea claro. Hoy entrega tus planes, preocupaciones y deseos al Señor.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 2, "title": "Clama y Dios responderá", "verse": "Jeremías 33:3", "reflection": "Dios nos invita a clamar, no porque ignore nuestras necesidades, sino porque desea que nos acerquemos a Él con confianza. Muchas veces cargamos problemas en silencio, tratando de resolverlo todo con nuestras propias fuerzas, cuando el Señor nos dice: “Clama a mí”.\n\nLa oración no siempre cambia las circunstancias de inmediato, pero siempre nos cambia por dentro. Nos da paz, dirección y fortaleza para seguir.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 3, "title": "La paz que Jesús da", "verse": "Juan 14:27", "reflection": "La paz de Jesús no depende de que todo esté perfecto alrededor. Es una paz que permanece aun cuando hay preocupaciones, decisiones difíciles o momentos de incertidumbre. El mundo ofrece una paz temporal, pero Cristo ofrece una paz profunda que guarda el corazón.\n\nCuando la ansiedad quiera tomar el control, recuerda que Jesús no solo te da paz; Él mismo es tu paz.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 4, "title": "Dios renueva tus fuerzas", "verse": "Isaías 40:31", "reflection": "Todas pasamos por temporadas donde el alma se siente cansada. Cansancio físico, emocional o espiritual puede hacernos sentir que no podemos continuar. Pero Dios promete nuevas fuerzas a quienes esperan en Él.\n\nHoy, aunque te sientas débil, acércate a la fuente de tu fortaleza. Dios no rechaza a la mujer cansada; Él la levanta y la sostiene.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 5, "title": "Mi familia en las manos de Dios", "verse": "Josué 24:15", "reflection": "La familia es uno de los lugares donde más necesitamos la gracia de Dios. A veces hay heridas, diferencias, preocupaciones por los hijos, el matrimonio o la unidad del hogar. Pero cuando una mujer decide orar por su familia, se convierte en instrumento de bendición.\n\nNo subestimes tus oraciones. Dios puede entrar donde tus palabras no llegan.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 6, "title": "Un corazón agradecido", "verse": "1 Tesalonicenses 5:18", "reflection": "La gratitud cambia la manera en que vemos la vida. No significa negar los problemas, sino reconocer que aun en medio de ellos Dios sigue siendo bueno. Cuando agradecemos, nuestro corazón se enfoca menos en lo que falta y más en lo que Dios ya ha hecho.\n\nHoy toma tiempo para mirar las pequeñas bendiciones.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 7, "title": "Llena del Espíritu Santo", "verse": "Lucas 11:13", "reflection": "El Espíritu Santo es el regalo que Dios da a sus hijos para guiarlos, fortalecerlos y transformarlos. No podemos vivir una vida espiritual profunda dependiendo solo de nuestras fuerzas.\n\nPedir el Espíritu Santo debe ser una oración diaria. Él nos ayuda a amar mejor, perdonar, servir, discernir y permanecer firmes.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 8, "title": "Sanidad interior", "verse": "Salmo 147:3", "reflection": "Dios sana heridas que muchas veces nadie ve. Él conoce los dolores que guardas en silencio y las cargas que has llevado por mucho tiempo. Su amor no solo toca lo exterior; también entra a los rincones más profundos del corazón.\n\nHoy permite que Dios sane tu interior.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 9, "title": "Mujer de fe", "verse": "Hebreos 11:1", "reflection": "La fe no siempre se siente fuerte. A veces la fe es simplemente seguir creyendo cuando no vemos respuestas inmediatas. Dios honra el corazón que decide confiar aun en medio de la espera.\n\nHoy camina como una mujer de fe, no porque tengas todas las respuestas, sino porque conoces al Dios que sostiene tu vida.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 10, "title": "Sabiduría para decidir", "verse": "Santiago 1:5", "reflection": "Cada día tomamos decisiones que afectan nuestra vida, familia y caminar espiritual. Dios no quiere que caminemos confundidas; Él promete sabiduría a quienes la piden con fe.\n\nAntes de actuar, ora. Antes de responder, ora. Antes de decidir, busca dirección en la Palabra.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 11, "title": "Intercesora fiel", "verse": "Ezequiel 22:30", "reflection": "Interceder es pararse en la brecha por otros. Es amar lo suficiente como para llevar sus necesidades delante de Dios. Una mujer de oración puede impactar hogares, matrimonios, hijos, iglesias y comunidades.\n\nHoy no ores solo por ti. Presenta a alguien que necesita fortaleza, sanidad o salvación.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 12, "title": "Perdonar con la ayuda de Dios", "verse": "Colosenses 3:13", "reflection": "Perdonar no siempre es fácil, especialmente cuando la herida fue profunda. Pero Dios nos llama a soltar el peso del resentimiento para que nuestro corazón pueda sanar.\n\nPerdonar no significa aprobar lo malo; significa entregar la justicia a Dios y permitir que Él limpie nuestro interior.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 13, "title": "Dios pelea por ti", "verse": "Éxodo 14:14", "reflection": "Hay batallas que no se ganan con palabras, esfuerzo o control. Hay momentos donde Dios nos pide estar quietas y confiar en que Él pelea por nosotras.\n\nSi hoy estás enfrentando una situación difícil, recuerda que no estás sola. Dios ve, Dios sabe y Dios actúa en el tiempo correcto.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 14, "title": "Corazón limpio", "verse": "Salmo 51:10", "reflection": "Dios no busca perfección externa, busca un corazón rendido. Cuando le pedimos que cree en nosotras un corazón limpio, estamos invitando su obra transformadora.\n\nHoy pídele a Dios que limpie tus pensamientos, intenciones y emociones. Su gracia no solo perdona; también renueva.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 15, "title": "Frutos del Espíritu", "verse": "Gálatas 5:22-23", "reflection": "El carácter cristiano no se fabrica con esfuerzo humano; crece cuando permanecemos conectadas con Dios. Amor, gozo, paz y paciencia son frutos de una vida guiada por el Espíritu.\n\nHoy revisa qué fruto necesitas practicar más. Dios puede formar en ti un carácter hermoso para reflejar a Cristo.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 16, "title": "Avivamiento personal", "verse": "Habacuc 3:2", "reflection": "El avivamiento comienza en un corazón que reconoce su necesidad de Dios. Antes de pedir que Dios transforme a otros, podemos pedirle que comience en nosotras.\n\nHoy ora por un despertar espiritual en tu vida. Que tu amor por la Palabra, la oración y el servicio vuelva a encenderse.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 17, "title": "La Palabra me guía", "verse": "Salmo 119:105", "reflection": "La Palabra de Dios es lámpara cuando el camino está oscuro. Nos corrige, consuela, enseña y afirma en la verdad.\n\nNo permitas que tu día avance sin escuchar la voz de Dios. Aunque leas pocos versículos, léelos con un corazón dispuesto.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 18, "title": "Oración por los hijos", "verse": "Isaías 54:13", "reflection": "Los hijos necesitan mucho más que consejos; necesitan cobertura espiritual. La oración de una madre, abuela o mujer de fe puede marcar generaciones.\n\nHoy presenta a los niños y jóvenes de tu familia ante Dios. Pide que sean enseñados por Él y guardados en sus caminos.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 19, "title": "Matrimonio en manos de Dios", "verse": "Eclesiastés 4:12", "reflection": "Cuando Dios es el centro, el amor encuentra fuerza para resistir las pruebas. Todo matrimonio necesita oración, humildad, perdón y dirección divina.\n\nHoy ora por los matrimonios de tu familia e iglesia. Dios puede sanar, unir y restaurar lo que parece difícil.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 20, "title": "Sanidad y esperanza", "verse": "Jeremías 30:17", "reflection": "Dios es especialista en restaurar lo quebrado. Su sanidad puede tocar el cuerpo, el alma y la mente. Aun cuando el proceso sea lento, su promesa permanece.\n\nHoy ora por sanidad con fe, confiando en que Dios obra con amor y sabiduría.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 21, "title": "Esperar en Dios", "verse": "Salmo 27:14", "reflection": "Esperar puede ser difícil cuando el corazón desea respuestas rápidas. Pero la espera en Dios nunca es pérdida; es formación.\n\nMientras esperas, Dios fortalece tu fe, purifica tus deseos y prepara tu corazón para recibir su voluntad.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 22, "title": "Propósito en tus manos", "verse": "Proverbios 31:25", "reflection": "Dios ha puesto propósito en tu vida. No eres accidental ni invisible para Él. Aun tus experiencias difíciles pueden convertirse en testimonio.\n\nCamina con dignidad, fuerza y esperanza. Dios puede usar tu vida para bendecir a otras mujeres.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 23, "title": "Luz para otros", "verse": "Mateo 5:16", "reflection": "Tu vida puede reflejar a Cristo en lugares donde otros necesitan esperanza. Una palabra amable, una oración o un acto de amor pueden ser luz.\n\nHoy pregúntale a Dios cómo puedes ser bendición para alguien.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 24, "title": "Protegida por Dios", "verse": "Efesios 6:11", "reflection": "La vida espiritual requiere estar vestidas con la armadura de Dios. No luchamos solas ni desprotegidas.\n\nCubre tu mente con la verdad, tu corazón con fe y tus pasos con oración. Dios te fortalece para resistir.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 25, "title": "Restauración familiar", "verse": "Malaquías 4:6", "reflection": "Dios puede volver corazones, sanar distancias y traer reconciliación. La restauración familiar muchas veces comienza con oración constante.\n\nHoy ora por unidad, humildad y perdón en tu familia.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 26, "title": "Dios abre caminos", "verse": "Isaías 43:19", "reflection": "Cuando parece que no hay salida, Dios puede abrir camino. Él hace cosas nuevas en tiempos inesperados.\n\nNo limites a Dios por lo que tus ojos ven. Confía en que Él puede crear oportunidades donde antes había desierto.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 27, "title": "Consagración diaria", "verse": "1 Samuel 1:27-28", "reflection": "Consagrar es entregar a Dios lo que más amamos. Ana nos enseña que lo recibido en oración también debe ser puesto en las manos del Señor.\n\nHoy consagra tus planes, familia, talentos y decisiones a Dios.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 28, "title": "Gozo del Señor", "verse": "Nehemías 8:10", "reflection": "El gozo del Señor no depende de circunstancias perfectas. Es una fortaleza interna que nace de saber que Dios está con nosotras.\n\nHoy permite que el gozo de Dios levante tu ánimo y renueve tu esperanza.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 29, "title": "Dios me sostiene", "verse": "Salmo 55:22", "reflection": "Dios no te pide cargar sola lo que pesa demasiado. Él te invita a echar tu carga sobre Él.\n\nHoy nombra tus cargas en oración y entrégalas una por una. El Señor promete sustentarte.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 30, "title": "Él terminará la obra", "verse": "Filipenses 1:6", "reflection": "Dios no deja su obra incompleta. Lo que comenzó en tu vida, Él seguirá perfeccionándolo con paciencia y amor.\n\nAunque todavía haya áreas en proceso, no te desanimes. Dios sigue trabajando en ti.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}, {"day": 31, "title": "Cierre con fe", "verse": "Salmo 37:5", "reflection": "Entregar el camino a Dios es una decisión diaria. Al mirar este recorrido espiritual, puedes reconocer que Dios ha estado presente.\n\nHoy cierra este mes con gratitud y fe. Lo que viene también está en las manos del Señor.", "prayer": "Señor, toma esta enseñanza y aplícala a mi vida. Guía mis pensamientos, fortalece mi fe y ayúdame a caminar más cerca de ti. Amén.", "question": "¿Qué me está enseñando Dios hoy a través de este devocional?", "promise": "Dios está obrando en mi vida con amor y propósito."}];
+
+(function(){
+  function getLS(k, fallback){
+    try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch(e){ return fallback; }
+  }
+  function setLS(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+
+  window.jdToggleDevoFix = function(index){
+    let done = getLS('jdDoneDevosFix', []);
+    if(done.includes(index)) done = done.filter(x => x !== index);
+    else done.push(index);
+    setLS('jdDoneDevosFix', done);
+
+    // keep compatibility with older progress/certificate
+    setLS('doneDevos', done);
+
+    jdRenderDevosFix();
+    jdRenderCalendarFix();
+  };
+
+  window.jdRenderDevosFix = function(){
+    const box = document.getElementById('jdDevoBox');
+    if(!box) return;
+    const done = getLS('jdDoneDevosFix', getLS('doneDevos', []));
+    box.innerHTML = window.JD_DEVOS_FIX.map(function(d, idx){
+      const isDone = done.includes(idx);
+      return '<div class="card devoDeepCard ' + (isDone ? 'done' : '') + '">' +
+        '<span class="badge">Día ' + d.day + '</span>' +
+        '<h3>' + d.title + '</h3>' +
+        '<p class="verse"><b>' + d.verse + '</b></p>' +
+        '<p class="devoSectionTitle">🌷 Reflexión</p>' +
+        '<p class="devoReflection">' + d.reflection + '</p>' +
+        '<p class="devoSectionTitle">🙏 Oración</p>' +
+        '<p>' + d.prayer + '</p>' +
+        '<div class="devoQuestion"><b>✍️ Para escribir en tu diario:</b><br>' + d.question + '</div>' +
+        '<div class="devoPromise">💜 Promesa: ' + d.promise + '</div>' +
+        '<button class="primary" onclick="jdToggleDevoFix(' + idx + ')">' + (isDone ? 'Completado ✓' : 'Marcar completado') + '</button>' +
+      '</div>';
+    }).join('');
+  };
+
+  window.jdRenderCalendarFix = function(){
+    const box = document.getElementById('jdCalendarBox');
+    if(!box) return;
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const title = document.getElementById('jdCalTitle');
+    if(title) title.textContent = now.toLocaleDateString('es-US', {month:'long', year:'numeric'});
+
+    const days = new Date(year, month + 1, 0).getDate();
+    const today = now.getDate();
+    const done = getLS('jdDoneDevosFix', getLS('doneDevos', []));
+
+    let html = '';
+    for(let day = 1; day <= days; day++){
+      const idx = day - 1;
+      const completed = done.includes(idx);
+      const isToday = day === today;
+      html += '<button class="calendarDay ' + (completed ? 'completed ' : '') + (isToday ? 'today ' : '') + '" onclick="jdToggleDevoFix(' + idx + ')">' +
+        '<span>' + day + '</span>' +
+        '<small>' + (completed ? '✓' : (isToday ? 'Hoy' : '')) + '</small>' +
+      '</button>';
+    }
+    box.innerHTML = html;
+
+    const summary = document.getElementById('jdCalendarSummary');
+    if(summary) summary.textContent = 'Devocionales completados: ' + done.length + '/31';
+  };
+
+  // Override old names too
+  window.renderDevos = window.jdRenderDevosFix;
+  window.renderCalendar = window.jdRenderCalendarFix;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    jdRenderDevosFix();
+    jdRenderCalendarFix();
+  });
+  setTimeout(function(){ jdRenderDevosFix(); jdRenderCalendarFix(); }, 200);
+  setTimeout(function(){ jdRenderDevosFix(); jdRenderCalendarFix(); }, 800);
+  setTimeout(function(){ jdRenderDevosFix(); jdRenderCalendarFix(); }, 1500);
+})();
+</script>
+
+
+<script>
+window.JD_DEVOS_UNICOS = [{"day": 1, "title": "Confía en los planes de Dios", "verse": "Jeremías 29:11", "reflection": "Hay momentos en los que no entendemos por qué Dios permite ciertos procesos. A veces oramos, esperamos y aun así parece que nada cambia. Pero Dios no improvisa con nuestra vida. Él conoce el final desde el principio y sus pensamientos hacia nosotras son de paz y esperanza.\n\nConfiar en Dios no significa que todo será fácil, sino que podemos descansar sabiendo que Él dirige nuestros pasos aun cuando el camino no se vea claro. Hoy entrega tus planes, preocupaciones y deseos al Señor.", "prayer": "Señor, hoy pongo mis planes en tus manos. Ayúdame a confiar en tu voluntad aunque no entienda todo lo que está pasando. Ordena mis pensamientos, calma mi corazón y enséñame a esperar con fe. Amén.", "question": "¿Qué plan o preocupación necesito entregar hoy completamente a Dios?", "promise": "Dios tiene pensamientos de paz y esperanza para mi vida."}, {"day": 2, "title": "Clama y Dios responderá", "verse": "Jeremías 33:3", "reflection": "Dios nos invita a clamar, no porque ignore nuestras necesidades, sino porque desea que nos acerquemos a Él con confianza. Muchas veces cargamos problemas en silencio, tratando de resolverlo todo con nuestras propias fuerzas, cuando el Señor nos dice: “Clama a mí”.\n\nLa oración no siempre cambia las circunstancias de inmediato, pero siempre nos cambia por dentro. Nos da paz, dirección y fortaleza para seguir.", "prayer": "Padre amado, hoy clamo a ti con fe. Te presento mis cargas, mis preguntas y mis necesidades. Háblame conforme a tu voluntad y enséñame a reconocer tu respuesta. Amén.", "question": "¿Qué petición necesito presentar hoy con más confianza delante de Dios?", "promise": "Dios escucha mi clamor y me responde con amor y sabiduría."}, {"day": 3, "title": "La paz que Jesús da", "verse": "Juan 14:27", "reflection": "La paz de Jesús no depende de que todo esté perfecto alrededor. Es una paz que permanece aun cuando hay preocupaciones, decisiones difíciles o momentos de incertidumbre. El mundo ofrece una paz temporal, pero Cristo ofrece una paz profunda que guarda el corazón.\n\nCuando la ansiedad quiera tomar el control, recuerda que Jesús no solo te da paz; Él mismo es tu paz.", "prayer": "Jesús, necesito tu paz en mi mente y en mi corazón. Quita todo temor, ansiedad y preocupación que quiera robarme la calma. Ayúdame a descansar en tu presencia. Amén.", "question": "¿Qué pensamiento necesito rendir hoy para recibir la paz de Cristo?", "promise": "Jesús me da una paz que el mundo no puede quitar."}, {"day": 4, "title": "Dios renueva tus fuerzas", "verse": "Isaías 40:31", "reflection": "Todas pasamos por temporadas donde el alma se siente cansada. Cansancio físico, emocional o espiritual puede hacernos sentir que no podemos continuar. Pero Dios promete nuevas fuerzas a quienes esperan en Él.\n\nHoy, aunque te sientas débil, acércate a la fuente de tu fortaleza. Dios no rechaza a la mujer cansada; Él la levanta y la sostiene.", "prayer": "Señor, renueva mis fuerzas. Levanta mi ánimo, fortalece mi fe y ayúdame a seguir caminando aunque me sienta cansada. Gracias porque en ti puedo volver a levantarme. Amén.", "question": "¿En qué área necesito que Dios renueve mis fuerzas hoy?", "promise": "Los que esperan en Jehová tendrán nuevas fuerzas."}, {"day": 5, "title": "Mi familia en las manos de Dios", "verse": "Josué 24:15", "reflection": "La familia es uno de los lugares donde más necesitamos la gracia de Dios. A veces hay heridas, diferencias, preocupaciones por los hijos, el matrimonio o la unidad del hogar. Pero cuando una mujer decide orar por su familia, se convierte en instrumento de bendición.\n\nNo subestimes tus oraciones. Dios puede entrar donde tus palabras no llegan.", "prayer": "Señor, pongo mi familia en tus manos. Trae unidad, paz, perdón y restauración a nuestro hogar. Toca cada corazón y ayúdanos a servirte con amor. Amén.", "question": "¿Por qué miembro de mi familia necesito orar especialmente hoy?", "promise": "Dios puede bendecir y restaurar mi hogar."}, {"day": 6, "title": "Un corazón agradecido", "verse": "1 Tesalonicenses 5:18", "reflection": "La gratitud cambia la manera en que vemos la vida. No significa negar los problemas, sino reconocer que aun en medio de ellos Dios sigue siendo bueno. Cuando agradecemos, nuestro corazón se enfoca menos en lo que falta y más en lo que Dios ya ha hecho.\n\nHoy toma tiempo para mirar las pequeñas bendiciones.", "prayer": "Padre, gracias por tus bendiciones visibles e invisibles. Ayúdame a vivir con un corazón agradecido y a reconocer tu bondad en los detalles de cada día. Amén.", "question": "¿Cuáles son tres bendiciones por las que puedo agradecer hoy?", "promise": "Dios sigue siendo bueno en todo tiempo."}, {"day": 7, "title": "Llena del Espíritu Santo", "verse": "Lucas 11:13", "reflection": "El Espíritu Santo es el regalo que Dios da a sus hijos para guiarlos, fortalecerlos y transformarlos. No podemos vivir una vida espiritual profunda dependiendo solo de nuestras fuerzas.\n\nPedir el Espíritu Santo debe ser una oración diaria. Él nos ayuda a amar mejor, perdonar, servir, discernir y permanecer firmes.", "prayer": "Espíritu Santo, llena mi vida hoy. Guía mis palabras, mis pensamientos y mis decisiones. Transforma mi carácter y ayúdame a reflejar a Cristo. Amén.", "question": "¿Qué área de mi carácter necesito entregar al Espíritu Santo?", "promise": "Dios da su Espíritu Santo a quienes se lo piden."}, {"day": 8, "title": "Sanidad interior", "verse": "Salmo 147:3", "reflection": "Dios sana heridas que muchas veces nadie ve. Él conoce los dolores que guardas en silencio y las cargas que has llevado por mucho tiempo. Su amor no solo toca lo exterior; también entra a los rincones más profundos del corazón.\n\nHoy permite que Dios sane tu interior.", "prayer": "Señor, toca las heridas de mi corazón. Sana lo que todavía duele, restaura mi paz y ayúdame a soltar lo que me impide avanzar contigo. Amén.", "question": "¿Qué herida o carga emocional necesito presentar hoy a Dios?", "promise": "Dios sana a los quebrantados de corazón."}, {"day": 9, "title": "Mujer de fe", "verse": "Hebreos 11:1", "reflection": "La fe no siempre se siente fuerte. A veces la fe es simplemente seguir creyendo cuando no vemos respuestas inmediatas. Dios honra el corazón que decide confiar aun en medio de la espera.\n\nHoy camina como una mujer de fe, no porque tengas todas las respuestas, sino porque conoces al Dios que sostiene tu vida.", "prayer": "Señor, aumenta mi fe. Ayúdame a creer en tus promesas aun cuando mis ojos no vean resultados. Que mi confianza esté puesta en ti. Amén.", "question": "¿Qué situación me está llamando a ejercer más fe?", "promise": "La fe me sostiene mientras espero en Dios."}, {"day": 10, "title": "Sabiduría para decidir", "verse": "Santiago 1:5", "reflection": "Cada día tomamos decisiones que afectan nuestra vida, familia y caminar espiritual. Dios no quiere que caminemos confundidas; Él promete sabiduría a quienes la piden con fe.\n\nAntes de actuar, ora. Antes de responder, ora. Antes de decidir, busca dirección en la Palabra.", "prayer": "Padre, dame sabiduría para decidir correctamente. Guíame lejos de la confusión y ayúdame a escoger lo que honra tu nombre. Amén.", "question": "¿Qué decisión necesito poner hoy bajo la dirección de Dios?", "promise": "Dios da sabiduría abundantemente a quienes la piden."}, {"day": 11, "title": "Intercesora fiel", "verse": "Ezequiel 22:30", "reflection": "Interceder es pararse en la brecha por otros. Es amar lo suficiente como para llevar sus necesidades delante de Dios. Una mujer de oración puede impactar hogares, matrimonios, hijos, iglesias y comunidades.\n\nHoy no ores solo por ti. Presenta a alguien que necesita fortaleza, sanidad o salvación.", "prayer": "Señor, enséñame a interceder con amor y perseverancia. Pon en mi corazón las personas por quienes debo orar y usa mi vida para bendecir a otros. Amén.", "question": "¿Por quién me está llamando Dios a interceder hoy?", "promise": "La oración intercesora puede abrir caminos de bendición."}, {"day": 12, "title": "Perdonar con la ayuda de Dios", "verse": "Colosenses 3:13", "reflection": "Perdonar no siempre es fácil, especialmente cuando la herida fue profunda. Pero Dios nos llama a soltar el peso del resentimiento para que nuestro corazón pueda sanar.\n\nPerdonar no significa aprobar lo malo; significa entregar la justicia a Dios y permitir que Él limpie nuestro interior.", "prayer": "Señor, ayúdame a perdonar con tu gracia. Sana mi corazón, líbrame del resentimiento y enséñame a caminar en libertad. Amén.", "question": "¿Qué resentimiento necesito entregar hoy al Señor?", "promise": "Dios me ayuda a perdonar y a vivir libre."}, {"day": 13, "title": "Dios pelea por ti", "verse": "Éxodo 14:14", "reflection": "Hay batallas que no se ganan con palabras, esfuerzo o control. Hay momentos donde Dios nos pide estar quietas y confiar en que Él pelea por nosotras.\n\nSi hoy estás enfrentando una situación difícil, recuerda que no estás sola. Dios ve, Dios sabe y Dios actúa en el tiempo correcto.", "prayer": "Señor, entrego mis batallas en tus manos. Ayúdame a estar tranquila, a confiar en tu defensa y a no actuar desde el temor. Amén.", "question": "¿Qué batalla necesito dejar de pelear con mis propias fuerzas?", "promise": "Jehová peleará por mí y yo estaré tranquila."}, {"day": 14, "title": "Corazón limpio", "verse": "Salmo 51:10", "reflection": "Dios no busca perfección externa, busca un corazón rendido. Cuando le pedimos que cree en nosotras un corazón limpio, estamos invitando su obra transformadora.\n\nHoy pídele a Dios que limpie tus pensamientos, intenciones y emociones. Su gracia no solo perdona; también renueva.", "prayer": "Crea en mí, oh Dios, un corazón limpio. Renueva mi espíritu, purifica mis pensamientos y ayúdame a vivir con sinceridad delante de ti. Amén.", "question": "¿Qué actitud o pensamiento necesito pedirle a Dios que limpie?", "promise": "Dios puede crear en mí un corazón nuevo."}, {"day": 15, "title": "Frutos del Espíritu", "verse": "Gálatas 5:22-23", "reflection": "El carácter cristiano no se fabrica con esfuerzo humano; crece cuando permanecemos conectadas con Dios. Amor, gozo, paz y paciencia son frutos de una vida guiada por el Espíritu.\n\nHoy revisa qué fruto necesitas practicar más. Dios puede formar en ti un carácter hermoso para reflejar a Cristo.", "prayer": "Espíritu Santo, produce tus frutos en mi vida. Dame amor, paciencia, dominio propio y un carácter que refleje a Jesús. Amén.", "question": "¿Qué fruto del Espíritu necesito cultivar más esta semana?", "promise": "El Espíritu Santo forma en mí el carácter de Cristo."}, {"day": 16, "title": "Avivamiento personal", "verse": "Habacuc 3:2", "reflection": "El avivamiento comienza en un corazón que reconoce su necesidad de Dios. Antes de pedir que Dios transforme a otros, podemos pedirle que comience en nosotras.\n\nHoy ora por un despertar espiritual en tu vida. Que tu amor por la Palabra, la oración y el servicio vuelva a encenderse.", "prayer": "Señor, aviva mi corazón. Despierta en mí hambre por tu Palabra, deseo de orar y pasión por servirte con fidelidad. Amén.", "question": "¿Qué hábito espiritual necesito renovar en mi vida?", "promise": "Dios puede avivar nuevamente mi corazón."}, {"day": 17, "title": "La Palabra me guía", "verse": "Salmo 119:105", "reflection": "La Palabra de Dios es lámpara cuando el camino está oscuro. Nos corrige, consuela, enseña y afirma en la verdad.\n\nNo permitas que tu día avance sin escuchar la voz de Dios. Aunque leas pocos versículos, léelos con un corazón dispuesto.", "prayer": "Señor, ilumina mi camino con tu Palabra. Ayúdame a obedecer lo que me enseñas y a buscar dirección en tus promesas. Amén.", "question": "¿Qué versículo necesito guardar en mi corazón hoy?", "promise": "La Palabra de Dios ilumina mis pasos."}, {"day": 18, "title": "Oración por los hijos", "verse": "Isaías 54:13", "reflection": "Los hijos necesitan mucho más que consejos; necesitan cobertura espiritual. La oración de una madre, abuela o mujer de fe puede marcar generaciones.\n\nHoy presenta a los niños y jóvenes de tu familia ante Dios. Pide que sean enseñados por Él y guardados en sus caminos.", "prayer": "Padre, cubre a mis hijos y a los niños de mi familia. Enséñales tus caminos, protégelos del mal y guíalos hacia tu propósito. Amén.", "question": "¿Qué niño o joven necesita hoy una oración especial?", "promise": "Dios puede enseñar y traer paz a nuestros hijos."}, {"day": 19, "title": "Matrimonio en manos de Dios", "verse": "Eclesiastés 4:12", "reflection": "Cuando Dios es el centro, el amor encuentra fuerza para resistir las pruebas. Todo matrimonio necesita oración, humildad, perdón y dirección divina.\n\nHoy ora por los matrimonios de tu familia e iglesia. Dios puede sanar, unir y restaurar lo que parece difícil.", "prayer": "Señor, bendice los matrimonios. Trae amor, respeto, perdón y unidad. Que cada hogar sea sostenido por tu presencia. Amén.", "question": "¿Qué matrimonio necesita hoy mi intercesión?", "promise": "Un hogar sostenido por Dios tiene mayor fortaleza."}, {"day": 20, "title": "Sanidad y esperanza", "verse": "Jeremías 30:17", "reflection": "Dios es especialista en restaurar lo quebrado. Su sanidad puede tocar el cuerpo, el alma y la mente. Aun cuando el proceso sea lento, su promesa permanece.\n\nHoy ora por sanidad con fe, confiando en que Dios obra con amor y sabiduría.", "prayer": "Dios sanador, toca mi vida y la vida de quienes necesitan salud. Trae restauración, esperanza y fortaleza en medio del proceso. Amén.", "question": "¿Por qué persona enferma necesito orar hoy?", "promise": "Dios puede traer sanidad y restauración."}, {"day": 21, "title": "Esperar en Dios", "verse": "Salmo 27:14", "reflection": "Esperar puede ser difícil cuando el corazón desea respuestas rápidas. Pero la espera en Dios nunca es pérdida; es formación.\n\nMientras esperas, Dios fortalece tu fe, purifica tus deseos y prepara tu corazón para recibir su voluntad.", "prayer": "Señor, enséñame a esperar sin desesperarme. Fortalece mi corazón mientras llega tu respuesta y ayúdame a confiar en tu tiempo. Amén.", "question": "¿Qué respuesta estoy esperando y cómo puedo confiar más mientras llega?", "promise": "Dios fortalece mi corazón mientras espero."}, {"day": 22, "title": "Propósito en tus manos", "verse": "Proverbios 31:25", "reflection": "Dios ha puesto propósito en tu vida. No eres accidental ni invisible para Él. Aun tus experiencias difíciles pueden convertirse en testimonio.\n\nCamina con dignidad, fuerza y esperanza. Dios puede usar tu vida para bendecir a otras mujeres.", "prayer": "Señor, ayúdame a caminar en el propósito que has puesto en mi vida. Dame valentía, sabiduría y un corazón dispuesto a servirte. Amén.", "question": "¿Qué talento o experiencia puede usar Dios para bendecir a otros?", "promise": "Dios me creó con propósito y dignidad."}, {"day": 23, "title": "Luz para otros", "verse": "Mateo 5:16", "reflection": "Tu vida puede reflejar a Cristo en lugares donde otros necesitan esperanza. Una palabra amable, una oración o un acto de amor pueden ser luz.\n\nHoy pregúntale a Dios cómo puedes ser bendición para alguien.", "prayer": "Señor, hazme luz para quienes me rodean. Usa mis palabras, mis acciones y mi testimonio para reflejar tu amor. Amén.", "question": "¿A quién puedo animar o bendecir hoy?", "promise": "Mi vida puede reflejar la luz de Cristo."}, {"day": 24, "title": "Protegida por Dios", "verse": "Efesios 6:11", "reflection": "La vida espiritual requiere estar vestidas con la armadura de Dios. No luchamos solas ni desprotegidas.\n\nCubre tu mente con la verdad, tu corazón con fe y tus pasos con oración. Dios te fortalece para resistir.", "prayer": "Señor, cúbreme con tu armadura espiritual. Protege mi mente, mi corazón y mi hogar de todo mal. Ayúdame a permanecer firme. Amén.", "question": "¿En qué área necesito estar más alerta espiritualmente?", "promise": "Dios me fortalece para permanecer firme."}, {"day": 25, "title": "Restauración familiar", "verse": "Malaquías 4:6", "reflection": "Dios puede volver corazones, sanar distancias y traer reconciliación. La restauración familiar muchas veces comienza con oración constante.\n\nHoy ora por unidad, humildad y perdón en tu familia.", "prayer": "Señor, restaura las relaciones dañadas en mi familia. Trae perdón, humildad y amor donde ha habido distancia o dolor. Amén.", "question": "¿Qué relación familiar necesita hoy restauración?", "promise": "Dios puede volver los corazones y traer reconciliación."}, {"day": 26, "title": "Dios abre caminos", "verse": "Isaías 43:19", "reflection": "Cuando parece que no hay salida, Dios puede abrir camino. Él hace cosas nuevas en tiempos inesperados.\n\nNo limites a Dios por lo que tus ojos ven. Confía en que Él puede crear oportunidades donde antes había desierto.", "prayer": "Señor, abre caminos donde yo no veo salida. Ayúdame a confiar en que tú haces cosas nuevas aun en medio del desierto. Amén.", "question": "¿Dónde necesito creer que Dios puede abrir un camino nuevo?", "promise": "Dios hace caminos en el desierto."}, {"day": 27, "title": "Consagración diaria", "verse": "Romanos 12:1", "reflection": "Consagrar es entregar a Dios lo que somos y lo que tenemos. No es solo una decisión de un día, sino una entrega diaria del corazón.\n\nHoy consagra tus planes, familia, talentos y decisiones a Dios.", "prayer": "Señor, hoy me entrego nuevamente a ti. Toma mi mente, mi corazón, mis talentos y mis decisiones. Que mi vida sea una ofrenda agradable para ti. Amén.", "question": "¿Qué parte de mi vida necesito consagrar nuevamente a Dios?", "promise": "Mi vida puede ser una ofrenda viva para Dios."}, {"day": 28, "title": "Gozo del Señor", "verse": "Nehemías 8:10", "reflection": "El gozo del Señor no depende de circunstancias perfectas. Es una fortaleza interna que nace de saber que Dios está con nosotras.\n\nHoy permite que el gozo de Dios levante tu ánimo y renueve tu esperanza.", "prayer": "Señor, llena mi corazón de tu gozo. Que mi ánimo no dependa de las circunstancias, sino de tu presencia y fidelidad. Amén.", "question": "¿Qué me está robando el gozo y necesito entregar al Señor?", "promise": "El gozo del Señor es mi fortaleza."}, {"day": 29, "title": "Dios me sostiene", "verse": "Salmo 55:22", "reflection": "Dios no te pide cargar sola lo que pesa demasiado. Él te invita a echar tu carga sobre Él.\n\nHoy nombra tus cargas en oración y entrégalas una por una. El Señor promete sustentarte.", "prayer": "Señor, entrego mis cargas en tus manos. Sostén mi corazón, guía mis pasos y recuérdame que no tengo que llevarlo todo sola. Amén.", "question": "¿Qué carga necesito entregar hoy a Dios en oración?", "promise": "Dios me sostiene cuando deposito mis cargas en Él."}, {"day": 30, "title": "Él terminará la obra", "verse": "Filipenses 1:6", "reflection": "Dios no deja su obra incompleta. Lo que comenzó en tu vida, Él seguirá perfeccionándolo con paciencia y amor.\n\nAunque todavía haya áreas en proceso, no te desanimes. Dios sigue trabajando en ti.", "prayer": "Señor, gracias porque no has terminado conmigo. Sigue formando mi carácter, sanando mi corazón y guiándome hacia tu propósito. Amén.", "question": "¿Qué área de mi vida está todavía en proceso y necesito confiarle a Dios?", "promise": "Dios terminará la buena obra que comenzó en mí."}, {"day": 31, "title": "Cierre con fe", "verse": "Salmo 37:5", "reflection": "Entregar el camino a Dios es una decisión diaria. Al mirar este recorrido espiritual, puedes reconocer que Dios ha estado presente.\n\nHoy cierra este mes con gratitud y fe. Lo que viene también está en las manos del Señor.", "prayer": "Señor, gracias por acompañarme durante este mes. Entrego mi camino delante de ti y confío en que seguirás guiando cada paso. Amén.", "question": "¿Qué aprendí de Dios durante este mes de devocionales?", "promise": "Cuando encomiendo mi camino a Dios, Él obra con fidelidad."}];
+(function(){
+  function getLS(k, fallback){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch(e){ return fallback; } }
+  function setLS(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+
+  window.jdToggleDevoUnico = function(index){
+    let done = getLS('jdDoneDevosFix', getLS('doneDevos', []));
+    if(done.includes(index)) done = done.filter(x => x !== index);
+    else done.push(index);
+    setLS('jdDoneDevosFix', done);
+    setLS('doneDevos', done);
+    jdRenderDevosUnicos();
+    if(typeof jdRenderCalendarFix === 'function') jdRenderCalendarFix();
+    if(typeof renderCalendar === 'function') renderCalendar();
+  };
+
+  window.jdRenderDevosUnicos = function(){
+    const box = document.getElementById('jdDevoBox');
+    if(!box) return;
+    const done = getLS('jdDoneDevosFix', getLS('doneDevos', []));
+    box.innerHTML = window.JD_DEVOS_UNICOS.map(function(d, idx){
+      const isDone = done.includes(idx);
+      return '<div class="card devoDeepCard ' + (isDone ? 'done' : '') + '">' +
+        '<span class="badge">Día ' + d.day + '</span>' +
+        '<h3>' + d.title + '</h3>' +
+        '<p class="verse"><b>' + d.verse + '</b></p>' +
+        '<p class="devoSectionTitle">🌷 Reflexión</p>' +
+        '<p class="devoReflection">' + d.reflection + '</p>' +
+        '<p class="devoSectionTitle">🙏 Oración</p>' +
+        '<p>' + d.prayer + '</p>' +
+        '<div class="devoQuestion"><b>✍️ Para escribir en tu diario:</b><br>' + d.question + '</div>' +
+        '<div class="devoPromise">💜 Promesa: ' + d.promise + '</div>' +
+        '<button class="primary" onclick="jdToggleDevoUnico(' + idx + ')">' + (isDone ? 'Completado ✓' : 'Marcar completado') + '</button>' +
+      '</div>';
+    }).join('');
+  };
+
+  window.renderDevos = window.jdRenderDevosUnicos;
+  document.addEventListener('DOMContentLoaded', jdRenderDevosUnicos);
+  setTimeout(jdRenderDevosUnicos, 200);
+  setTimeout(jdRenderDevosUnicos, 800);
+})();
+</script>
+
+
+<form name="peticiones-oracion" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="nombre">
+  <textarea name="peticion"></textarea>
+  <input type="text" name="fecha">
+</form>
+
+
+<script>
+// Corrección final: asegurar que todos los botones abran sus secciones
+window.showTab = window.show = function(id){
+  document.querySelectorAll('.tab').forEach(function(s){s.classList.remove('active');});
+  var target=document.getElementById(id);
+  if(target){ target.classList.add('active'); window.scrollTo({top: document.querySelector('nav').offsetTop, behavior:'smooth'}); }
+};
+// Forzar devocionales únicos aunque el navegador tenga una función vieja en memoria
+setTimeout(function(){ if(window.jdRenderDevosUnicos){ window.renderDevos=window.jdRenderDevosUnicos; window.jdRenderDevosUnicos(); } },100);
+setTimeout(function(){ if(window.jdRenderDevosUnicos){ window.jdRenderDevosUnicos(); } },700);
+</script>
+</body></html>
