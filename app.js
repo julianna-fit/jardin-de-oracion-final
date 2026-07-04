@@ -6,6 +6,7 @@ const biblePlan = [{"day": 1, "reading": "Génesis 1–3", "focus": "Lee con ora
 let currentFilter = 'todos';
 let bibleFilter = 'hoy';
 let promiseView = 'todas';
+let selectedPromiseCategory = '';
 function get(k,f){try{return JSON.parse(localStorage.getItem(k)) ?? f}catch(e){return f}}
 function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
 function el(id){return document.getElementById(id)}
@@ -25,13 +26,46 @@ function todayUS(){const d=new Date(); return String(d.getMonth()+1).padStart(2,
 function saveJournal(){let e=get('journal',[]); e.push({date:el('jDate').value||todayUS(),text:el('jText').value,thanks:el('jThanks').value}); set('journal',e); el('jText').value=''; el('jThanks').value=''; renderJournal()}
 function renderJournal(){let e=get('journal',[]); const box=el('journalBox'); if(!box)return; box.innerHTML=e.slice().reverse().map(x=>`<div class="card"><h3>${x.date}</h3><p>${x.text}</p><p><b>Gratitud:</b> ${x.thanks}</p></div>`).join('')||'<div class="card">Todavía no has escrito en tu diario.</div>'}
 function renderCalendar(){let done=get('doneDevos',[]); const box=el('calendarBox'); if(!box)return; box.innerHTML=''; for(let i=0;i<31;i++)box.innerHTML+=`<button class="day ${done.includes(i)?'doneDay':''}" onclick="toggleDevo(${i})">${i+1}<br>${done.includes(i)?'✓':''}</button>`; if(el('calendarSummary'))el('calendarSummary').textContent=`Devocionales completados: ${done.length}/31`;}
-function setPromiseView(v){promiseView=v; renderPromises()}
+function setPromiseView(v){promiseView=v; if(v!=='categorias') selectedPromiseCategory=''; renderPromises()}
+function setPromiseCategory(cat){promiseView='categorias'; selectedPromiseCategory=cat; renderPromises()}
 function allPromises(){return promiseLibrary.concat(get('customPromises',[]))}
+function promiseCategories(){
+  const preferred=['Fe','Amor','Paz','Esperanza','Fortaleza','Sanidad','Familia','Matrimonio','Protección','Salvación','Espíritu Santo','Oración','Descanso','Personal'];
+  const cats=[...new Set(allPromises().map(p=>p.cat||'Promesa'))];
+  return preferred.filter(c=>cats.includes(c)).concat(cats.filter(c=>!preferred.includes(c)).sort());
+}
+function renderPromiseCategories(){
+  const box=el('promiseCategoryBox');
+  if(!box)return;
+  if(promiseView!=='categorias'){box.innerHTML=''; return;}
+  box.innerHTML=promiseCategories().map(cat=>`<button class="categoryBtn ${selectedPromiseCategory===cat?'activeCat':''}" onclick="setPromiseCategory('${cat.replace(/'/g,"\\'")}')">💜 ${cat}</button>`).join('');
+}
 function renderDailyPromise(){const p=promiseLibrary[new Date().getDate()%promiseLibrary.length]; if(el('dailyPromiseText'))el('dailyPromiseText').textContent='“'+p.text+'”'; if(el('dailyPromiseRef'))el('dailyPromiseRef').textContent=p.ref}
 function favoriteDailyPromise(){const p=promiseLibrary[new Date().getDate()%promiseLibrary.length]; let f=get('favPromises',[]); if(!f.some(x=>x.ref===p.ref))f.push(p); set('favPromises',f); renderPromises(); alert('Promesa guardada 💜')}
-function renderPromises(){renderDailyPromise(); let list=allPromises(); const q=(el('promiseSearch')?.value||'').toLowerCase(); if(promiseView==='favoritas')list=get('favPromises',[]); if(promiseView==='mias')list=get('customPromises',[]); if(q)list=list.filter(p=>(p.ref+' '+p.text+' '+(p.cat||'')).toLowerCase().includes(q)); const box=el('promisesBox'); if(!box)return; box.innerHTML=list.map((p,i)=>`<div class="card promiseCard"><span class="categoryPill">${p.cat||'Promesa'}</span><h3>${p.ref}</h3><p>${p.text}</p><button class="secondary" onclick="copyText('${(p.ref+' - '+p.text).replace(/'/g,"\'")}')">📋 Copiar</button></div>`).join('')||'<div class="card">No hay promesas en esta sección.</div>'}
+function renderPromises(){
+  renderDailyPromise();
+  renderPromiseCategories();
+  let list=allPromises();
+  const q=(el('promiseSearch')?.value||'').toLowerCase();
+  if(promiseView==='categorias'){
+    if(selectedPromiseCategory) list=list.filter(p=>(p.cat||'Promesa')===selectedPromiseCategory);
+    else { const box=el('promisesBox'); if(box)box.innerHTML='<div class="card center">Escoge una categoría para ver promesas de fe, amor, paz, esperanza y más.</div>'; return; }
+  }
+  if(promiseView==='favoritas')list=get('favPromises',[]);
+  if(promiseView==='mias')list=get('customPromises',[]);
+  if(q)list=list.filter(p=>(p.ref+' '+p.text+' '+(p.cat||'')).toLowerCase().includes(q));
+  const box=el('promisesBox'); if(!box)return;
+  box.innerHTML=list.map((p,i)=>`<div class="card promiseCard"><span class="categoryPill">${p.cat||'Promesa'}</span><h3>${p.ref}</h3><p>${p.text}</p><button class="secondary" onclick="copyText('${(p.ref+' - '+p.text).replace(/'/g,"\\'")}')">📋 Copiar</button></div>`).join('')||'<div class="card">No hay promesas en esta sección.</div>'
+}
 function copyText(t){if(navigator.clipboard)navigator.clipboard.writeText(t); alert('Copiado 💜')}
-function addPromise(){let ref=el('newPromiseRef').value.trim(), text=el('newPromiseText').value.trim(); if(!ref||!text){alert('Escribe referencia y promesa'); return} let c=get('customPromises',[]); c.push({ref,text,cat:'Personal'}); set('customPromises',c); el('newPromiseRef').value=''; el('newPromiseText').value=''; promiseView='mias'; renderPromises()}
+function addPromise(){
+  let ref=el('newPromiseRef').value.trim(), text=el('newPromiseText').value.trim();
+  let cat=el('newPromiseCat')?.value || 'Personal';
+  if(!ref||!text){alert('Escribe referencia y promesa'); return}
+  let c=get('customPromises',[]); c.push({ref,text,cat}); set('customPromises',c);
+  el('newPromiseRef').value=''; el('newPromiseText').value='';
+  promiseView='mias'; selectedPromiseCategory=''; renderPromises()
+}
 function filterBible(f){bibleFilter=f; renderBibleYear()}
 function bibleDayOfYear(){const now=new Date(); const start=new Date(now.getFullYear(),0,0); return Math.floor((now-start)/86400000)}
 function renderBibleYear(){let done=get('bibleDone',[]); let day=bibleDayOfYear(); let list=biblePlan.map((b,i)=>({...b,idx:i})); if(bibleFilter==='hoy')list=list.filter(b=>b.day===day); if(bibleFilter==='pendientes')list=list.filter(b=>!done.includes(b.idx)).slice(0,31); if(bibleFilter==='completados')list=list.filter(b=>done.includes(b.idx)); const box=el('bibleBox'); if(!box)return; box.innerHTML=list.map(b=>`<div class="card ${done.includes(b.idx)?'done':''}"><span class="badge">Día ${b.day}</span><h3>📖 ${b.reading}</h3><p>${b.focus}</p><button class="primary" onclick="toggleBible(${b.idx})">${done.includes(b.idx)?'Lectura completada ✓':'Marcar lectura completada'}</button></div>`).join('')||'<div class="card">No hay lecturas en este filtro.</div>'; const pct=Math.round(done.length/365*100); if(el('bibleCircle'))el('bibleCircle').textContent=pct+'%'; if(el('bibleSummary'))el('bibleSummary').textContent=`Lecturas completadas: ${done.length}/365`; renderProgress()}

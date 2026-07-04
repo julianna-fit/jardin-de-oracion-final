@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jardín de Oración</title>
-<link rel="stylesheet" href="styles.css?v=20260704-estable-1">
+<link rel="stylesheet" href="styles.css?v=20260704-final-3fix">
 <link rel="manifest" href="manifest.json">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
 <script>
@@ -16,7 +16,7 @@ gtag('config', 'G-46QY175SK2');
 </head>
 <body>
 <header>
-  <img src="portada.png?v=20260704-estable-1" class="cover" alt="Jardín de Oración">
+  <img src="portada.png?v=20260704-final-3fix" class="cover" alt="Jardín de Oración">
 </header>
 
 <nav>
@@ -40,7 +40,7 @@ gtag('config', 'G-46QY175SK2');
   <div class="card center welcomeCard">
     <h1>🌿 Jardín de Oración</h1>
     <h3>Mujeres en las Manos de Dios</h3>
-    <img src="julianna-foto-app.jpeg?v=20260704-estable-1" class="fullPhotoWelcome" alt="Julianna Guerrero">
+    <img src="julianna-foto-app.jpeg?v=20260704-final-3fix" class="fullPhotoWelcome" alt="Julianna Guerrero">
     <p>Bienvenida a tu espacio espiritual para leer, orar, escribir, guardar promesas, completar tu Año Bíblico y crecer cada día con Dios.</p>
     <p class="verse">“Confía en Jehová con todo tu corazón.”<br><b>Proverbios 3:5</b></p>
     <p class="creatorLine">Un espacio para crecer cada día con Dios</p>
@@ -123,13 +123,29 @@ gtag('config', 'G-46QY175SK2');
   <input id="promiseSearch" placeholder="Buscar promesa..." oninput="renderPromises()">
   <div class="promiseTabs">
     <button onclick="setPromiseView('todas')">📖 Todas</button>
+    <button onclick="setPromiseView('categorias')">🏷️ Categorías</button>
     <button onclick="setPromiseView('favoritas')">❤️ Favoritas</button>
     <button onclick="setPromiseView('mias')">➕ Mías</button>
   </div>
+  <div id="promiseCategoryBox" class="categoryGrid"></div>
   <div class="card">
     <h3>➕ Agregar mi promesa</h3>
     <input id="newPromiseRef" placeholder="Referencia">
     <textarea id="newPromiseText" placeholder="Texto de la promesa"></textarea>
+    <select id="newPromiseCat">
+      <option value="Personal">Personal</option>
+      <option value="Fe">Fe</option>
+      <option value="Amor">Amor</option>
+      <option value="Paz">Paz</option>
+      <option value="Esperanza">Esperanza</option>
+      <option value="Fortaleza">Fortaleza</option>
+      <option value="Sanidad">Sanidad</option>
+      <option value="Familia">Familia</option>
+      <option value="Matrimonio">Matrimonio</option>
+      <option value="Protección">Protección</option>
+      <option value="Salvación">Salvación</option>
+      <option value="Oración">Oración</option>
+    </select>
     <button class="primary" onclick="addPromise()">Guardar promesa</button>
   </div>
   <div id="promisesBox"></div>
@@ -179,8 +195,7 @@ gtag('config', 'G-46QY175SK2');
 <section id="creadora" class="tab">
   <h2>🌷 Sobre la Creadora</h2>
   <div class="card center creatorCard">
-    <img src="julianna-foto-app.jpeg?v=20260704-estable-1" class="creatorFullPhotoSmall" alt="Julianna Guerrero">
-    <h3>Julianna Guerrero</h3>
+<h3>Julianna Guerrero</h3>
     <p>Esta aplicación fue creada con amor y oración para ayudar a las mujeres a fortalecer su relación con Dios.</p>
     <p class="verse">“Acercaos a Dios, y él se acercará a vosotros.”<br><b>Santiago 4:8</b></p>
     <button class="primary" onclick="if(navigator.share){navigator.share({title:'Jardín de Oración',url:'https://jardindeoracion.org'});}else{navigator.clipboard.writeText('https://jardindeoracion.org');alert('Enlace copiado 💜');}">📲 Compartir App</button>
@@ -233,6 +248,6 @@ gtag('config', 'G-46QY175SK2');
   <textarea name="peticion"></textarea>
   <input type="text" name="fecha">
 </form>
-<script src="app.js?v=20260704-estable-1"></script>
+<script src="app.js?v=20260704-final-3fix"></script>
 </body>
 </html>
