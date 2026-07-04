@@ -71,7 +71,17 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="creadora" class="tab"><h2>🌷 Sobre la Creadora</h2><div class="card center creatorCard"><h3>Julianna Guerrero</h3><p>Esta aplicación fue creada con amor y oración para ayudar a las mujeres a fortalecer su relación con Dios.</p><p class="verse">“Acercaos a Dios, y él se acercará a vosotros.”<br><b>Santiago 4:8</b></p></div><div class="card"><h3>💌 Enviar petición de oración</h3><p>Esta petición será enviada al grupo de oración. Solo tú y los intercesores podrán verla.</p><form name="peticiones-oracion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="specialPrayerForm"><input type="hidden" name="form-name" value="peticiones-oracion"><p style="display:none"><label>No llenar: <input name="bot-field"></label></p><input id="specialPrayerName" name="nombre" placeholder="Nombre o título" required><textarea id="specialPrayerText" name="peticion" placeholder="Escribe la petición..." required></textarea><input type="hidden" id="specialPrayerDate" name="fecha"><button class="primary" type="submit">Enviar petición</button></form><p id="specialPrayerStatus" class="formStatus"></p></div></section>
 
-<section id="certificado" class="tab"><h2>🏆 Certificado Espiritual</h2><div class="certificate" id="certificateBox"><div class="certFlowers">🌸 🌿 🦋 🌷 💜</div>
+<div style="text-align:center;margin:20px 0;">
+  <button onclick="navigator.share({title:'Jardín de Oración',url:window.location.href})">
+    📲 Compartir App
+  </button>
+</div>
+
+<div style="text-align:center;margin:10px 0;">
+  <a href="https://cash.app/$yuyu07" target="_blank">
+    ❤️ Apoyar este ministerio
+  </a>
+</div>section id="certificado" class="tab"><h2>🏆 Certificado Espiritual</h2><div class="certificate" id="certificateBox"><div class="certFlowers">🌸 🌿 🦋 🌷 💜</div>
   <h1>¡Felicidades!</h1><p>Has completado tu recorrido espiritual de este mes.</p><h2>Jardín de Oración</h2><p><b>Un espacio para crecer cada día con Dios</b></p>
 <p class="verse">"El que comenzó en vosotros la buena obra, la perfeccionará."<br><b>Filipenses 1:6</b></p></div><button class="primary" onclick="window.print()">Imprimir / Guardar certificado</button><p class="soft center" id="certificateStatus"></p></section>
 
