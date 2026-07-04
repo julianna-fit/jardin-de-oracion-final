@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jardín de Oración</title>
-<link rel="stylesheet" href="styles.css?v=20260704-reparada-final">
+<link rel="stylesheet" href="styles.css?v=20260702-anio-biblico-1">
 <link rel="manifest" href="manifest.json">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
 <script>
@@ -15,7 +15,7 @@ gtag('config', 'G-46QY175SK2');
 </script>
 </head>
 <body>
-<header><img src="portada.png?v=20260704-reparada-final" class="cover" alt="Jardín de Oración"></header>
+<header><img src="portada.png?v=20260702-anio-biblico-1" class="cover" alt="Jardín de Oración"></header>
 <nav>
 <button onclick="show('inicio')">Inicio</button>
 <button onclick="show('devocional')">Devocional</button>
@@ -27,7 +27,7 @@ gtag('config', 'G-46QY175SK2');
 <button onclick="show('anio')">Año Bíblico</button>
 <button onclick="show('musica')">Música</button>
 <button onclick="show('progreso')">Progreso</button>
-
+<button onclick="show('creadora')">Creadora</button>
 <button onclick="show('certificado')">Certificado</button>
 <button onclick="show('privacidad')">Privacidad</button>
 </nav>
@@ -36,9 +36,10 @@ gtag('config', 'G-46QY175SK2');
 <div class="card center welcomeCard">
 <h1>🌿 Jardín de Oración</h1>
 <h3>Mujeres en las Manos de Dios</h3>
+<img src="julianna-foto-app.jpeg?v=20260702-anio-biblico-1" class="fullPhotoWelcome" alt="Julianna Guerrero">
 <p>Bienvenida a tu espacio espiritual para leer, orar, escribir, guardar promesas, completar tu Año Bíblico y crecer cada día con Dios.</p>
 <p class="verse">“Confía en Jehová con todo tu corazón.”<br><b>Proverbios 3:5</b></p>
-<p class="creatorLine">Un espacio para crecer cada día con Dios</p>
+<p class="creatorLine">Creada por <b>Julianna Guerrero</b></p>
 </div>
 <div class="grid">
 <button class="tile" onclick="show('devocional')">📖<span>Devocional</span></button>
@@ -52,7 +53,7 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="devocional" class="tab"><h2>📖 Devocionales de Julio</h2><div class="card center"><h3>🌷 31 días con Dios</h3><p>Reflexiones con oración, pregunta para diario y promesa diferente cada día.</p></div><div id="devoBox"></div></section>
 
-<section id="oracion" class="tab"><h2>🙏 Jardín de Oración</h2><div class="card"><p>Guarda tus peticiones y marca cuando Dios responda.</p><input id="pName" placeholder="Nombre o título"><textarea id="pNeed" placeholder="Petición"></textarea><button class="primary" onclick="addPrayer()">Añadir petición</button></div><div class="card center"><button class="primary" onclick="shareApp()">📲 Compartir App</button><a href="https://cash.app/$yuyu07" target="_blank" rel="noopener"><button class="primary" type="button">❤️ Apoyar este ministerio</button></a></div><div class="card"><h3>💌 Enviar petición de oración</h3><p>Esta petición será enviada al grupo de oración. Solo tú y los intercesores podrán verla.</p><form name="peticiones-oracion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="specialPrayerForm"><input type="hidden" name="form-name" value="peticiones-oracion"><p style="display:none"><label>No llenar: <input name="bot-field"></label></p><input id="specialPrayerName" name="nombre" placeholder="Nombre o título" required><textarea id="specialPrayerText" name="peticion" placeholder="Escribe la petición..." required></textarea><input type="hidden" id="specialPrayerDate" name="fecha"><button class="primary" type="submit">Enviar petición</button></form><p id="specialPrayerStatus" class="formStatus"></p></div><div id="prayerBox"></div></section>
+<section id="oracion" class="tab"><h2>🙏 Jardín de Oración</h2><div class="card"><p>Guarda tus peticiones y marca cuando Dios responda.</p><input id="pName" placeholder="Nombre o título"><textarea id="pNeed" placeholder="Petición"></textarea><button class="primary" onclick="addPrayer()">Añadir petición</button></div><div id="prayerBox"></div></section>
 
 <section id="diario" class="tab"><h2>📝 Diario Espiritual</h2><div class="card"><p class="soft center">Formato de fecha: Mes/Día/Año — ejemplo 07/01/2026</p><input type="text" id="jDate" inputmode="numeric" placeholder="MM/DD/YYYY"><textarea id="jText" placeholder="¿Qué habló Dios a tu corazón?"></textarea><textarea id="jThanks" placeholder="3 bendiciones de hoy"></textarea><button class="primary" onclick="saveJournal()">Guardar</button></div><div id="journalBox"></div></section>
 
@@ -62,41 +63,19 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="promesas" class="tab"><h2>💜 Promesas</h2><div class="card promiseHero"><h3>🌸 Promesa del día</h3><p id="dailyPromiseText" class="promiseBig"></p><p id="dailyPromiseRef" class="promiseRef"></p><button class="secondary" onclick="favoriteDailyPromise()">❤️ Guardar en favoritas</button></div><input id="promiseSearch" placeholder="Buscar promesa..." oninput="renderPromises()"><div class="promiseTabs"><button onclick="setPromiseView('todas')">📖 Todas</button><button onclick="setPromiseView('favoritas')">❤️ Favoritas</button><button onclick="setPromiseView('mias')">➕ Mías</button></div><div class="card"><h3>➕ Agregar mi promesa</h3><input id="newPromiseRef" placeholder="Referencia"><textarea id="newPromiseText" placeholder="Texto de la promesa"></textarea><button class="primary" onclick="addPromise()">Guardar promesa</button></div><div id="promisesBox"></div></section>
 
-<section id="anio" class="tab"><h2>📚 Año Bíblico</h2><div class="card center bibleHero"><h3>Plan de lectura anual</h3><p>Lee la Biblia en un año, marca cada día completado y mira tu progreso.</p><div class="bibleTools"><button class="primary" onclick="showBibleToday()">📅 Lectura del día</button><a href="https://www.biblegateway.com/versions/Reina-Valera-1960-RVR1960-Biblia/" target="_blank" rel="noopener"><button class="primary" type="button">📖 Leer Biblia Online</button></a><button class="primary" onclick="openVerseSearch()">🔍 Buscar versículo</button></div><div id="verseSearchBox" class="card" style="display:none"><input id="verseSearchInput" placeholder="Ejemplo: Juan 3:16 o fe"><button class="secondary" onclick="searchVerseOnline()">Buscar</button></div><div class="circle smallCircle" id="bibleCircle">0%</div><p id="bibleSummary"></p></div><div class="filters"><button onclick="filterBible('hoy')">📖 Hoy</button><button onclick="filterBible('pendientes')">🕊️ Pendientes</button><button onclick="filterBible('completados')">✅ Completados</button></div><div id="bibleBox"></div></section>
+<section id="anio" class="tab"><h2>📚 Año Bíblico</h2><div class="card center bibleHero"><h3>Plan de lectura anual</h3><p>Lee la Biblia en un año, marca cada día completado y mira tu progreso.</p><div class="circle smallCircle" id="bibleCircle">0%</div><p id="bibleSummary"></p></div><div class="filters"><button onclick="filterBible('hoy')">📖 Hoy</button><button onclick="filterBible('pendientes')">🕊️ Pendientes</button><button onclick="filterBible('completados')">✅ Completados</button></div><div id="bibleBox"></div></section>
 
 <section id="musica" class="tab"><h2>🎵 Música para el Alma</h2><div class="card center"><h3>Instrumental para oración</h3><p>Toca ▶️ dentro del reproductor.</p><div class="videoBox"><iframe src="https://www.youtube.com/embed/zk9qRkJ4Pso" allowfullscreen></iframe></div></div></section>
 
 <section id="progreso" class="tab"><h2>📊 Progreso</h2><div class="card center"><div class="circle" id="progressCircle">0%</div><p id="progressText"></p><div id="badgeBox" class="badgeBox"></div></div><button class="primary" onclick="downloadBackup()">Descargar respaldo</button></section>
 
-<section id="certificado" class="tab"><h2>🏆 Certificado Espiritual</h2><div class="certificate" id="certificateBox"><div class="certFlowers">🌸 🌿 🦋 🌷 💜</div>
-  <h1>¡Felicidades!</h1><p>Has completado tu recorrido espiritual de este mes.</p><h2>Jardín de Oración</h2><p><b>Un espacio para crecer cada día con Dios</b></p>
-<p class="verse">"El que comenzó en vosotros la buena obra, la perfeccionará."<br><b>Filipenses 1:6</b></p></div><button class="primary" onclick="window.print()">Imprimir / Guardar certificado</button><p class="soft center" id="certificateStatus"></p></section>
+<section id="creadora" class="tab"><h2>🌷 Sobre la Creadora</h2><div class="card center creatorCard"><img src="julianna-foto-app.jpeg?v=20260702-anio-biblico-1" class="creatorFullPhoto" alt="Julianna Guerrero"><h3>Julianna Guerrero</h3><p>Esta aplicación fue creada con amor y oración para ayudar a las mujeres a fortalecer su relación con Dios.</p><p class="verse">“Acercaos a Dios, y él se acercará a vosotros.”<br><b>Santiago 4:8</b></p></div><div class="card"><h3>💌 Enviar petición de oración</h3><p>Esta petición será enviada al grupo de oración. Solo tú y los intercesores podrán verla.</p><form name="peticiones-oracion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="specialPrayerForm"><input type="hidden" name="form-name" value="peticiones-oracion"><p style="display:none"><label>No llenar: <input name="bot-field"></label></p><input id="specialPrayerName" name="nombre" placeholder="Nombre o título" required><textarea id="specialPrayerText" name="peticion" placeholder="Escribe la petición..." required></textarea><input type="hidden" id="specialPrayerDate" name="fecha"><button class="primary" type="submit">Enviar petición</button></form><p id="specialPrayerStatus" class="formStatus"></p></div></section>
 
-<section id="privacidad" class="tab"><h2>🔒 Privacidad</h2><div class="card"><p><strong>Tu privacidad es importante.</strong></p><p>Jardín de Oración utiliza estadísticas anónimas para comprender cómo se usa la aplicación y mejorar la experiencia.</p><p>Tus notas personales, diario espiritual, promesas guardadas y progreso permanecen en tu dispositivo. Las peticiones enviadas desde el formulario serán compartidas con el ministerio de oración para interceder por ellas.</p><p>No vendemos ni compartimos información personal.</p></div></section>
+<section id="certificado" class="tab"><h2>🏆 Certificado Espiritual</h2><div class="certificate" id="certificateBox"><div class="certFlowers">🌸 🌿 🦋 🌷 💜</div><img src="julianna-foto-app.jpeg?v=20260702-anio-biblico-1" class="certificateFullPhoto" alt="Julianna Guerrero"><h1>¡Felicidades!</h1><p>Has completado tu recorrido espiritual de este mes.</p><h2>Jardín de Oración</h2><p>Creado por <b>Julianna Guerrero</b></p><p class="verse">“El que comenzó en vosotros la buena obra, la perfeccionará.”<br><b>Filipenses 1:6</b></p></div><button class="primary" onclick="window.print()">Imprimir / Guardar certificado</button><p class="soft center" id="certificateStatus"></p></section>
+
+<section id="privacidad" class="tab"><h2>🔒 Privacidad</h2><div class="card"><p><strong>Tu privacidad es importante.</strong></p><p>Jardín de Oración utiliza estadísticas anónimas para comprender cómo se usa la aplicación y mejorar la experiencia.</p><p>Tus notas personales, diario espiritual, promesas guardadas y progreso permanecen en tu dispositivo. Las peticiones enviadas desde el formulario serán compartidas con el ministerio de oración para interceder por ellas.</p><p>No vendemos ni compartimos información personal.</p><p>🌷 Creado por Julianna Guerrero</p></div></section>
 </main>
-<footer>✨ Jardín de Oración <br>Creado con amor para la gloria de Dios<br><b>© 2026</b></footer>
+<footer>✨ Jardín de Oración <br>Creado con amor para la gloria de Dios<br><b>Por Julianna Guerrero © 2026</b></footer>
 <form name="peticiones-oracion" data-netlify="true" netlify-honeypot="bot-field" hidden><input type="text" name="nombre"><textarea name="peticion"></textarea><input type="text" name="fecha"></form>
-
-<script>
-function shareApp(){
-  const data={title:'Jardín de Oración', text:'Te comparto Jardín de Oración', url:window.location.href};
-  if(navigator.share){ navigator.share(data).catch(()=>{}); }
-  else { navigator.clipboard?.writeText(window.location.href); alert('Enlace copiado para compartir.'); }
-}
-function showBibleToday(){
-  show('anio');
-  if(typeof filterBible === 'function'){ filterBible('hoy'); }
-  setTimeout(()=>document.getElementById('bibleBox')?.scrollIntoView({behavior:'smooth', block:'start'}), 100);
-}
-function openVerseSearch(){
-  const box=document.getElementById('verseSearchBox');
-  if(box){ box.style.display = box.style.display==='none' ? 'block' : 'none'; document.getElementById('verseSearchInput')?.focus(); }
-}
-function searchVerseOnline(){
-  const q=(document.getElementById('verseSearchInput')?.value || '').trim();
-  if(!q){ alert('Escribe un versículo o palabra para buscar.'); return; }
-  window.open('https://www.biblegateway.com/quicksearch/?quicksearch='+encodeURIComponent(q)+'&version=RVR1960','_blank');
-}
-</script>
-<script src="app.js?v=20260704-reparada-final"></script>
+<script src="app.js?v=20260702-anio-biblico-1"></script>
 </body></html>
