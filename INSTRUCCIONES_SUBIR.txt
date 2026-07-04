@@ -1,14 +1,1 @@
-SUBIR A GITHUB:
-1. Descomprime este ZIP.
-2. En GitHub, entra al repositorio jardin-de-oracion-final.
-3. Add file > Upload files.
-4. Sube TODOS estos archivos sueltos, no el ZIP:
-   - index.html
-   - app.js
-   - styles.css
-   - manifest.json
-   - CNAME
-   - portada.png
-   - julianna-foto-app.jpeg
-5. Commit changes directo a main.
-6. Espera 2-5 minutos y recarga la web con Command + Shift + R.
+Sube los archivos sueltos a GitHub, no el ZIP. Incluye index.html, app.js, styles.css, CNAME, manifest.json, portada.png y julianna-foto-app.jpeg.
