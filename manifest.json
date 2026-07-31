@@ -1,8 +1,8 @@
 {
   "name":"Jardín de Oración",
   "short_name":"Jardín",
-  "start_url":"./",
-  "scope":"./",
+  "start_url":"/",
+  "scope":"/",
   "display":"standalone",
   "background_color":"#fff8ef",
   "theme_color":"#b45f72",
