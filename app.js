@@ -7,8 +7,8 @@ let bibleFilter = 'hoy';
 let promiseView = 'todas';
 let selectedPromiseCategory = '';
 const STORAGE_SCHEMA_VERSION = 1;
-const CURRENT_EDITION = 'agosto2026';
-const STORAGE_PREFIX = `jardin:${CURRENT_EDITION}:`;
+const CURRENT_EDITION = window.JARDIN_APP?.currentEdition || 'agosto2026';
+const STORAGE_PREFIX = `jardin:${CURRENT_EDITION}:`; // edición activa; no cambia datos de otros meses
 const MONTHLY_KEYS = new Set([
   'doneDevos','doneGames','journal','customPromises','favoritePromises','devoNotes',
   'momentNotes','momentPrayed','momentDecisions','gameResponses','prayers','specialPrayers',
@@ -24,6 +24,8 @@ function storageKey(k){
 function safeParse(raw,f){try{return raw===null?f:(JSON.parse(raw) ?? f)}catch(e){return f}}
 function get(k,f){return safeParse(localStorage.getItem(storageKey(k)),f)}
 function set(k,v){localStorage.setItem(storageKey(k),JSON.stringify(v))}
+function getEditionData(edition,k,f){return window.JARDIN_APP?.getEdition(edition,k,f) ?? f}
+function setEditionData(edition,k,v){if(window.JARDIN_APP)window.JARDIN_APP.setEdition(edition,k,v)}
 function migrateAugustStorage(){
   const legacyMonthly=[...MONTHLY_KEYS];
   legacyMonthly.forEach(k=>{

@@ -1,0 +1,11 @@
+JARDÍN DE ORACIÓN — BASE PERMANENTE 7.0
+
+Esta versión centraliza las ediciones en app-core.js.
+- Julio 2026: archivada en edicion-julio.html.
+- Agosto 2026: edición actual.
+- Septiembre 2026: registrada como próxima edición.
+- El progreso usa claves separadas por edición: jardin:<edicion>:<dato>.
+- Los datos compartidos usan jardin:shared:<dato>.
+- Los respaldos incluyen todas las claves que comienzan con jardin:.
+
+Para un mes nuevo: añadir la edición al registro de app-core.js y sus archivos/contenidos sin cambiar las claves de meses anteriores.
