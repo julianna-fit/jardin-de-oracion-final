@@ -1,7 +1,8 @@
 {
   "name": "Jardín de Oración — Agosto 2026",
   "short_name": "Jardín Agosto",
-  "start_url": "index.html",
+  "start_url": "./index.html?v=20260731-43",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#fff8ef",
   "theme_color": "#b45f72",

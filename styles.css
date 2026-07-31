@@ -378,7 +378,7 @@ footer{color:var(--august-rose-dark)}
 body{background:linear-gradient(180deg,#fffaf5 0%,#fdf2ee 46%,#f8ecea 100%);color:var(--aug-ink)}
 .premiumAugustHero{
   min-height:680px;position:relative;display:grid;align-items:end;text-align:center;padding:64px 22px 58px;
-  background-image:url('portada-agosto-premium.png');background-size:cover;background-position:center top;
+  background-image:url('portada-agosto-premium-v43.png');background-size:cover;background-position:center top;
   color:#fff;overflow:hidden;border-bottom-left-radius:34px;border-bottom-right-radius:34px;
   box-shadow:0 20px 48px rgba(89,45,55,.18)
 }
@@ -857,7 +857,7 @@ nav{
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   background:
     linear-gradient(rgba(255,250,247,.94),rgba(250,239,238,.96)),
-    url("portada-agosto-premium.png") center/cover;
+    url("portada-agosto-premium-v43.png") center/cover;
   border:12px double #c99a70!important;border-radius:8px!important;
   box-shadow:0 24px 50px rgba(79,49,61,.20)!important;box-sizing:border-box;overflow:hidden
 }
@@ -948,7 +948,7 @@ nav{
 /* VERSIÓN 4 — Portada móvil definitiva */
 .finalCleanHero{
   min-height:clamp(680px,88vh,900px)!important;
-  background-image:url("portada-agosto-sin-foto.png")!important;
+  background-image:url("portada-agosto-sin-foto-v43.png")!important;
   background-position:center top!important;
   background-size:cover!important;
   background-repeat:no-repeat!important
@@ -965,20 +965,7 @@ nav{
 }
 
 
-/* VERSIÓN 4.1 — Corrección definitiva de la sección Creadora */
-.creatorAugustClean{
-  overflow:visible!important;
-}
-.creatorAugustClean .creatorAugustImage,
-.premiumCreatorCard .creatorAugustImage{
-  width:100%!important;
-  height:auto!important;
-  max-height:none!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  display:block!important;
-  overflow:visible!important;
-  clip-path:none!important;
-  -webkit-clip-path:none!important;
-  border-radius:24px 24px 0 0!important;
-}
+
+/* v4.3: mostrar imagen completa de Creadora */
+.creatorAugustClean{overflow:visible!important;}
+.creatorAugustClean .creatorAugustImage,.premiumCreatorCard .creatorAugustImage{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;display:block!important;clip-path:none!important;-webkit-clip-path:none!important;}
