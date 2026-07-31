@@ -944,3 +944,64 @@ nav{
 .certificateUnlockedContent{animation:certificateBloom .8s ease}
 @keyframes certificateBloom{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
 @keyframes celebrationFloat{to{transform:translateY(-5px)}}
+
+/* VERSIÓN 4 — Portada móvil definitiva */
+.finalCleanHero{
+  min-height:clamp(680px,88vh,900px)!important;
+  background-image:url("portada-agosto-sin-foto.png")!important;
+  background-position:center top!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important
+}
+.finalCleanHero .heroOverlay{background:linear-gradient(to bottom,rgba(62,35,46,.03),rgba(62,35,46,.08))!important}
+.finalCleanHero .heroContent{
+  min-height:inherit!important;display:flex!important;align-items:flex-start!important;
+  justify-content:center!important;padding:34px 16px!important
+}
+.finalCleanHero .timeGreeting{margin:0 auto!important}
+@media(max-width:600px){
+  .finalCleanHero{min-height:720px!important;background-position:center top!important}
+  .finalCleanHero .heroContent{min-height:720px!important;padding-top:28px!important}
+}
+
+
+/* VERSIÓN 4.1 — Corrección definitiva de la sección Creadora */
+.creatorAugustClean{
+  overflow:visible!important;
+}
+.creatorAugustClean .creatorAugustImage,
+.premiumCreatorCard .creatorAugustImage{
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  display:block!important;
+  overflow:visible!important;
+  clip-path:none!important;
+  -webkit-clip-path:none!important;
+  border-radius:24px 24px 0 0!important;
+}
+.creatorCompleteVerse{
+  width:calc(100% - 40px);
+  max-width:590px;
+  margin:18px auto 4px;
+  padding:18px 20px;
+  box-sizing:border-box;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff7ef,#f8e7e8);
+  border-left:5px solid #d0a05f;
+  color:#654f58;
+  font:500 1rem/1.55 Georgia,serif;
+  text-align:center;
+  box-shadow:0 10px 24px rgba(80,50,63,.08);
+}
+.creatorCompleteVerse strong{
+  display:block;
+  margin-top:8px;
+  font-family:inherit;
+  color:#7b4f61;
+}
+@media(max-width:540px){
+  .creatorCompleteVerse{width:calc(100% - 28px);padding:16px 14px}
+}
