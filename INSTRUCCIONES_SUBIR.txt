@@ -1,1 +1,11 @@
-Sube los archivos sueltos a GitHub, no el ZIP. Incluye index.html, app.js, styles.css, CNAME, manifest.json, portada.png y julianna-foto-app.jpeg.
+JARDÍN DE ORACIÓN — EDICIÓN AGOSTO 2026
+
+1. Descomprime este ZIP.
+2. Abre la carpeta jardin-de-oracion-final-main.
+3. Sube a la raíz de tu repositorio de GitHub TODOS los archivos y carpetas que están dentro.
+4. Reemplaza los archivos existentes cuando GitHub lo indique.
+5. Conserva la carpeta ediciones; allí está guardada la edición de julio.
+6. No cambies ni borres CNAME, porque mantiene el dominio jardindeoracion.org.
+
+Archivo principal: index.html
+Edición anterior: ediciones/julio/index.html

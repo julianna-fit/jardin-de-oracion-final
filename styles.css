@@ -246,3 +246,493 @@
   background:#ead7ff;
   outline:2px solid #7b2cbf;
 }
+
+/* Navegación entre ediciones mensuales */
+.editionArchive{border:1px solid #dcbcf7;background:linear-gradient(135deg,#fff,#fff8e8)}
+.editionLink{display:inline-block;text-decoration:none;border-radius:18px;padding:12px 18px;background:linear-gradient(135deg,#6f2dbd,#b06adf);color:white;font-weight:900;box-shadow:0 7px 18px rgba(76,20,120,.16)}
+
+
+/* EDICIÓN AGOSTO 2026 — PASO 3 */
+:root{
+  --august-rose:#b45f72;
+  --august-rose-dark:#7c3f50;
+  --august-peach:#f4c6ad;
+  --august-cream:#fff8ef;
+  --august-gold:#c49545;
+  --august-sage:#78917b;
+  --august-ink:#4b3038;
+}
+body{background:linear-gradient(180deg,#fff7f2 0%,#fffdf8 42%,#f7f2ed 100%);color:var(--august-ink)}
+.augustHero{position:relative;overflow:hidden;min-height:430px;padding:68px 22px 50px;text-align:center;background:radial-gradient(circle at 50% 5%,rgba(255,247,213,.98) 0 12%,rgba(244,198,173,.82) 36%,rgba(180,95,114,.88) 72%,#754451 100%);color:white;isolation:isolate}
+.augustHero::before,.augustHero::after{content:"";position:absolute;bottom:-55px;width:290px;height:190px;border-radius:50% 50% 0 0;background:rgba(255,255,255,.12);filter:blur(2px);z-index:-1}
+.augustHero::before{left:-70px;transform:rotate(12deg)}.augustHero::after{right:-80px;transform:rotate(-12deg)}
+.sunGlow{position:absolute;top:-110px;left:50%;transform:translateX(-50%);width:330px;height:330px;border-radius:50%;background:rgba(255,244,197,.72);filter:blur(18px);z-index:-1}
+.heroFlowers{font-size:25px;letter-spacing:8px;margin-bottom:18px;filter:drop-shadow(0 3px 4px rgba(56,24,31,.25))}
+.editionLabel{display:inline-block;margin:0 0 8px;padding:8px 14px;border:1px solid rgba(255,255,255,.55);border-radius:999px;background:rgba(255,255,255,.16);font-size:12px;font-weight:900;letter-spacing:2px}
+.augustHero h1{margin:8px 0 0;color:white;font-family:Georgia,'Times New Roman',serif;font-size:clamp(42px,9vw,68px);font-weight:500;text-shadow:0 3px 14px rgba(74,28,39,.28)}
+.augustHero h2{margin:6px 0 14px;color:#fff7e6;font-family:Georgia,'Times New Roman',serif;font-size:clamp(25px,6vw,38px);font-weight:500}
+.heroMessage{max-width:640px;margin:0 auto 20px;font-size:17px;line-height:1.55;font-weight:650}
+.heroVerse{max-width:510px;margin:auto;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34);line-height:1.5}
+nav{background:rgba(255,250,246,.94);border-bottom:1px solid rgba(180,95,114,.15)}
+nav button{background:#f7e4df;color:var(--august-rose-dark)}
+h1,h2{color:var(--august-rose-dark)}
+.card{border-color:#edd8d1;box-shadow:0 10px 26px rgba(112,60,70,.09)}
+.augustWelcome{background:linear-gradient(145deg,#fff,#fff4ed);border:1px solid #efd2c8}
+.welcomeIcon{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 8px;border-radius:50%;font-size:34px;background:linear-gradient(145deg,#fff3da,#f7d5cc);box-shadow:0 8px 20px rgba(126,70,82,.12)}
+.verse{background:#fff1df;border-left-color:var(--august-gold)}
+.tile{border-color:#edd8d1;color:var(--august-rose-dark);background:linear-gradient(145deg,#fff,#fff8f4)}
+.primary{background:linear-gradient(135deg,var(--august-rose-dark),var(--august-rose))}
+.secondary{background:#f6ddd7;color:var(--august-rose-dark)}
+.badge{background:#fbe6c5;color:#76551e}
+.done{outline-color:var(--august-sage)}
+.day.doneDay{background:#dfe9df;outline-color:var(--august-sage)}
+.circle{color:var(--august-rose-dark);border-color:#e8b9b1}
+.editionArchive{border-color:#ead5c5;background:linear-gradient(135deg,#fff,#fff7ec)}
+.editionLink{background:linear-gradient(135deg,#6f7f6e,#91a68e);box-shadow:0 7px 18px rgba(70,96,73,.16)}
+.certificate{background:linear-gradient(135deg,#fff,#fff0df,#f4dfdc);border-color:var(--august-gold)}
+footer{color:var(--august-rose-dark)}
+@media(max-width:520px){.augustHero{min-height:390px;padding:54px 18px 40px}.heroFlowers{letter-spacing:4px}.heroMessage{font-size:16px}}
+@media print{.augustHero{display:none!important}}
+
+
+/* Música de fondo y bienvenida — agosto 2026 */
+.musicToggle{
+  position:fixed;right:14px;top:14px;z-index:900;
+  border:1px solid rgba(255,255,255,.55);border-radius:999px;
+  padding:10px 14px;background:rgba(255,250,246,.92);color:var(--august-rose-dark);
+  font-weight:900;box-shadow:0 8px 22px rgba(75,48,56,.18);backdrop-filter:blur(10px);
+}
+.musicToggle.playing{background:linear-gradient(135deg,#6f7f6e,#91a68e);color:white}
+.musicWelcome[hidden]{display:none}
+.musicWelcome{
+  position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:22px;
+  background:rgba(66,38,47,.72);backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .25s ease;
+}
+.musicWelcome.visible{opacity:1}
+.musicWelcomeCard{
+  width:min(92vw,470px);padding:32px 25px;text-align:center;border-radius:30px;
+  background:linear-gradient(155deg,#fffdf8,#fff2ea 60%,#f4dedb);
+  border:1px solid rgba(255,255,255,.75);box-shadow:0 24px 70px rgba(45,21,29,.35);
+  transform:translateY(12px) scale(.98);transition:transform .25s ease;color:var(--august-ink);
+}
+.musicWelcome.visible .musicWelcomeCard{transform:translateY(0) scale(1)}
+.musicWelcomeCard h2{font-family:Georgia,'Times New Roman',serif;font-size:30px;margin:12px 0 6px}
+.musicWelcomeCard .primary{width:100%;margin-top:12px}
+.musicWelcomeFlowers{font-size:24px;letter-spacing:5px}
+.musicSilentButton{width:100%;margin-top:9px;padding:12px;border:0;background:transparent;color:var(--august-rose-dark);font-weight:850;text-decoration:underline}
+.prayerMusicCard{background:linear-gradient(145deg,#fff,#fff3e9);border:1px solid #efd2c8}
+.musicNote{width:78px;height:78px;margin:0 auto 12px;display:grid;place-items:center;border-radius:50%;font-size:40px;background:linear-gradient(145deg,#fff2d8,#f3d1c8);box-shadow:0 10px 24px rgba(126,70,82,.14)}
+@media(max-width:520px){.musicToggle{top:auto;bottom:14px;right:12px}.musicWelcomeCard{padding:27px 20px}.musicWelcomeCard h2{font-size:26px}}
+@media print{.musicToggle,.musicWelcome{display:none!important}}
+
+/* Estructura definitiva de los devocionales */
+.devotionalCard{overflow:hidden;padding:0;margin-bottom:24px}.devotionalHeader{padding:22px 22px 12px;background:linear-gradient(135deg,rgba(255,239,233,.92),rgba(248,226,233,.82));border-bottom:1px solid rgba(156,111,88,.15)}.devotionalHeader h3{margin:10px 0 2px;font-size:1.48rem}.devotionalSection{margin:0;padding:18px 22px;border-bottom:1px solid rgba(122,91,76,.12)}.devotionalSection h4{margin:0 0 9px;font-size:1.04rem;color:#6f4856}.devotionalSection p{margin:0;line-height:1.72}.beforeSection{background:#f4f8ef}.verseSection{background:#fffaf0}.womanSection{background:#fff2f4}.godSection{background:#f1f7f1}.questionSection{background:#fff9e9}.prayerSection{background:#f4f1fb}.commitmentSection{background:#f0f8f2}.promiseSection{background:#fff7df}.seedSection{background:#f7f5e9}.thoughtSection{background:linear-gradient(135deg,#f6ecfb,#fff3f8)}.devotionalCard>.primary{margin:20px 22px 24px;width:calc(100% - 44px)}
+.hopeGrid,.libraryGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.hopeCard{border-top:4px solid #d4a98d}.hopeCard h3,.editionBook h3{margin-top:4px}.safetyNote{border-left:5px solid #806a91;background:#f7f3fa}.bookMonth{display:inline-block;font-size:.76rem;letter-spacing:.12em;font-weight:800;color:#8d6270;background:#f7e8ed;padding:7px 10px;border-radius:999px}.editionBook{position:relative;min-height:230px}.currentEdition{box-shadow:0 12px 30px rgba(139,92,108,.15);border:1px solid rgba(173,117,135,.25)}
+@media(max-width:600px){.devotionalSection{padding:16px 17px}.devotionalHeader{padding:19px 17px 10px}.devotionalCard>.primary{margin:18px 17px 22px;width:calc(100% - 34px)}}
+
+/* PASO 1 — bienvenida premium */
+.musicWelcome{overflow:hidden;background:linear-gradient(180deg,rgba(91,48,61,.78),rgba(48,35,42,.86));}
+.welcomeSun{position:absolute;top:-180px;left:50%;width:520px;height:520px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,244,193,.98) 0 18%,rgba(244,198,173,.68) 42%,rgba(180,95,114,.18) 68%,transparent 72%);filter:blur(2px);animation:welcomeGlow 4s ease-in-out infinite alternate}
+.welcomePetals span{position:absolute;font-size:24px;opacity:.65;animation:petalFloat 8s ease-in-out infinite}
+.welcomePetals span:nth-child(1){left:8%;top:15%}.welcomePetals span:nth-child(2){right:10%;top:22%;animation-delay:1s}.welcomePetals span:nth-child(3){left:14%;bottom:16%;animation-delay:2s}.welcomePetals span:nth-child(4){right:12%;bottom:12%;animation-delay:3s}
+.musicWelcomeCard{position:relative;width:min(92vw,500px);padding:38px 28px 28px;border-radius:34px;background:linear-gradient(160deg,rgba(255,253,248,.98),rgba(255,241,233,.98) 58%,rgba(242,222,219,.98));box-shadow:0 28px 90px rgba(31,15,21,.42);}
+.musicWelcomeCard::before{content:"";position:absolute;inset:9px;border:1px solid rgba(196,149,69,.35);border-radius:27px;pointer-events:none}
+.welcomeLogo{display:grid;place-items:center;width:78px;height:78px;margin:0 auto 14px;border-radius:50%;font-size:38px;background:linear-gradient(145deg,#fff8df,#f1d0c8);box-shadow:0 10px 28px rgba(126,70,82,.17);animation:logoBreathe 3s ease-in-out infinite}
+.musicWelcomeCard .editionLabel{color:#7c3f50;border-color:rgba(124,63,80,.18);background:rgba(255,255,255,.58)}
+.musicWelcomeCard h2{font-size:clamp(31px,8vw,42px);font-weight:500;color:var(--august-rose-dark);margin:12px 0 5px}
+.welcomeTheme{margin:0 0 18px;font-family:Georgia,'Times New Roman',serif;font-size:20px;color:#8e5965}
+.welcomeDailyPhrase{margin:0 auto 8px;max-width:360px;font-size:18px;line-height:1.55;font-weight:750;color:#594048}
+.welcomeDate{margin:0 0 18px;font-size:13px;text-transform:capitalize;color:#8a7178}
+.welcomePrimary{min-height:52px;font-size:16px;box-shadow:0 10px 24px rgba(124,63,80,.24)}
+.welcomeRemember{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:#765c64}
+.welcomeRemember input{width:18px;height:18px;accent-color:var(--august-rose)}
+.welcomeHint{margin:11px auto 0;max-width:360px;font-size:11px;line-height:1.45;color:#9a858b}
+@keyframes welcomeGlow{from{transform:translateX(-50%) scale(.96);opacity:.78}to{transform:translateX(-50%) scale(1.04);opacity:1}}
+@keyframes petalFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-18px) rotate(7deg)}}
+@keyframes logoBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+@media (prefers-reduced-motion:reduce){.welcomeSun,.welcomePetals span,.welcomeLogo{animation:none}}
+@media(max-width:520px){.musicWelcome{padding:14px}.musicWelcomeCard{padding:31px 20px 23px;border-radius:28px}.welcomeLogo{width:68px;height:68px;font-size:33px}.welcomeTheme{font-size:18px}.welcomeDailyPhrase{font-size:16px}.welcomeHint{font-size:10px}}
+
+
+/* PASO 1B — foto de Julianna integrada en la edición de agosto */
+.welcomePhotoFrame{position:relative;width:132px;height:132px;margin:0 auto 16px;padding:5px;border-radius:50%;background:linear-gradient(145deg,#f6d98f,#b77865 55%,#fff4dc);box-shadow:0 14px 36px rgba(105,56,70,.24);animation:logoBreathe 3s ease-in-out infinite}
+.welcomePhotoFrame::after{content:"🌸";position:absolute;right:-7px;bottom:4px;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:#fff9f2;box-shadow:0 6px 16px rgba(96,55,65,.18);font-size:21px}
+.welcomePhoto{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;object-position:center 25%;border:3px solid rgba(255,255,255,.88)}
+.heroPhotoFrame{width:122px;height:122px;margin:2px auto 13px;padding:4px;border-radius:50%;background:linear-gradient(145deg,#f4d58b,#a86166 60%,#fff1d2);box-shadow:0 14px 34px rgba(91,48,61,.22)}
+.heroPhoto{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;object-position:center 25%;border:3px solid rgba(255,255,255,.9)}
+@media (prefers-reduced-motion:reduce){.welcomePhotoFrame{animation:none}}
+@media(max-width:520px){.welcomePhotoFrame{width:112px;height:112px}.heroPhotoFrame{width:104px;height:104px}}
+
+/* REDISEÑO PREMIUM AGOSTO — rosa empolvado, durazno, crema y dorado */
+:root{
+  --aug-blush:#d78990;
+  --aug-blush-dark:#7d414d;
+  --aug-peach:#f3c3a7;
+  --aug-cream:#fff8ef;
+  --aug-mauve:#aa7885;
+  --aug-gold:#c99a58;
+  --aug-sage:#8d9d7c;
+  --aug-ink:#4e3439;
+}
+body{background:linear-gradient(180deg,#fffaf5 0%,#fdf2ee 46%,#f8ecea 100%);color:var(--aug-ink)}
+.premiumAugustHero{
+  min-height:680px;position:relative;display:grid;align-items:end;text-align:center;padding:64px 22px 58px;
+  background-image:url('portada-agosto-premium.png');background-size:cover;background-position:center top;
+  color:#fff;overflow:hidden;border-bottom-left-radius:34px;border-bottom-right-radius:34px;
+  box-shadow:0 20px 48px rgba(89,45,55,.18)
+}
+.premiumAugustHero .heroOverlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(69,32,42,.04) 18%,rgba(83,42,54,.18) 54%,rgba(74,38,49,.84) 100%)}
+.premiumAugustHero .heroContent{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.premiumAugustHero h1{font-family:Georgia,'Times New Roman',serif;color:#fff;font-size:clamp(45px,10vw,75px);font-weight:500;line-height:.95;text-shadow:0 3px 18px rgba(55,25,35,.42)}
+.premiumAugustHero h2{color:#fff6ed;font-family:Georgia,'Times New Roman',serif;font-size:clamp(25px,6vw,39px);font-weight:500}
+.premiumAugustHero .editionLabel{background:rgba(255,248,239,.86);color:var(--aug-blush-dark);border:1px solid rgba(255,255,255,.75)}
+.premiumAugustHero .heroVerse{background:rgba(255,247,239,.16);border:1px solid rgba(255,255,255,.42);backdrop-filter:blur(8px)}
+nav{background:rgba(255,249,244,.96);box-shadow:0 5px 18px rgba(110,60,70,.08)}
+nav button{background:#f8e5df;color:var(--aug-blush-dark);border:1px solid #efd2ca}
+.card{border:1px solid #efd9d1;background:rgba(255,253,249,.96);border-radius:24px;box-shadow:0 12px 30px rgba(108,60,71,.08)}
+.tile{background:linear-gradient(145deg,#fffdf9,#fbeae5);border:1px solid #efd5ce;color:var(--aug-blush-dark);border-radius:22px}
+.primary{background:linear-gradient(135deg,#b86570,#d98a91);box-shadow:0 8px 20px rgba(144,70,83,.22)}
+.secondary,.softAction{background:#fff2e7;color:var(--aug-blush-dark);border:1px solid #eccfc3}
+.gardenDashboard{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;overflow:hidden;padding:0;background:linear-gradient(135deg,#fffaf5,#f7dedb)}
+.gardenCopy{padding:26px 10px 26px 26px}.gardenCopy h3{font-family:Georgia,'Times New Roman',serif;color:var(--aug-blush-dark);font-size:24px;margin:8px 0}.miniLabel{letter-spacing:.14em;font-size:12px;font-weight:900;color:#a05b67}.gardenPreview{width:100%;height:250px;object-fit:cover;object-position:center;border-radius:22px 0 0 22px}.softAction{padding:11px 17px;border-radius:999px;font-weight:850}
+.welcomeAugustEmblem{display:grid;place-items:center;width:96px;height:96px;margin:0 auto 14px;border-radius:50%;font-size:46px;background:linear-gradient(145deg,#fff8e8,#f1c8c1);border:1px solid rgba(201,154,88,.45);box-shadow:0 12px 30px rgba(120,67,78,.17);animation:logoBreathe 3s ease-in-out infinite}
+.musicWelcomeCard{background:linear-gradient(155deg,#fffdf8,#fff0e8 58%,#ead7da);border-color:rgba(255,255,255,.8)}
+.musicWelcomeCard::before{border-color:rgba(201,154,88,.38)}
+.premiumCreatorCard{padding:0 0 25px;overflow:hidden;background:linear-gradient(180deg,#fffaf5,#f7e2df)}
+.creatorAugustImage{width:100%;max-height:560px;object-fit:cover;object-position:center top;display:block;margin-bottom:18px}
+.premiumCreatorCard>p,.premiumCreatorCard>h3,.premiumCreatorCard>a,.premiumCreatorCard>button{margin-left:22px;margin-right:22px}
+.creatorScript{font-family:'Brush Script MT','Segoe Script',cursive;font-size:24px;color:#a86470;margin-bottom:0!important}
+.premiumCreatorCard h3{font-family:Georgia,'Times New Roman',serif;font-size:34px;color:var(--aug-blush-dark);margin-top:2px}
+.promiseHero,.prayerMusicCard,.augustWelcome{background:linear-gradient(145deg,#fffdf9,#fbe9e4)}
+.verse{background:#fff1e2;border-left-color:var(--aug-gold)}
+footer{color:var(--aug-blush-dark)}
+@media(max-width:600px){
+ .premiumAugustHero{min-height:570px;padding-bottom:40px;background-position:center top}
+ .gardenDashboard{grid-template-columns:1fr}.gardenCopy{padding:23px 21px 5px}.gardenPreview{height:210px;border-radius:18px 18px 0 0;order:-1}.creatorAugustImage{max-height:430px}
+}
+
+/* PASO 2 — MI JARDÍN INTERACTIVO */
+.miniGardenScene,.fullGardenScene{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;background:radial-gradient(circle at 50% 18%,rgba(255,255,255,.96),rgba(249,219,217,.75) 55%,rgba(225,190,189,.48));}
+.miniGardenScene{min-height:265px;border-radius:28px 0 0 28px;padding:24px 16px 28px}.fullGardenScene{min-height:330px;border-radius:28px;padding:28px 20px 18px;margin:12px 0 18px;border:1px solid rgba(191,126,137,.22)}
+.gardenPot{position:relative;width:142px;height:92px;background:linear-gradient(145deg,#eeb2b0,#ca7784);border-radius:14px 14px 52px 52px;box-shadow:inset 0 10px 0 rgba(255,255,255,.28),0 14px 25px rgba(114,58,72,.18);display:grid;place-items:center;color:#fff0d2;font-size:35px;font-family:Georgia,serif;z-index:3}.gardenPot:before{content:"";position:absolute;top:-12px;width:160px;height:28px;border-radius:50%;background:linear-gradient(#a75d69,#d9929b);box-shadow:inset 0 8px 8px rgba(72,36,40,.18)}.largePot{width:180px;height:112px;font-size:42px}.largePot:before{width:200px;height:32px}
+.gardenPlant{position:relative;height:152px;width:185px;margin-bottom:-8px;display:flex;align-items:flex-end;justify-content:center;transform-origin:bottom center;transition:transform .8s ease,filter .8s ease}.gardenPlant:before{content:"";position:absolute;bottom:0;width:7px;height:0;background:linear-gradient(#7b9a52,#47733f);border-radius:8px;transition:height .9s ease}.plantSprout,.plantLeaves,.plantBloom{position:absolute;bottom:4px;opacity:0;transform:scale(.2);transition:all .8s cubic-bezier(.2,.9,.2,1.3);filter:drop-shadow(0 7px 6px rgba(86,69,48,.14))}.plantSprout{font-size:54px}.plantLeaves{font-size:92px;bottom:28px}.plantBloom{font-size:94px;bottom:78px;z-index:2}.gardenPlant.stage-1 .plantSprout,.gardenPlant.stage-2 .plantSprout,.gardenPlant.stage-3 .plantSprout,.gardenPlant.stage-4 .plantSprout,.gardenPlant.stage-5 .plantSprout{opacity:1;transform:scale(1)}.gardenPlant.stage-2:before{height:72px}.gardenPlant.stage-2 .plantLeaves,.gardenPlant.stage-3 .plantLeaves,.gardenPlant.stage-4 .plantLeaves,.gardenPlant.stage-5 .plantLeaves{opacity:1;transform:scale(.72)}.gardenPlant.stage-3:before,.gardenPlant.stage-4:before,.gardenPlant.stage-5:before{height:112px}.gardenPlant.stage-3 .plantLeaves{transform:scale(.9)}.gardenPlant.stage-3 .plantBloom{opacity:1;transform:scale(.55)}.gardenPlant.stage-4 .plantLeaves,.gardenPlant.stage-5 .plantLeaves{transform:scale(1)}.gardenPlant.stage-4 .plantBloom{opacity:1;transform:scale(.82)}.gardenPlant.stage-5 .plantBloom{opacity:1;transform:scale(1.08)}.gardenPlant.stage-5{filter:drop-shadow(0 0 18px rgba(225,157,103,.45))}.gardenGround{margin-top:-2px;font-size:24px;letter-spacing:2px}.myGardenCard{position:relative;overflow:hidden;background:linear-gradient(180deg,#fffaf7,#f9e3e0)}.waterDrop{position:absolute;top:58px;left:50%;font-size:34px;opacity:0;transform:translate(-50%,-35px);z-index:8}.waterDrop.animate{animation:waterPlant 1.15s ease forwards}@keyframes waterPlant{0%{opacity:0;transform:translate(-50%,-45px)}25%{opacity:1}75%{opacity:1;transform:translate(-50%,160px)}100%{opacity:0;transform:translate(-50%,184px)}}.gardenMeter{height:14px;background:#ead8d5;border-radius:999px;overflow:hidden;margin:12px auto 8px;max-width:520px}.gardenMeter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#c97987,#e4ad87);border-radius:999px;transition:width .8s ease}.gardenMilestones{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:16px}.gardenMilestones span{font-size:12px;padding:8px 3px;border-radius:12px;background:rgba(255,255,255,.72);color:#7e4f59;font-weight:800}
+@media(max-width:520px){.miniGardenScene{border-radius:22px 22px 0 0;min-height:235px}.gardenMilestones{grid-template-columns:repeat(3,1fr)}.plantBloom{font-size:82px}.plantLeaves{font-size:80px}}
+
+
+/* PASO 3 — DIARIO ESPIRITUAL PREMIUM */
+.journalIntro{text-align:center;background:linear-gradient(145deg,#fffaf6,#f8e2df);padding:27px 24px}.journalFlower{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 10px;border-radius:50%;font-size:31px;background:#fff6e9;box-shadow:0 8px 22px rgba(115,61,75,.12)}.journalIntro h3{font-family:Georgia,'Times New Roman',serif;color:var(--aug-blush-dark);font-size:25px;margin:7px 0}.journalIntro p{max-width:620px;margin:0 auto;line-height:1.65;color:#70565e}
+.journalEditor{background:linear-gradient(180deg,#fffefa,#fff6f1);padding:25px}.journalEditorHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:18px}.journalEditorHeader h3{margin:5px 0 0;font-family:Georgia,'Times New Roman',serif;color:var(--aug-blush-dark);font-size:24px}.journalLock{white-space:nowrap;background:#f6e6df;color:#7d505b;padding:8px 11px;border-radius:999px;font-size:12px;font-weight:800}.journalFields{display:grid;grid-template-columns:.72fr 1.28fr;gap:12px}.journalEditor label{display:block;margin:12px 0 6px;font-weight:800;color:#684850}.journalEditor input,.journalEditor textarea,.journalToolbar input{margin-top:7px;background:#fffdf9;border:1px solid #ead1ca}.journalEditor textarea{min-height:118px;line-height:1.6}.journalActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.savedMessage{min-height:22px;color:#688052;font-weight:800;margin:10px 0 0}
+.journalToolbar{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin:18px 0 10px}.journalToolbar input{width:100%;padding:13px 15px;border-radius:16px}.journalStats{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:8px 3px 14px;color:#805963;font-size:13px;font-weight:800}.journalEntry{position:relative;overflow:hidden;padding:23px}.journalEntry:before{content:"";position:absolute;right:-30px;top:-38px;width:115px;height:115px;border-radius:50%;background:radial-gradient(circle,#f8dcd7,transparent 70%);opacity:.7}.journalEntryTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:1px solid #f0ddd7;padding-bottom:13px;margin-bottom:15px}.journalDate{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.08em;color:#a3636f}.journalEntry h3{font-family:Georgia,'Times New Roman',serif;color:var(--aug-blush-dark);font-size:23px;margin:5px 0 0}.journalEntryFlower{font-size:28px}.journalEntrySection{padding:11px 13px;margin:9px 0;border-radius:15px;background:#fff8f3}.journalEntrySection b{color:#85505c}.journalEntrySection p{margin:7px 0 0;line-height:1.65;white-space:normal}.journalEntryActions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}.textDanger{border:0;background:transparent;color:#a24f58;font-weight:850;padding:10px}.emptyJournal span{font-size:48px}.emptyJournal h3{color:var(--aug-blush-dark)}
+.devotionalQuickJournal{margin:18px 0;padding:18px;border-radius:20px;background:linear-gradient(145deg,#fff8f2,#f8e2df);border:1px solid #eed3cc}.devotionalQuickJournal h4{margin:0 0 9px;color:var(--aug-blush-dark)}.devotionalQuickJournal textarea{min-height:96px;background:#fffdf9}.devotionalQuickJournal .secondary{margin-top:8px}
+@media(max-width:600px){.journalFields,.journalToolbar{grid-template-columns:1fr}.journalEditorHeader{flex-direction:column}.journalLock{align-self:flex-start}.journalEntryActions{justify-content:flex-start}}
+/* Diario de agosto: Cartas desde mi Jardín */
+.augustJournal{position:relative}.journalHeroAugust{position:relative;overflow:hidden;text-align:center;padding:34px 24px;margin-bottom:18px;border-radius:28px;background:linear-gradient(145deg,#f7d8d2 0%,#fff4e9 52%,#ead9e6 100%);border:1px solid rgba(184,112,125,.22);box-shadow:0 16px 42px rgba(105,61,75,.12)}
+.journalHeroAugust:before,.journalHeroAugust:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(2px);opacity:.35;background:radial-gradient(circle,#fff7d6 0,transparent 68%)}.journalHeroAugust:before{left:-65px;top:-70px}.journalHeroAugust:after{right:-70px;bottom:-90px}.journalHeroPetals{font-size:38px;margin-bottom:8px;filter:drop-shadow(0 6px 9px rgba(110,62,79,.14))}.journalHeroAugust h2{font-family:Georgia,'Times New Roman',serif;font-size:34px;color:#70434e;margin:8px 0}.journalHeroAugust>p{max-width:650px;margin:0 auto;line-height:1.7;color:#745861}.journalHeroVerse{display:inline-block;margin-top:18px;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.58);color:#80515d;font-style:italic}
+.journalMoodCard{padding:18px 20px;border-radius:22px;background:#fffaf5;border:1px solid #eed9d2;margin-bottom:18px}.journalMoodCard>span{display:block;text-align:center;font-family:Georgia,'Times New Roman',serif;font-size:20px;color:#70434e;margin-bottom:13px}.moodPicker{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.moodPicker button{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:88px;padding:11px 9px;border:1px solid #ead1ca;border-radius:17px;background:#fff;color:#714c56;font-size:22px;transition:.2s}.moodPicker button small{font-size:11px;font-weight:800}.moodPicker button.active{transform:translateY(-3px);background:linear-gradient(145deg,#e8b6b8,#c88d9a);color:white;border-color:transparent;box-shadow:0 9px 20px rgba(151,83,99,.24)}
+.journalLetterPaper{position:relative;padding:32px 27px 26px;border-radius:12px 12px 28px 28px;background:repeating-linear-gradient(to bottom,#fffefa 0,#fffefa 36px,#f3e4df 37px);border:1px solid #ead2ca;box-shadow:0 18px 40px rgba(86,50,61,.12);margin:24px 4px}.journalLetterPaper:before{content:"";position:absolute;left:28px;top:0;bottom:0;width:1px;background:#efc8c4;opacity:.65}.paperRibbon{position:absolute;top:-16px;left:50%;transform:translateX(-50%);padding:8px 22px;background:#b97683;color:#fff;border-radius:4px 4px 14px 14px;font-family:Georgia,'Times New Roman',serif;box-shadow:0 7px 14px rgba(94,50,63,.18)}.journalLetterPaper label{position:relative;display:block;margin:14px 0 7px;font-weight:850;color:#6c4952}.journalLetterPaper input,.journalLetterPaper textarea{margin-top:7px;background:rgba(255,255,255,.78);border:1px solid #e4cbc4}.journalLetterPaper textarea{min-height:125px;line-height:1.7}.letterPrompt textarea{min-height:190px;font-family:Georgia,'Times New Roman',serif;font-size:17px}.journalTwoColumns{display:grid;grid-template-columns:1fr 1fr;gap:14px}.journalSealButton{border-radius:999px!important;padding-inline:24px!important}.journalMemoryHeader{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:30px 4px 8px}.journalMemoryHeader h3{font-family:Georgia,'Times New Roman',serif;color:#70434e;font-size:25px;margin:5px 0}.journalSearchOnly{grid-template-columns:1fr}.journalPath{position:relative;padding-left:18px}.journalPath:before{content:"";position:absolute;left:6px;top:8px;bottom:12px;width:2px;background:linear-gradient(#d9a2aa,#eed6c5,#aabf91)}.journalPath .journalEntry{margin-left:14px;border-radius:9px 24px 24px 24px;background:linear-gradient(145deg,#fffefa,#fff5ef)}.journalPath .journalEntry:after{content:"";position:absolute;left:-24px;top:28px;width:14px;height:14px;border:3px solid #fff;border-radius:50%;background:#bd7a87;box-shadow:0 0 0 2px #d9a2aa}.journalMoodBadge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:#f4dfdc;color:#81535d;font-size:11px;font-weight:850;margin-top:6px}.journalSeedBox{padding:12px 14px;margin:10px 0;border-radius:15px;background:linear-gradient(135deg,#f3f1df,#fffaf0);border-left:4px solid #a9b985;color:#657052}.journalSeedBox b{color:#657052}.journalEntryLetterOpening{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:#8b5a65;margin:4px 0 9px}
+@media(max-width:650px){.journalTwoColumns{grid-template-columns:1fr}.journalLetterPaper{padding:30px 18px 22px}.journalLetterPaper:before{left:15px}.journalMemoryHeader{align-items:flex-start;flex-direction:column}.journalHeroAugust h2{font-size:29px}.moodPicker button{min-width:75px}.journalPath{padding-left:9px}.journalPath:before{left:1px}.journalPath .journalEntry{margin-left:12px}}
+
+
+/* PASO 5 — Biblioteca premium tipo revista */
+.libraryHero{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:26px;margin:14px 0 24px;border-radius:28px;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(255,255,255,.9),transparent 28%),
+    linear-gradient(135deg,#fae7e8 0%,#f7e8d8 46%,#eee4f4 100%);
+  border:1px solid rgba(171,117,137,.18);
+  box-shadow:0 16px 40px rgba(116,78,97,.12)
+}
+.libraryHero h3{font-family:Georgia,serif;font-size:clamp(1.4rem,4vw,2rem);margin:7px 0;color:#684858}
+.libraryHero p{max-width:680px;margin:0;color:#715f68;line-height:1.65}
+.libraryEyebrow{font-size:.72rem;letter-spacing:.16em;font-weight:900;color:#a56d7f}
+.librarySeal{
+  min-width:104px;height:104px;border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:rgba(255,255,255,.72);
+  border:1px solid rgba(175,125,143,.22);box-shadow:0 9px 24px rgba(108,74,91,.1)
+}
+.librarySeal span{font:700 2.1rem Georgia,serif;color:#9a6376;line-height:1}
+.librarySeal small{color:#806b76;margin-top:5px}
+.libraryShelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px;align-items:stretch}
+.editionMagazine{
+  position:relative;overflow:hidden;border-radius:28px;background:#fff;
+  border:1px solid rgba(145,101,117,.16);box-shadow:0 18px 42px rgba(102,70,86,.13);
+  display:flex;flex-direction:column;min-height:470px;transition:transform .25s ease,box-shadow .25s ease
+}
+.editionMagazine:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(102,70,86,.18)}
+.magazineRibbon{
+  position:absolute;z-index:2;top:18px;right:-38px;transform:rotate(35deg);
+  width:170px;text-align:center;padding:7px 0;background:#a86b7e;color:#fff;
+  font-size:.65rem;letter-spacing:.1em;font-weight:900;box-shadow:0 5px 12px rgba(0,0,0,.12)
+}
+.archivedRibbon{background:#7c6d8d}
+.magazineCover{
+  flex:1;padding:34px 28px 28px;display:flex;flex-direction:column;align-items:flex-start;
+  position:relative;isolation:isolate
+}
+.magazineCover:before,.magazineCover:after{content:"";position:absolute;border-radius:50%;z-index:-1;filter:blur(.2px)}
+.magazineCover:before{width:190px;height:190px;right:-55px;top:80px;background:rgba(255,255,255,.36)}
+.magazineCover:after{width:120px;height:120px;left:-45px;bottom:50px;background:rgba(255,255,255,.24)}
+.augustMagazine .magazineCover{background:linear-gradient(155deg,#f9dede 0%,#f6e6d4 48%,#e8dff2 100%)}
+.julyMagazine .magazineCover{background:linear-gradient(155deg,#e9def1 0%,#f0e5f4 45%,#e6eee6 100%)}
+.magazineMonth{font-size:.72rem;letter-spacing:.16em;font-weight:900;color:#875d6d}
+.magazineFlower{font-size:3rem;margin:34px 0 12px;filter:drop-shadow(0 7px 8px rgba(104,64,81,.14))}
+.magazineCover h3{font:700 clamp(1.7rem,5vw,2.35rem)/1.08 Georgia,serif;color:#634654;margin:0 0 14px}
+.magazineCover p{color:#735f68;line-height:1.55;margin:0 0 22px}
+.magazineProgress{width:100%;margin-top:auto;background:rgba(255,255,255,.56);padding:13px;border-radius:16px}
+.magazineProgressTop{display:flex;justify-content:space-between;gap:12px;font-size:.8rem;color:#7a6670;margin-bottom:8px}
+.magazineProgressTrack{height:9px;border-radius:999px;background:rgba(132,97,111,.15);overflow:hidden}
+.magazineProgressTrack span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#c58598,#d8ae82);transition:width .5s ease}
+.archiveNote{margin-top:auto;padding:13px 14px;border-radius:15px;background:rgba(255,255,255,.55);font-size:.83rem;color:#6f6273;line-height:1.45}
+.magazineActions{display:grid;gap:9px;padding:17px;background:#fff}
+.premiumEditionLink{
+  display:block;text-align:center;text-decoration:none;padding:13px 18px;border-radius:999px;
+  background:linear-gradient(135deg,#7c6d8d,#9c7fa0);color:#fff!important;font-weight:800;
+  box-shadow:0 8px 20px rgba(97,77,106,.18)
+}
+.libraryMemoryCard{display:flex;gap:15px;align-items:center;margin-top:24px;background:linear-gradient(120deg,#fff,#fbf4f6)}
+.memoryIcon{font-size:2.2rem}.libraryMemoryCard h3{margin:0 0 5px;color:#70505e}.libraryMemoryCard p{margin:0;color:#75656d}
+@media(max-width:620px){
+  .libraryHero{align-items:flex-start;padding:21px}.librarySeal{min-width:78px;height:78px}
+  .librarySeal span{font-size:1.55rem}.librarySeal small{font-size:.68rem}
+  .editionMagazine{min-height:430px}
+}
+
+
+/* PASO 6 — Momentos con Dios */
+.momentIntro{margin-bottom:20px;background:linear-gradient(135deg,#fff9f6,#f5e9f5)}
+.momentIntroIcon{font-size:2.4rem}.momentDayGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
+.momentDayCard{padding:20px;border-radius:24px;background:linear-gradient(155deg,#fff,#fff8f4);border:1px solid rgba(164,111,132,.16);box-shadow:0 12px 28px rgba(102,70,86,.1);display:flex;flex-direction:column}
+.momentDayCard.done{background:linear-gradient(155deg,#fff8fa,#f2ebf6)}.momentDayTop{display:flex;justify-content:space-between;align-items:center;gap:8px}.momentStatus{font-size:.72rem;color:#8b6b78;font-weight:800}.momentDayBloom{font-size:2.7rem;margin:18px 0 8px}.momentDayCard h3{font-family:Georgia,serif;color:#684957;margin:0 0 8px}.momentVersePreview{color:#8d6c78;font-style:italic}.momentDecisionPreview{font-size:.76rem;padding:7px 10px;border-radius:999px;background:#f6e6ea;color:#865f6e;margin:0 0 14px;align-self:flex-start}.momentDayCard .primary{margin-top:auto}
+.momentModal{display:none;position:fixed;inset:0;z-index:9999}.momentModal.open{display:block}.momentBackdrop{position:absolute;inset:0;background:rgba(55,39,49,.62);backdrop-filter:blur(7px)}.momentPanel{position:relative;z-index:2;width:min(760px,calc(100% - 24px));max-height:92vh;overflow:auto;margin:4vh auto;background:linear-gradient(160deg,#fffdfb,#fbf2f5);border-radius:30px;padding:26px;box-shadow:0 28px 80px rgba(47,31,40,.35)}.momentClose{position:absolute;right:16px;top:12px;border:0;background:rgba(255,255,255,.8);width:38px;height:38px;border-radius:50%;font-size:1.7rem;color:#7d5a68;z-index:3}.momentOpen{overflow:hidden}.momentProgress{display:flex;justify-content:center;gap:8px;margin:4px 46px 24px}.momentProgress span{width:34px;height:6px;border-radius:20px;background:#eadde2}.momentProgress span.active{background:#b87389}.momentProgress span.done{background:#d7ad81}.momentStep{min-height:430px;display:flex;flex-direction:column;justify-content:center}.momentStep.center{text-align:center;align-items:center}.momentKicker{font-size:.7rem;letter-spacing:.17em;font-weight:900;color:#a66c80;margin-bottom:8px}.momentStep h2,.momentFinish h2{font:700 clamp(1.7rem,5vw,2.5rem)/1.1 Georgia,serif;color:#674654;margin:8px 0 18px}.momentStep p{line-height:1.7;color:#6f5d66}.breathingOrb{width:150px;height:150px;border-radius:50%;margin:0 auto 30px;background:radial-gradient(circle,#fff 5%,#f5dce2 55%,#e8d9ee);display:grid;place-items:center;box-shadow:0 0 0 18px rgba(243,221,228,.35);animation:breathe 8s ease-in-out infinite}.breathingOrb span{font-family:Georgia,serif;color:#895e6f}.breathGuide{text-align:center;font-weight:700;color:#9a7180!important}@keyframes breathe{0%,100%{transform:scale(.88)}50%{transform:scale(1.08)}}.momentScripture{margin:10px 0 22px;padding:24px;border-radius:22px;background:linear-gradient(135deg,#f9e7df,#f1e7f4);border-left:4px solid #cf9d78;font:italic 1.16rem/1.6 Georgia,serif;color:#684c58}.momentScripture cite{display:block;margin-top:10px;font:700 .85rem Arial;color:#966e7c}.momentReading{background:#fff;padding:20px;border-radius:22px}.momentReading h4{color:#8e6072;margin:20px 0 5px}.heartPaper{padding:22px;border-radius:24px;background:repeating-linear-gradient(#fff,#fff 31px,#f3e7eb 32px);box-shadow:0 10px 26px rgba(90,61,74,.08)}.heartPaper textarea{min-height:130px;background:rgba(255,255,255,.72)}.momentSeed,.momentPromise{margin-top:18px;padding:17px;border-radius:19px;background:#f5ecf1;color:#6d5862}.prayerFlower{font-size:5rem;filter:grayscale(.35);transform:scale(.72);transition:all .7s ease}.prayerFlower.bloom{filter:none;transform:scale(1.12) rotate(4deg)}.momentPrayer{max-width:560px;font-family:Georgia,serif;font-style:italic}.decisionGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:20px 0}.decisionChoice{padding:14px;border-radius:18px;border:1px solid #dfc8d1;background:#fff;color:#755563;font-weight:800}.decisionChoice.selected{background:linear-gradient(135deg,#bb7890,#d5a97f);color:#fff;border-color:transparent}.momentNav{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #eee0e5;padding-top:18px}.momentFinish{min-height:520px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}.petals{font-size:3rem;animation:petalFloat 2.5s ease-in-out infinite}@keyframes petalFloat{50%{transform:translateY(-12px) rotate(3deg)}}
+@media(max-width:600px){.momentPanel{padding:20px 16px;margin:2vh auto;max-height:96vh}.momentStep{min-height:500px}.momentProgress span{width:25px}.momentNav button{padding-left:13px;padding-right:13px}}
+
+
+/* PASO 7 — Insignias espirituales */
+.badgesHero{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:26px;margin:14px 0 24px;border-radius:28px;background:radial-gradient(circle at 88% 18%,rgba(255,255,255,.92),transparent 26%),linear-gradient(135deg,#f9e2e7 0%,#f5eadb 48%,#e9e2f2 100%);border:1px solid rgba(166,111,132,.18);box-shadow:0 16px 40px rgba(110,74,93,.12)}
+.badgesEyebrow{font-size:.72rem;letter-spacing:.16em;font-weight:900;color:#a56d7f}.badgesHero h3{font:700 clamp(1.45rem,4vw,2.05rem)/1.16 Georgia,serif;color:#674958;margin:8px 0}.badgesHero p{margin:0;color:#715f68;line-height:1.65;max-width:720px}
+.badgesCounter{min-width:104px;height:104px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.76);border:1px solid rgba(175,125,143,.24);box-shadow:0 10px 25px rgba(108,74,91,.1)}.badgesCounter strong{font:700 2rem Georgia,serif;color:#976276;line-height:1}.badgesCounter span{font-size:.8rem;color:#806b76;margin-top:5px}
+.badgesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.badgeCard{position:relative;overflow:hidden;min-height:265px;padding:22px;border-radius:25px;border:1px solid rgba(145,101,117,.16);background:#fff;box-shadow:0 14px 32px rgba(102,70,86,.11);display:flex;flex-direction:column;align-items:center;text-align:center;transition:.25s ease}
+.badgeCard.unlocked{background:linear-gradient(155deg,#fff 0%,#fff8f4 44%,#f7eef8 100%);transform:translateY(-2px)}.badgeCard.locked{filter:saturate(.35);opacity:.72;background:linear-gradient(160deg,#fafafa,#f2eff3)}
+.badgeIconWrap{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;margin:5px 0 14px;background:linear-gradient(145deg,#f3d8df,#f5e7d1);border:4px solid rgba(255,255,255,.8);box-shadow:0 8px 22px rgba(121,77,95,.16);position:relative}.badgeCard.locked .badgeIconWrap{background:#ddd8df;box-shadow:none}
+.badgeIcon{font-size:2.8rem}.badgeLock{position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:.9rem;box-shadow:0 4px 10px rgba(74,54,63,.12)}
+.badgeCard h3{font:700 1.2rem Georgia,serif;color:#684a59;margin:0 0 8px}.badgeCard p{color:#75636c;line-height:1.48;margin:0 0 14px;font-size:.92rem}.badgeStatus{margin-top:auto;padding:8px 12px;border-radius:999px;font-size:.76rem;font-weight:900}.badgeCard.unlocked .badgeStatus{background:#f0dce4;color:#8b586c}.badgeCard.locked .badgeStatus{background:#e7e2e7;color:#7d747b}.badgeShare{margin-top:10px;border:0;background:transparent;color:#9b6578;font-weight:800;cursor:pointer}
+.badgesReflection{display:flex;gap:15px;align-items:center;margin-top:24px;background:linear-gradient(120deg,#fff,#fbf5f7)}.badgesReflectionIcon{font-size:2.2rem}.badgesReflection h3{margin:0 0 5px;color:#70505e}.badgesReflection p{margin:0;color:#75656d}
+.badgeToast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);width:min(92vw,430px);z-index:9999;padding:18px;border-radius:22px;background:linear-gradient(135deg,#6f4c5d,#9b6679);color:#fff;box-shadow:0 18px 45px rgba(69,45,57,.3);opacity:0;pointer-events:none;transition:.35s ease;text-align:center}.badgeToast.show{opacity:1;transform:translateX(-50%) translateY(0)}.badgeToast strong{display:block;font:700 1.25rem Georgia,serif;margin:4px 0}
+@media(max-width:620px){.badgesHero{align-items:flex-start;padding:21px}.badgesCounter{min-width:78px;height:78px}.badgesCounter strong{font-size:1.55rem}.badgesGrid{grid-template-columns:1fr 1fr;gap:12px}.badgeCard{min-height:245px;padding:16px 12px}.badgeIconWrap{width:76px;height:76px}.badgeIcon{font-size:2.15rem}}@media(max-width:430px){.badgesGrid{grid-template-columns:1fr}}
+
+
+/* PASO 8 — Ambientes dinámicos según la hora */
+:root{
+  --time-bg-1:#fff8f4;
+  --time-bg-2:#f8e7ec;
+  --time-bg-3:#ece6f2;
+  --time-glow:rgba(255,211,151,.30);
+  --time-nav:rgba(255,250,247,.90);
+  --time-card:rgba(255,255,255,.94);
+  --time-text:#624a56;
+}
+html{background:var(--time-bg-2)}
+body{
+  position:relative;
+  min-height:100vh;
+  color:var(--time-text);
+  background:
+    radial-gradient(circle at 85% 4%,var(--time-glow),transparent 28rem),
+    linear-gradient(150deg,var(--time-bg-1) 0%,var(--time-bg-2) 50%,var(--time-bg-3) 100%);
+  background-attachment:fixed;
+  transition:background 1.2s ease,color 1.2s ease;
+}
+body.time-dawn{
+  --time-bg-1:#fff3e6;--time-bg-2:#f6dce3;--time-bg-3:#dedaf0;
+  --time-glow:rgba(255,185,112,.42);--time-nav:rgba(255,247,243,.91);--time-card:rgba(255,253,251,.94);
+}
+body.time-morning{
+  --time-bg-1:#fffdf4;--time-bg-2:#f4eadc;--time-bg-3:#e8eef0;
+  --time-glow:rgba(255,220,116,.34);--time-nav:rgba(255,254,247,.91);--time-card:rgba(255,255,252,.94);
+}
+body.time-afternoon{
+  --time-bg-1:#fff9ed;--time-bg-2:#f3e6df;--time-bg-3:#e1e9e2;
+  --time-glow:rgba(255,197,112,.28);--time-nav:rgba(255,251,246,.91);--time-card:rgba(255,255,252,.94);
+}
+body.time-sunset{
+  --time-bg-1:#fff0df;--time-bg-2:#e9cfd9;--time-bg-3:#d9d2eb;
+  --time-glow:rgba(255,151,104,.36);--time-nav:rgba(255,244,242,.91);--time-card:rgba(255,250,249,.94);
+}
+body.time-night{
+  --time-bg-1:#24243d;--time-bg-2:#35314c;--time-bg-3:#182738;
+  --time-glow:rgba(219,211,255,.16);--time-nav:rgba(36,34,55,.92);--time-card:rgba(255,255,255,.92);
+  --time-text:#f7eef6;
+}
+body.time-night main>section>h2{color:#fff}
+body.time-night nav{box-shadow:0 12px 30px rgba(7,8,20,.28)}
+body.time-night nav button{color:#f7edf4}
+body.time-night nav button:hover{background:rgba(255,255,255,.12)}
+body.time-night .musicToggle{background:rgba(42,38,61,.92);color:#fff;border-color:rgba(255,255,255,.22)}
+nav{
+  background:var(--time-nav)!important;
+  backdrop-filter:blur(17px);
+  -webkit-backdrop-filter:blur(17px);
+  transition:background 1.2s ease;
+}
+.card,.badgeCard,.libraryCard,.journalLetter,.gardenPanel{
+  transition:background 1.2s ease,box-shadow .4s ease;
+}
+.timeAmbience{
+  position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
+  opacity:.95;transition:opacity 1.2s ease;
+}
+.ambientSun{
+  position:absolute;right:8vw;top:8vh;width:118px;height:118px;border-radius:50%;
+  background:radial-gradient(circle,#fff8d8 0%,#ffdca0 42%,rgba(255,201,126,.08) 72%);
+  box-shadow:0 0 70px 25px var(--time-glow);
+  opacity:.62;transition:all 1.2s ease;
+}
+.time-afternoon .ambientSun{top:20vh;right:6vw;opacity:.5}
+.time-sunset .ambientSun{top:46vh;right:9vw;background:radial-gradient(circle,#ffe8b9,#f6a278 45%,rgba(255,141,105,.05) 72%)}
+.time-night .ambientSun{width:82px;height:82px;top:9vh;right:10vw;background:radial-gradient(circle,#fff 0%,#eee9ff 48%,rgba(227,220,255,.04) 72%);box-shadow:0 0 45px 12px rgba(225,219,255,.24);opacity:.82}
+.ambientCloud{
+  position:absolute;width:190px;height:50px;border-radius:999px;background:rgba(255,255,255,.17);
+  filter:blur(2px);animation:ambientDrift 24s linear infinite;
+}
+.cloudOne{top:19vh;left:-220px}.cloudTwo{top:48vh;left:-300px;animation-duration:36s;animation-delay:-8s;opacity:.55}
+.time-night .ambientCloud{opacity:.05}
+.ambientStars{
+  position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;
+  background-image:
+    radial-gradient(circle at 12% 14%,rgba(255,255,255,.8) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 28% 9%,rgba(255,255,255,.7) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 47% 18%,rgba(255,255,255,.85) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 67% 10%,rgba(255,255,255,.75) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 83% 24%,rgba(255,255,255,.72) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 17% 43%,rgba(255,255,255,.6) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 73% 52%,rgba(255,255,255,.65) 0 1px,transparent 1.8px);
+  background-size:260px 220px;
+  animation:starTwinkle 4s ease-in-out infinite alternate;
+}
+.time-night .ambientStars{opacity:.88}
+.timeGreeting{
+  display:inline-flex;align-items:center;gap:7px;margin:8px 0 2px;padding:7px 13px;border-radius:999px;
+  background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.7);
+  color:#765361;font-size:.78rem;font-weight:850;letter-spacing:.025em;
+  box-shadow:0 7px 18px rgba(95,60,75,.09);backdrop-filter:blur(8px)
+}
+.time-night .timeGreeting{background:rgba(42,38,61,.58);border-color:rgba(255,255,255,.22);color:#fff}
+@keyframes ambientDrift{to{transform:translateX(calc(100vw + 520px))}}
+@keyframes starTwinkle{from{filter:brightness(.75)}to{filter:brightness(1.25)}}
+@media(prefers-reduced-motion:reduce){.ambientCloud,.ambientStars{animation:none}}
+@media(max-width:600px){
+  .ambientSun{width:82px;height:82px;right:3vw;top:6vh}
+  .timeGreeting{font-size:.72rem;padding:6px 10px}
+}
+
+
+/* PASO 9 — Caja de Promesas interactiva */
+.promiseExperience{
+  margin:12px 0 28px;padding:28px 20px 24px;border-radius:32px;
+  background:
+    radial-gradient(circle at 50% 32%,rgba(255,255,255,.95),transparent 30%),
+    linear-gradient(145deg,#f8e1e7 0%,#f7ecdf 48%,#e8e2f0 100%);
+  border:1px solid rgba(153,100,121,.16);
+  box-shadow:0 20px 48px rgba(93,59,75,.13);
+  overflow:hidden;position:relative
+}
+.promiseIntro{text-align:center;max-width:680px;margin:0 auto 12px}
+.promiseEdition{font-size:.72rem;font-weight:900;letter-spacing:.16em;color:#a4697e}
+.promiseIntro h3{font:700 clamp(1.65rem,4vw,2.25rem) Georgia,serif;color:#684857;margin:8px 0}
+.promiseIntro p{margin:0;color:#725e67;line-height:1.62}
+.promiseBoxScene{
+  position:relative;min-height:430px;display:grid;place-items:center;
+  perspective:1000px;margin-top:4px
+}
+.promiseGlow{
+  position:absolute;width:280px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,238,181,.58),rgba(255,213,157,.14) 46%,transparent 72%);
+  filter:blur(5px);animation:promiseGlowPulse 3s ease-in-out infinite
+}
+.promiseGiftBox{
+  position:relative;width:220px;height:205px;border:0;background:transparent;cursor:pointer;
+  transform-style:preserve-3d;transition:transform .35s ease;z-index:2
+}
+.promiseGiftBox:hover{transform:translateY(-5px) scale(1.02)}
+.promiseBoxBase{
+  position:absolute;left:15px;bottom:5px;width:190px;height:145px;border-radius:12px 12px 20px 20px;
+  background:
+    linear-gradient(90deg,transparent 0 42%,rgba(255,236,196,.9) 42% 58%,transparent 58%),
+    linear-gradient(145deg,#a56d7f,#7b4f61);
+  box-shadow:0 20px 30px rgba(76,45,59,.24),inset 0 1px 0 rgba(255,255,255,.35);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:22px
+}
+.promiseBoxLid{
+  position:absolute;left:2px;top:31px;width:216px;height:61px;border-radius:14px;
+  background:
+    linear-gradient(90deg,transparent 0 42%,rgba(255,236,196,.95) 42% 58%,transparent 58%),
+    linear-gradient(145deg,#bd8195,#8c596c);
+  box-shadow:0 10px 16px rgba(75,46,59,.18);
+  transform-origin:20px bottom;transition:transform .85s cubic-bezier(.2,.8,.2,1),top .85s ease
+}
+.promiseBow{
+  position:absolute;left:50%;top:-32px;transform:translateX(-50%);
+  font-size:3rem;filter:drop-shadow(0 5px 6px rgba(75,43,58,.18))
+}
+.promiseBoxLabel{
+  padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.84);
+  color:#765164;font-size:.78rem;font-weight:900;letter-spacing:.035em;
+  box-shadow:0 6px 14px rgba(66,39,51,.11)
+}
+.promiseBoxScene.open .promiseGiftBox{pointer-events:none;animation:promiseBoxSink .85s ease forwards}
+.promiseBoxScene.open .promiseBoxLid{transform:translate(-28px,-92px) rotate(-18deg);top:20px}
+.promiseRevealCard{
+  position:absolute;z-index:4;width:min(88%,460px);padding:28px 24px;border-radius:25px;
+  background:
+    linear-gradient(rgba(255,255,255,.94),rgba(255,250,247,.96)),
+    repeating-linear-gradient(0deg,transparent 0 29px,rgba(170,123,143,.06) 30px);
+  border:1px solid rgba(169,117,137,.22);box-shadow:0 22px 48px rgba(77,49,62,.22);
+  text-align:center;opacity:0;transform:translateY(120px) scale(.75) rotateX(24deg);
+  pointer-events:none;transition:opacity .65s ease .35s,transform .8s cubic-bezier(.2,.8,.2,1) .25s
+}
+.promiseBoxScene.open .promiseRevealCard{
+  opacity:1;transform:translateY(-4px) scale(1) rotateX(0);pointer-events:auto
+}
+.promiseRevealCategory{
+  display:inline-block;font-size:.68rem;font-weight:900;letter-spacing:.14em;color:#a1687c;
+  background:#f4e2e8;padding:7px 11px;border-radius:999px
+}
+.promiseRevealFlower{font-size:2rem;margin:13px 0 4px}
+.promiseRevealCard blockquote{
+  margin:8px auto 12px;font:700 clamp(1.25rem,3.6vw,1.75rem)/1.45 Georgia,serif;
+  color:#644755;max-width:390px
+}
+.promiseRevealCard>p{font-weight:900;color:#9c687a;margin:0 0 18px}
+.promiseRevealActions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.promiseReset{
+  margin-top:13px;border:0;background:transparent;color:#8b6b78;text-decoration:underline;cursor:pointer
+}
+.promiseDailyNote{
+  display:flex;align-items:center;gap:13px;max-width:650px;margin:0 auto;padding:14px 16px;
+  border-radius:18px;background:rgba(255,255,255,.58);color:#735f68
+}
+.promiseDailyNote>span{font-size:1.5rem}.promiseDailyNote p{margin:0;line-height:1.45;font-size:.88rem}
+.promiseSpark{
+  position:absolute;z-index:3;pointer-events:none;font-size:1rem;
+  animation:promiseSparkRise 1.8s ease-out forwards
+}
+@keyframes promiseGlowPulse{50%{transform:scale(1.12);opacity:.72}}
+@keyframes promiseBoxSink{to{transform:translateY(84px) scale(.72);opacity:.18}}
+@keyframes promiseSparkRise{
+  0%{opacity:0;transform:translate(0,30px) scale(.5)}
+  25%{opacity:1}
+  100%{opacity:0;transform:translate(var(--spark-x),-160px) scale(1.25) rotate(180deg)}
+}
+@media(max-width:560px){
+  .promiseExperience{padding:24px 13px 20px;border-radius:25px}
+  .promiseBoxScene{min-height:410px}
+  .promiseGiftBox{transform:scale(.9)}
+  .promiseGiftBox:hover{transform:scale(.92)}
+  .promiseRevealCard{padding:23px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .promiseGlow,.promiseSpark{animation:none}
+  .promiseBoxScene.open .promiseGiftBox{animation:none;opacity:.15}
+}

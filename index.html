@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jardín de Oración</title>
-<link rel="stylesheet" href="styles.css?v=20260704-final-3fix">
+<title>Jardín de Oración — Agosto 2026</title>
+<link rel="stylesheet" href="styles.css?v=20260731-caja-promesas">
 <link rel="manifest" href="manifest.json">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
 <script>
@@ -15,8 +15,42 @@ gtag('config', 'G-46QY175SK2');
 </script>
 </head>
 <body>
-<header>
-  <img src="portada.png?v=20260704-final-3fix" class="cover" alt="Jardín de Oración">
+<div id="timeAmbience" class="timeAmbience" aria-hidden="true">
+  <span class="ambientSun"></span>
+  <span class="ambientCloud cloudOne"></span>
+  <span class="ambientCloud cloudTwo"></span>
+  <span class="ambientStars"></span>
+</div>
+<div id="musicWelcome" class="musicWelcome" role="dialog" aria-modal="true" aria-labelledby="musicWelcomeTitle" hidden>
+  <div class="welcomeSun" aria-hidden="true"></div>
+  <div class="welcomePetals" aria-hidden="true"><span>🌸</span><span>🌿</span><span>✨</span><span>🌷</span></div>
+  <div class="musicWelcomeCard">
+    <div class="welcomeAugustEmblem" aria-hidden="true">🌸</div>
+    <p class="editionLabel">EDICIÓN AGOSTO 2026</p>
+    <h2 id="musicWelcomeTitle">Jardín de Oración</h2>
+    <p class="welcomeTheme">Dios restaura mi corazón</p>
+    <p id="welcomeDailyPhrase" class="welcomeDailyPhrase">Hoy Dios quiere encontrarse contigo.</p>
+    <p id="welcomeDate" class="welcomeDate"></p>
+    <button class="primary welcomePrimary" type="button" onclick="enterWithMusic()">🌸 Comenzar con música</button>
+    <button class="musicSilentButton" type="button" onclick="enterSilently()">Entrar en silencio</button>
+    <label class="welcomeRemember"><input id="hideWelcomeToday" type="checkbox"> No mostrar de nuevo hoy</label>
+    <p class="welcomeHint">La música solo comienza después de tocar el botón, como requieren los navegadores del teléfono.</p>
+  </div>
+</div>
+<audio id="backgroundMusic" loop preload="auto">
+  <source src="musica-oracion-original.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="musicToggle" type="button" onclick="toggleBackgroundMusic()" aria-label="Activar música" title="Activar o silenciar música">🔇 Música</button>
+<header class="augustHero premiumAugustHero" aria-label="Portada de agosto">
+  <div class="heroOverlay"></div>
+  <div class="heroContent">
+    <p class="editionLabel">EDICIÓN AGOSTO 2026</p>
+    <div id="timeGreeting" class="timeGreeting">🌅 Amanecer con Dios</div>
+    <h1>Jardín de Oración</h1>
+    <h2>Dios restaura mi corazón</h2>
+    <p class="heroMessage">Un mes para sanar, confiar y comenzar de nuevo en las manos de Dios.</p>
+    <div class="heroVerse">“Él sana a los quebrantados de corazón.”<br><b>Salmo 147:3</b></div>
+  </div>
 </header>
 
 <nav>
@@ -27,6 +61,9 @@ gtag('config', 'G-46QY175SK2');
   <button onclick="show('juegos')">Juegos</button>
   <button onclick="show('calendario')">Calendario</button>
   <button onclick="show('promesas')">Promesas</button>
+  <button onclick="show('esperanza')">Banco de Esperanza</button>
+  <button onclick="show('biblioteca')">Biblioteca</button>
+<button onclick="show('insignias')">🏅 Mi Camino</button>
   <button onclick="show('anio')">Año Bíblico</button>
   <button onclick="show('musica')">Música</button>
   <button onclick="show('progreso')">Progreso</button>
@@ -37,13 +74,32 @@ gtag('config', 'G-46QY175SK2');
 
 <main>
 <section id="inicio" class="tab active">
-  <div class="card center welcomeCard">
-    <h1>🌿 Jardín de Oración</h1>
-    <h3>Mujeres en las Manos de Dios</h3>
-    <img src="julianna-foto-app.jpeg?v=20260704-final-3fix" class="fullPhotoWelcome" alt="Julianna Guerrero">
-    <p>Bienvenida a tu espacio espiritual para leer, orar, escribir, guardar promesas, completar tu Año Bíblico y crecer cada día con Dios.</p>
-    <p class="verse">“Confía en Jehová con todo tu corazón.”<br><b>Proverbios 3:5</b></p>
-    <p class="creatorLine">Un espacio para crecer cada día con Dios</p>
+  <div class="card center welcomeCard augustWelcome">
+    <span class="welcomeIcon">🕊️</span>
+    <h1>Bienvenida a agosto</h1>
+    <h3>Un refugio para tu corazón</h3>
+    <p>Durante este mes caminaremos con mujeres que necesitan consuelo, dirección y esperanza en medio de cambios familiares, matrimoniales y personales.</p>
+    <p class="verse">“Cercano está Jehová a los quebrantados de corazón.”<br><b>Salmo 34:18</b></p>
+    <p class="creatorLine">No tienes que tener todas las respuestas para comenzar a sanar.</p>
+  </div>
+  <div class="card gardenDashboard">
+    <div class="gardenCopy">
+      <span class="miniLabel">MI JARDÍN</span>
+      <h3>Cada día con Dios hace crecer tu jardín</h3>
+      <p id="homeGardenProgress">Comienza hoy y observa cómo florece tu constancia.</p>
+      <button class="softAction" onclick="show('progreso')">🌿 Ver mi jardín</button>
+    </div>
+    <div class="miniGardenScene" aria-label="Vista de progreso de Mi Jardín">
+      <div id="homeGardenPlant" class="gardenPlant stage-0" aria-hidden="true">
+        <span class="plantBloom">🌸</span><span class="plantLeaves">🌿</span><span class="plantSprout">🌱</span>
+      </div>
+      <div class="gardenPot"><span>♡</span></div>
+    </div>
+  </div>
+  <div class="card center editionArchive">
+    <h3>📚 Ediciones mensuales</h3>
+    <p>La edición de julio queda guardada y podrás consultarla cuando quieras.</p>
+    <a class="editionLink" href="ediciones/julio/index.html">← Ver edición de julio</a>
   </div>
   <div class="grid">
     <button class="tile" onclick="show('devocional')">📖<span>Devocional</span></button>
@@ -51,17 +107,31 @@ gtag('config', 'G-46QY175SK2');
     <button class="tile" onclick="show('diario')">📝<span>Diario</span></button>
     <button class="tile" onclick="show('juegos')">🏆<span>Juegos</span></button>
     <button class="tile" onclick="show('promesas')">💜<span>Promesas</span></button>
+    <button class="tile" onclick="show('esperanza')">🤍<span>Banco de Esperanza</span></button>
+    <button class="tile" onclick="show('biblioteca')">📚<span>Biblioteca</span></button>
     <button class="tile" onclick="show('anio')">📚<span>Año Bíblico</span></button>
   </div>
 </section>
 
 <section id="devocional" class="tab">
-  <h2>📖 Devocionales de Julio</h2>
+  <h2>📖 Devocionales de Agosto</h2>
   <div class="card center">
-    <h3>🌷 31 días con Dios</h3>
-    <p>Reflexiones con oración, pregunta para diario y promesa diferente cada día.</p>
+    <h3>🌅 31 días de restauración y esperanza</h3>
+    <p>Reflexiones para esposas, madres, mujeres divorciadas y solteras, con oración, paso práctico y promesa diaria.</p>
   </div>
-  <div id="devoBox"></div>
+  <div class="momentIntro card center">
+    <span class="momentIntroIcon">✨</span>
+    <h3>Momentos con Dios</h3>
+    <p>Entra sin prisa. Cada día te guiará paso a paso para respirar, escuchar, responder y orar.</p>
+  </div>
+  <div id="devoBox" class="momentDayGrid"></div>
+  <div id="momentModal" class="momentModal" aria-hidden="true">
+    <div class="momentBackdrop" onclick="closeMoment()"></div>
+    <div class="momentPanel" role="dialog" aria-modal="true" aria-label="Momento con Dios">
+      <button class="momentClose" onclick="closeMoment()" aria-label="Cerrar">×</button>
+      <div id="momentContent"></div>
+    </div>
+  </div>
 </section>
 
 <section id="oracion" class="tab">
@@ -75,18 +145,61 @@ gtag('config', 'G-46QY175SK2');
   <div id="prayerBox"></div>
 </section>
 
-<section id="diario" class="tab">
-  <h2>📝 Diario Espiritual</h2>
-  <div class="card">
-    <p class="soft center">Formato de fecha: Mes/Día/Año — ejemplo 07/01/2026</p>
-    <input type="text" id="jDate" inputmode="numeric" placeholder="MM/DD/YYYY">
-    <textarea id="jText" placeholder="¿Qué habló Dios a tu corazón?"></textarea>
-    <textarea id="jThanks" placeholder="3 bendiciones de hoy"></textarea>
-    <button class="primary" onclick="saveJournal()">Guardar</button>
+<section id="diario" class="tab augustJournal">
+  <div class="journalHeroAugust">
+    <div class="journalHeroPetals">🌸</div>
+    <span class="miniLabel">EDICIÓN AGOSTO 2026</span>
+    <h2>Cartas desde mi Jardín</h2>
+    <p>No es solamente un diario: es un rincón para escribirle a Dios, sembrar una promesa y dejar en Sus manos lo que hoy pesa.</p>
+    <div class="journalHeroVerse">“Derramad delante de él vuestro corazón.” <b>Salmo 62:8</b></div>
   </div>
-  <div id="journalBox"></div>
-</section>
 
+  <div class="journalMoodCard">
+    <span>Hoy mi corazón se siente...</span>
+    <div class="moodPicker" id="journalMoodPicker">
+      <button type="button" data-mood="En paz" onclick="selectJournalMood(this)">🕊️<small>En paz</small></button>
+      <button type="button" data-mood="Agradecida" onclick="selectJournalMood(this)">🌷<small>Agradecida</small></button>
+      <button type="button" data-mood="Cansada" onclick="selectJournalMood(this)">🌧️<small>Cansada</small></button>
+      <button type="button" data-mood="Con esperanza" onclick="selectJournalMood(this)">🌅<small>Con esperanza</small></button>
+      <button type="button" data-mood="Necesito consuelo" onclick="selectJournalMood(this)">🤍<small>Necesito consuelo</small></button>
+    </div>
+    <input type="hidden" id="jMood">
+  </div>
+
+  <div class="journalLetterPaper">
+    <div class="paperRibbon">Mi carta de hoy</div>
+    <div class="journalEditorHeader">
+      <div><span class="miniLabel">UN MOMENTO ENTRE DIOS Y YO</span><h3 id="journalEditorTitle">Querido Dios...</h3></div>
+      <span class="journalLock">🔒 Solo en este dispositivo</span>
+    </div>
+    <input type="hidden" id="jEditId">
+    <div class="journalFields">
+      <label>Fecha<input type="text" id="jDate" inputmode="numeric" placeholder="MM/DD/YYYY"></label>
+      <label>Nombre para esta página<input type="text" id="jTitle" placeholder="Ejemplo: Hoy decido volver a confiar"></label>
+    </div>
+    <label class="letterPrompt">💌 Lo que quiero contarte hoy, Señor<textarea id="jText" placeholder="Querido Dios, hoy mi corazón..."></textarea></label>
+    <div class="journalTwoColumns">
+      <label>🌱 Lo que dejo en Tus manos<textarea id="jPrayer" placeholder="Hoy te entrego..."></textarea></label>
+      <label>🌸 La evidencia de Tu amor<textarea id="jThanks" placeholder="Hoy pude ver Tu amor en..."></textarea></label>
+    </div>
+    <label>✨ Promesa que quiero sembrar<input type="text" id="jSeed" placeholder="Escribe un versículo o una promesa para recordar"></label>
+    <div class="journalActions">
+      <button class="primary journalSealButton" onclick="saveJournal()">♡ Sellar y guardar mi carta</button>
+      <button class="secondary" id="cancelJournalEdit" onclick="cancelJournalEdit()" hidden>Cancelar edición</button>
+    </div>
+    <p id="journalSavedMessage" class="savedMessage" aria-live="polite"></p>
+  </div>
+
+  <div class="journalMemoryHeader">
+    <div><span class="miniLabel">MI SENDERO DE AGOSTO</span><h3>Cartas que deseo recordar</h3></div>
+    <button class="secondary" onclick="downloadJournal()">Descargar mis cartas</button>
+  </div>
+  <div class="journalToolbar journalSearchOnly">
+    <input id="journalSearch" type="search" placeholder="🔎 Buscar una palabra, promesa o recuerdo..." oninput="renderJournal()">
+  </div>
+  <div id="journalStats" class="journalStats"></div>
+  <div id="journalBox" class="journalPath"></div>
+</section>
 <section id="juegos" class="tab">
   <h2>🏆 Juegos Bíblicos Diarios</h2>
   <div class="card center">
@@ -105,7 +218,7 @@ gtag('config', 'G-46QY175SK2');
 <section id="calendario" class="tab">
   <h2>📅 Calendario Espiritual</h2>
   <div class="card center">
-    <h3>Julio</h3>
+    <h3>Agosto 2026</h3>
     <p>Marca tus devocionales completados y mira tu avance del mes.</p>
   </div>
   <div id="calendarBox" class="calendarGrid"></div>
@@ -114,12 +227,40 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="promesas" class="tab">
   <h2>💜 Promesas</h2>
-  <div class="card promiseHero">
-    <h3>🌸 Promesa del día</h3>
-    <p id="dailyPromiseText" class="promiseBig"></p>
-    <p id="dailyPromiseRef" class="promiseRef"></p>
-    <button class="secondary" onclick="favoriteDailyPromise()">❤️ Guardar en favoritas</button>
+  
+  <div class="promiseExperience">
+    <div class="promiseIntro">
+      <span class="promiseEdition">UNA PALABRA PARA HOY</span>
+      <h3>🎁 Caja de Promesas</h3>
+      <p>Haz una pausa, entrégale a Dios lo que llevas en el corazón y abre una promesa para este día.</p>
+    </div>
+
+    <div id="promiseBoxScene" class="promiseBoxScene">
+      <div class="promiseGlow" aria-hidden="true"></div>
+      <button id="promiseGiftBox" class="promiseGiftBox" type="button" onclick="openPromiseBox()" aria-label="Abrir la caja de promesas">
+        <span class="promiseBoxLid"><span class="promiseRibbonVertical"></span><span class="promiseBow">🌸</span></span>
+        <span class="promiseBoxBase"><span class="promiseRibbonVertical"></span><span class="promiseBoxLabel">Abre tu promesa</span></span>
+      </button>
+
+      <div id="promiseRevealCard" class="promiseRevealCard" aria-live="polite">
+        <span id="promiseRevealCategory" class="promiseRevealCategory">PROMESA DEL DÍA</span>
+        <div class="promiseRevealFlower">🌷</div>
+        <blockquote id="promiseRevealText">Toca la caja para recibir una promesa.</blockquote>
+        <p id="promiseRevealRef"></p>
+        <div class="promiseRevealActions">
+          <button class="primary" type="button" onclick="saveRevealedPromise()">❤️ Guardar</button>
+          <button class="secondary" type="button" onclick="shareRevealedPromise()">Compartir</button>
+        </div>
+        <button class="promiseReset" type="button" onclick="resetPromiseBox()">Cerrar la tarjeta</button>
+      </div>
+    </div>
+
+    <div class="promiseDailyNote">
+      <span>✨</span>
+      <p><strong>Una promesa diferente cada día.</strong><br>Durante el mismo día puedes volver a abrir la caja y recibirás la misma palabra, para meditar en ella con calma.</p>
+    </div>
   </div>
+
   <input id="promiseSearch" placeholder="Buscar promesa..." oninput="renderPromises()">
   <div class="promiseTabs">
     <button onclick="setPromiseView('todas')">📖 Todas</button>
@@ -151,6 +292,96 @@ gtag('config', 'G-46QY175SK2');
   <div id="promisesBox"></div>
 </section>
 
+
+<section id="esperanza" class="tab">
+  <h2>🤍 Banco de Esperanza</h2>
+  <div class="card center hopeIntro">
+    <h3>Recursos para el momento que estás atravesando</h3>
+    <p>Escoge la situación que más se parece a la tuya. Aquí encontrarás una palabra breve, una acción segura y una promesa bíblica para hoy.</p>
+  </div>
+  <div class="hopeGrid">
+    <div class="card hopeCard"><h3>💍 Dificultades en el matrimonio</h3><p>No tienes que cargar sola con una relación difícil. Ora, busca conversaciones respetuosas, establece límites sanos y pide apoyo sabio.</p><p class="verse"><b>Santiago 1:5</b></p></div>
+    <div class="card hopeCard"><h3>👩‍👧 Preocupación por los hijos</h3><p>Escucha antes de corregir, protege la paz del hogar y recuerda que Dios ama a tus hijos más profundamente de lo que puedes imaginar.</p><p class="verse"><b>Isaías 54:13</b></p></div>
+    <div class="card hopeCard"><h3>🕊️ Después del divorcio</h3><p>Tu duelo merece tiempo y compasión. El final de una relación no es el final de tu identidad, tu propósito ni tu futuro con Dios.</p><p class="verse"><b>Salmo 147:3</b></p></div>
+    <div class="card hopeCard"><h3>🌷 Soltería con propósito</h3><p>Tu vida no está en pausa. Este tiempo puede llenarse de crecimiento, amistades sanas, servicio, descanso y sueños nuevos.</p><p class="verse"><b>Colosenses 2:10</b></p></div>
+  </div>
+  <div class="card safetyNote"><h3>🛡️ Tu seguridad importa</h3><p>La fe nunca exige soportar violencia, amenazas, coerción o control. En una situación de peligro, aléjate a un lugar seguro y busca ayuda inmediata de personas confiables o de los servicios de emergencia de tu localidad.</p></div>
+</section>
+
+
+<section id="insignias" class="tab">
+  <h2>🏅 Mi Camino con Dios</h2>
+  <div class="badgesHero">
+    <div><span class="badgesEyebrow">ÁLBUM ESPIRITUAL · AGOSTO 2026</span>
+    <h3>Cada paso de constancia deja una huella de gracia</h3>
+    <p>Estas insignias no miden tu valor. Celebran los momentos que decidiste apartar para encontrarte con Dios.</p></div>
+    <div class="badgesCounter"><strong id="badgesUnlockedCount">0</strong><span>de 10</span></div>
+  </div>
+  <div id="badgesGrid" class="badgesGrid" aria-live="polite"></div>
+  <div class="card badgesReflection"><div class="badgesReflectionIcon">🌿</div><div>
+    <h3>La meta no es coleccionar insignias</h3>
+    <p>La verdadera recompensa es el corazón que aprende a buscar a Dios aun en los días difíciles.</p>
+  </div></div>
+</section>
+
+<section id="biblioteca" class="tab">
+  <h2>📚 Mi Biblioteca Espiritual</h2>
+
+  <div class="libraryHero">
+    <div>
+      <span class="libraryEyebrow">COLECCIÓN JARDÍN DE ORACIÓN</span>
+      <h3>Un lugar para volver a las palabras que hicieron florecer tu corazón</h3>
+      <p>Cada mes queda guardado como una edición especial. Puedes regresar a sus devocionales, promesas y momentos de oración cuando los necesites.</p>
+    </div>
+    <div class="librarySeal" aria-hidden="true">
+      <span>2</span>
+      <small>ediciones</small>
+    </div>
+  </div>
+
+  <div class="libraryShelf">
+    <article class="editionMagazine augustMagazine">
+      <div class="magazineRibbon">EDICIÓN ACTUAL</div>
+      <div class="magazineCover">
+        <span class="magazineMonth">AGOSTO 2026</span>
+        <div class="magazineFlower">🌸</div>
+        <h3>Dios restaura<br>mi corazón</h3>
+        <p>31 días de sanidad, dirección y esperanza.</p>
+        <div class="magazineProgress">
+          <div class="magazineProgressTop"><span>Tu recorrido</span><b id="libraryAugustProgress">0 de 31</b></div>
+          <div class="magazineProgressTrack"><span id="libraryAugustProgressBar"></span></div>
+        </div>
+      </div>
+      <div class="magazineActions">
+        <button class="primary" onclick="show('devocional')">🌷 Continuar agosto</button>
+        <button class="secondary" onclick="show('jardin')">🌱 Ver mi jardín</button>
+      </div>
+    </article>
+
+    <article class="editionMagazine julyMagazine">
+      <div class="magazineRibbon archivedRibbon">EDICIÓN GUARDADA</div>
+      <div class="magazineCover">
+        <span class="magazineMonth">JULIO 2026</span>
+        <div class="magazineFlower">💜</div>
+        <h3>Volver al primer jardín</h3>
+        <p>Devocionales, promesas y actividades de la edición anterior.</p>
+        <div class="archiveNote">Tu edición de julio permanece intacta y separada de agosto.</div>
+      </div>
+      <div class="magazineActions">
+        <a class="editionLink premiumEditionLink" href="ediciones/julio/index.html">📖 Abrir julio</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="card libraryMemoryCard">
+    <div class="memoryIcon">✨</div>
+    <div>
+      <h3>Tu historia espiritual también merece ser recordada</h3>
+      <p>Los meses anteriores no desaparecen. Se convierten en capítulos de tu caminar con Dios.</p>
+    </div>
+  </div>
+</section>
+
 <section id="anio" class="tab">
   <h2>📚 Año Bíblico</h2>
   <div class="card center bibleHero">
@@ -175,15 +406,35 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="musica" class="tab">
   <h2>🎵 Música para el Alma</h2>
-  <div class="card center">
-    <h3>Instrumental para oración</h3>
-    <p>Toca ▶️ dentro del reproductor.</p>
-    <div class="videoBox"><iframe src="https://www.youtube.com/embed/zk9qRkJ4Pso" allowfullscreen></iframe></div>
+  <div class="card center prayerMusicCard">
+    <div class="musicNote" aria-hidden="true">🎹</div>
+    <h3>Melodía de oración</h3>
+    <p>Una pieza instrumental original y tranquila para acompañar tu lectura, oración y descanso.</p>
+    <button class="primary" type="button" onclick="toggleBackgroundMusic()" id="musicSectionButton">▶️ Reproducir música</button>
+    <p class="soft">Puedes apagarla en cualquier momento. La aplicación recordará tu preferencia.</p>
   </div>
 </section>
 
 <section id="progreso" class="tab">
-  <h2>📊 Progreso</h2>
+  <h2>🌷 Mi Jardín</h2>
+  <div class="card center myGardenCard">
+    <p class="miniLabel">TU CONSTANCIA ESTÁ FLORECIENDO</p>
+    <div id="waterDrop" class="waterDrop" aria-hidden="true">💧</div>
+    <div class="fullGardenScene" aria-label="Planta que crece según los devocionales completados">
+      <div id="gardenPlant" class="gardenPlant stage-0" aria-hidden="true">
+        <span class="plantBloom">🌸</span><span class="plantLeaves">🌿</span><span class="plantSprout">🌱</span>
+      </div>
+      <div class="gardenPot largePot"><span>♡</span></div>
+      <div class="gardenGround">🌱　🌼　🌿　🌸　🌱</div>
+    </div>
+    <h3 id="gardenStageTitle">Tu semilla está lista</h3>
+    <p id="gardenEncouragement">Completa tu primer devocional para comenzar a verla crecer.</p>
+    <div class="gardenMeter"><span id="gardenMeterFill"></span></div>
+    <p id="gardenCount">0 de 31 días</p>
+    <div class="gardenMilestones">
+      <span>🌱 Día 1</span><span>🌿 Día 7</span><span>🌷 Día 15</span><span>🌸 Día 23</span><span>🌺 Día 31</span>
+    </div>
+  </div>
   <div class="card center">
     <div class="circle" id="progressCircle">0%</div>
     <p id="progressText"></p>
@@ -194,10 +445,12 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="creadora" class="tab">
   <h2>🌷 Sobre la Creadora</h2>
-  <div class="card center creatorCard">
-<h3>Julianna Guerrero</h3>
-    <p>Esta aplicación fue creada con amor y oración para ayudar a las mujeres a fortalecer su relación con Dios.</p>
-    <p class="verse">“Acercaos a Dios, y él se acercará a vosotros.”<br><b>Santiago 4:8</b></p>
+  <div class="card center creatorCard premiumCreatorCard">
+    <img src="creadora-agosto.png" alt="Julianna Guerrero, creadora de Jardín de Oración" class="creatorAugustImage">
+    <p class="creatorScript">Creado con cariño por</p>
+    <h3>Julianna Guerrero</h3>
+    <p>Un ministerio creado con amor y oración para acercar cada corazón a Dios.</p>
+    <p class="verse">“Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón.”<br><b>Salmo 37:4</b></p>
     <button class="primary" onclick="if(navigator.share){navigator.share({title:'Jardín de Oración',url:'https://jardindeoracion.org'});}else{navigator.clipboard.writeText('https://jardindeoracion.org');alert('Enlace copiado 💜');}">📲 Compartir App</button>
     <a href="https://cash.app/$yuyu07" target="_blank" rel="noopener"><button class="primary">❤️ Apoyar este ministerio</button></a>
   </div>
@@ -221,9 +474,9 @@ gtag('config', 'G-46QY175SK2');
   <div class="certificate" id="certificateBox">
     <div class="certFlowers">🌸 🌿 🦋 🌷 💜</div>
     <h1>¡Felicidades!</h1>
-    <p>Has completado tu recorrido espiritual de este mes.</p>
+    <p>Has completado los 31 días de la edición de agosto.</p>
     <h2>Jardín de Oración</h2>
-    <p><b>Un espacio para crecer cada día con Dios</b></p>
+    <p><b>Dios restaura mi corazón</b></p>
     <p class="verse">“El que comenzó en vosotros la buena obra, la perfeccionará.”<br><b>Filipenses 1:6</b></p>
   </div>
   <button class="primary" onclick="window.print()">Imprimir / Guardar certificado</button>
@@ -248,6 +501,6 @@ gtag('config', 'G-46QY175SK2');
   <textarea name="peticion"></textarea>
   <input type="text" name="fecha">
 </form>
-<script src="app.js?v=20260704-final-3fix"></script>
+<script src="app.js?v=20260731-caja-promesas"></script>
 </body>
 </html>
