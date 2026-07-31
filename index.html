@@ -7,14 +7,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jardín de Oración — Agosto 2026</title>
-<link rel="stylesheet" href="styles.css?v=20260731-43">
-<link rel="manifest" href="manifest.json?v=20260731-43">
+<link rel="stylesheet" href="styles.css?v=20260731-v5-storage">
+<link rel="manifest" href="manifest.json?v=20260731-44">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-46QY175SK2');
+</script>
+<script>
+(function(){
+  const BUILD='20260731-44';
+  try{
+    if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));}
+    if('caches' in window){caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k))));}
+    localStorage.setItem('jardin_build',BUILD);
+  }catch(e){}
+})();
 </script>
 </head>
 <body>
@@ -41,14 +51,12 @@ gtag('config', 'G-46QY175SK2');
   </div>
 </div>
 <audio id="backgroundMusic" loop preload="auto">
-  <source src="musica-oracion-original.mp3?v=20260731-43" type="audio/mpeg">
+  <source src="musica-oracion-original.mp3?v=20260731-v5" type="audio/mpeg">
 </audio>
 <button id="musicToggle" class="musicToggle" type="button" onclick="toggleBackgroundMusic()" aria-label="Activar música" title="Activar o silenciar música">🔇 Música</button>
 <header class="augustHero premiumAugustHero finalCleanHero" aria-label="Portada de agosto">
   <div class="heroOverlay"></div>
-  <div class="heroContent">
-    <div id="timeGreeting" class="timeGreeting">🌅 Amanecer con Dios</div>
-  </div>
+  <div class="heroContent" aria-hidden="true"></div>
 </header>
 
 <nav>
@@ -457,7 +465,15 @@ gtag('config', 'G-46QY175SK2');
     <p id="progressText"></p>
     <div id="badgeBox" class="badgeBox"></div>
   </div>
-  <button class="primary" onclick="downloadBackup()">Descargar respaldo</button>
+  <div class="backupPanel">
+    <h3>🛡️ Protege tu progreso</h3>
+    <p>Descarga un respaldo antes de cambiar de teléfono, borrar datos del navegador o publicar una edición nueva.</p>
+    <div class="backupActions">
+      <button class="primary" onclick="downloadBackup()">⬇️ Descargar respaldo</button>
+      <button class="secondary" onclick="chooseBackupFile()">⬆️ Restaurar respaldo</button>
+      <input id="backupFile" type="file" accept="application/json,.json" hidden onchange="restoreBackupFile(this)">
+    </div>
+  </div>
 </section>
 
 <section id="creadora" class="tab">
@@ -579,6 +595,6 @@ gtag('config', 'G-46QY175SK2');
   <textarea name="peticion"></textarea>
   <input type="text" name="fecha">
 </form>
-<script src="app.js?v=20260731-43"></script>
+<script src="app.js?v=20260731-v5-storage"></script>
 </body>
 </html>

@@ -6,11 +6,43 @@ let currentFilter = 'todos';
 let bibleFilter = 'hoy';
 let promiseView = 'todas';
 let selectedPromiseCategory = '';
-const MONTH_STORAGE_PREFIX = 'agosto2026_';
-const MONTHLY_KEYS = new Set(['doneDevos','doneGames','journal','customPromises','favoritePromises','devoNotes','momentNotes','momentPrayed','momentDecisions']);
-function storageKey(k){return MONTHLY_KEYS.has(k)?MONTH_STORAGE_PREFIX+k:k}
-function get(k,f){try{return JSON.parse(localStorage.getItem(storageKey(k))) ?? f}catch(e){return f}}
+const STORAGE_SCHEMA_VERSION = 1;
+const CURRENT_EDITION = 'agosto2026';
+const STORAGE_PREFIX = `jardin:${CURRENT_EDITION}:`;
+const MONTHLY_KEYS = new Set([
+  'doneDevos','doneGames','journal','customPromises','favoritePromises','devoNotes',
+  'momentNotes','momentPrayed','momentDecisions','gameResponses','prayers','specialPrayers',
+  'unlockedBadges','promiseBoxToday','favPromises','journalEntries','diaryEntries','letters',
+  'cartas','reflections','momentosNotas','prayedDays','oracionesCompletadas'
+]);
+const SHARED_KEYS = new Set(['bibleDone']);
+function storageKey(k){
+  if(MONTHLY_KEYS.has(k)) return STORAGE_PREFIX+k;
+  if(SHARED_KEYS.has(k)) return 'jardin:shared:'+k;
+  return 'jardin:settings:'+k;
+}
+function safeParse(raw,f){try{return raw===null?f:(JSON.parse(raw) ?? f)}catch(e){return f}}
+function get(k,f){return safeParse(localStorage.getItem(storageKey(k)),f)}
 function set(k,v){localStorage.setItem(storageKey(k),JSON.stringify(v))}
+function migrateAugustStorage(){
+  const legacyMonthly=[...MONTHLY_KEYS];
+  legacyMonthly.forEach(k=>{
+    const target=storageKey(k);
+    if(localStorage.getItem(target)!==null)return;
+    const candidates=['agosto2026_'+k,k];
+    for(const oldKey of candidates){
+      const value=localStorage.getItem(oldKey);
+      if(value!==null){localStorage.setItem(target,value);break;}
+    }
+  });
+  SHARED_KEYS.forEach(k=>{
+    const target=storageKey(k);
+    if(localStorage.getItem(target)===null&&localStorage.getItem(k)!==null)
+      localStorage.setItem(target,localStorage.getItem(k));
+  });
+  localStorage.setItem('jardin:storage-schema',String(STORAGE_SCHEMA_VERSION));
+}
+migrateAugustStorage();
 function el(id){return document.getElementById(id)}
 function show(id){if(id==='promesas')setTimeout(initializePromiseBox,0);if(id==='insignias')setTimeout(renderBadges,0);if(id==='biblioteca')setTimeout(updateLibraryProgress,0);if(id==='certificado')setTimeout(updateCertificateUnlock,0);document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); const target=el(id); if(target) target.classList.add('active'); if(id==='devocional')renderDevos(); if(id==='juegos')renderGames(); if(id==='calendario')renderCalendar(); if(id==='promesas')renderPromises(); if(id==='anio')renderBibleYear(); if(id==='progreso')renderProgress(); if(id==='diario')renderJournal(); window.scrollTo({top:0,behavior:'smooth'})}
 function renderDevos(){
@@ -218,7 +250,29 @@ function animateGardenWatering(){
   setTimeout(()=>drop.classList.remove('animate'),1300);
 }
 function renderProgress(){let d=get('doneDevos',[]).length,g=get('doneGames',[]).length,p=get('prayers',[]).filter(x=>x.done).length,b=get('bibleDone',[]).length; updateGarden(d); if(el('progressCircle'))el('progressCircle').textContent=Math.round(d/31*100)+'%'; if(el('progressText'))el('progressText').textContent=`Devocionales: ${d}/31 • Juegos: ${g}/31 • Año Bíblico: ${b}/365 • Oraciones contestadas: ${p}`; let badges=[]; if(d>=7)badges.push('📖 Mujer de la Palabra'); if(g>=10)badges.push('🏆 Guerrera Bíblica'); if(b>=7)badges.push('📚 Constante en la Biblia'); if(p>=1)badges.push('🙏 Intercesora'); if(d>=31)badges.push('💜 Mes Completado'); if(el('badgeBox'))el('badgeBox').innerHTML=badges.map(x=>`<span class="spiritualBadge">${x}</span>`).join(''); updateCertificateUnlock();}
-function downloadBackup(){let data={edition:'agosto-2026',doneDevos:get('doneDevos',[]),doneGames:get('doneGames',[]),bibleDone:get('bibleDone',[]),prayers:get('prayers',[]),journal:get('journal',[]),customPromises:get('customPromises',[]),devoNotes:get('devoNotes','momentNotes','momentPrayed','momentDecisions',{})}; let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='respaldo-jardin-oracion-agosto-2026.json'; a.click()}
+function downloadBackup(){
+  const data={schema:STORAGE_SCHEMA_VERSION,app:'Jardín de Oración',createdAt:new Date().toISOString(),items:{}};
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i);
+    if(key&&key.startsWith('jardin:')) data.items[key]=localStorage.getItem(key);
+  }
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='respaldo-jardin-de-oracion-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function chooseBackupFile(){el('backupFile')?.click()}
+function restoreBackupFile(input){
+  const file=input.files?.[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{try{
+    const data=JSON.parse(reader.result);
+    if(!data||data.app!=='Jardín de Oración'||!data.items)throw new Error('Formato inválido');
+    Object.entries(data.items).forEach(([k,v])=>{if(k.startsWith('jardin:'))localStorage.setItem(k,v)});
+    alert('Respaldo restaurado correctamente. La aplicación se actualizará ahora. 🌸');location.reload();
+  }catch(e){alert('No se pudo restaurar este archivo de respaldo.');}};
+  reader.readAsText(file);input.value='';
+}
 function setupNetlifyForm(){const form=el('specialPrayerForm'); if(!form)return; form.addEventListener('submit',function(e){e.preventDefault(); const nombre=el('specialPrayerName').value.trim(); const peticion=el('specialPrayerText').value.trim(); const fecha=new Date().toLocaleString('es-US'); if(!nombre||!peticion){el('specialPrayerStatus').textContent='Por favor escribe el nombre y la petición.'; return} el('specialPrayerDate').value=fecha; let local=get('specialPrayers',[]); local.push({name:nombre,text:peticion,date:fecha}); set('specialPrayers',local); el('specialPrayerStatus').textContent='Enviando petición...'; fetch('https://formspree.io/f/xwvdwnqo',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({'form-name':'peticiones-oracion','nombre':nombre,'peticion':peticion,'fecha':fecha}).toString()}).then(()=>{el('specialPrayerStatus').textContent='Petición enviada correctamente. Estaremos orando por ti. 💜'; form.reset();}).catch(()=>{el('specialPrayerStatus').textContent='Petición enviada correctamente. Nuestro grupo de oración estará intercediendo por ti.';})})}
 document.addEventListener('DOMContentLoaded',function(){ if(el('jDate'))el('jDate').value=todayUS(); renderDevos(); renderGames(); renderPrayers(); renderJournal(); renderCalendar(); renderPromises(); renderBibleYear(); renderProgress(); setupNetlifyForm(); });
 
@@ -370,8 +424,6 @@ function applyTimeAmbience(){
   else{key='night';icon='🌙';label='Noche de paz';}
   document.body.classList.remove('time-dawn','time-morning','time-afternoon','time-sunset','time-night');
   document.body.classList.add('time-'+key);
-  const greeting=document.getElementById('timeGreeting');
-  if(greeting) greeting.textContent=icon+' '+label;
   document.documentElement.style.colorScheme=key==='night'?'dark':'light';
 }
 document.addEventListener('DOMContentLoaded',()=>{
@@ -461,11 +513,11 @@ function updateAugustCertificate(){
   const display=el('certificateDisplayName');
   const name=(input?.value||'').trim();
   if(display)display.textContent=name||'Mujer de Fe';
-  if(name)localStorage.setItem('augustCertificateName',name);
-  else localStorage.removeItem('augustCertificateName');
+  if(name)localStorage.setItem('jardin:agosto2026:certificateName',name);
+  else localStorage.removeItem('jardin:agosto2026:certificateName');
 }
 function initializeAugustCertificate(){
-  const saved=localStorage.getItem('augustCertificateName')||'';
+  const saved=localStorage.getItem('jardin:agosto2026:certificateName')||'';
   if(el('certificateName'))el('certificateName').value=saved;
   updateAugustCertificate();
   const d=new Date();
@@ -491,11 +543,11 @@ function updateCertificateUnlock(){
   if(lock)lock.hidden=unlocked;
   if(content)content.hidden=!unlocked;
 
-  const wasCelebrated=localStorage.getItem('augustCertificateCelebrated')==='true';
+  const wasCelebrated=localStorage.getItem('jardin:agosto2026:certificateCelebrated')==='true';
   if(celebration){
     celebration.hidden=!unlocked||wasCelebrated;
     if(unlocked&&!wasCelebrated){
-      localStorage.setItem('augustCertificateCelebrated','true');
+      localStorage.setItem('jardin:agosto2026:certificateCelebrated','true');
       setTimeout(()=>{if(celebration)celebration.hidden=true;},7000);
     }
   }

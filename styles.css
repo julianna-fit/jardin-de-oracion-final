@@ -969,3 +969,13 @@ nav{
 /* v4.3: mostrar imagen completa de Creadora */
 .creatorAugustClean{overflow:visible!important;}
 .creatorAugustClean .creatorAugustImage,.premiumCreatorCard .creatorAugustImage{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;display:block!important;clip-path:none!important;-webkit-clip-path:none!important;}
+
+/* VERSIÓN 4.4 — portada limpia para app instalada */
+.finalCleanHero .heroContent{display:none!important}
+.finalCleanHero .timeGreeting{display:none!important}
+
+/* VERSIÓN 5 — respaldo y almacenamiento mensual protegido */
+.backupPanel{margin-top:20px;padding:22px;border-radius:24px;background:linear-gradient(145deg,#fff9f4,#f5e7ec);border:1px solid rgba(156,103,123,.18);text-align:center;box-shadow:0 12px 28px rgba(80,50,63,.09)}
+.backupPanel h3{margin:0 0 8px;color:#704f5d}.backupPanel p{margin:0 auto 16px;max-width:620px;color:#715d66;line-height:1.5}
+.backupActions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.backupActions button{margin:0!important;min-width:210px}
+@media(max-width:520px){.backupActions{display:grid}.backupActions button{width:100%;min-width:0}}
