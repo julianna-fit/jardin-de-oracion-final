@@ -736,3 +736,211 @@ nav{
   .promiseGlow,.promiseSpark{animation:none}
   .promiseBoxScene.open .promiseGiftBox{animation:none;opacity:.15}
 }
+
+
+/* VERSIÓN 3 — Corrección móvil de portada */
+.premiumAugustHero .heroHtmlEdition,
+.premiumAugustHero .heroHtmlTitle,
+.premiumAugustHero .heroHtmlTheme{display:none!important}
+.premiumAugustHero .heroContent{
+  justify-content:flex-end!important;
+  min-height:clamp(620px,88vh,820px);
+  padding:24px 22px 48px!important
+}
+.premiumAugustHero .timeGreeting{margin:0 auto 14px!important}
+.premiumAugustHero .heroMessage{
+  max-width:620px;margin:0 auto 16px!important;
+  background:rgba(72,43,53,.46);border:1px solid rgba(255,255,255,.28);
+  border-radius:20px;padding:13px 17px;backdrop-filter:blur(7px)
+}
+.premiumAugustHero .heroVerse{margin:0 auto!important;max-width:620px}
+@media(max-width:600px){
+  .premiumAugustHero{min-height:740px!important;background-position:center top!important}
+  .premiumAugustHero .heroContent{min-height:740px;padding:22px 16px 30px!important}
+  .premiumAugustHero .heroMessage{font-size:1rem!important;line-height:1.45!important}
+  .premiumAugustHero .heroVerse{font-size:1rem!important;padding:18px 14px!important}
+}
+
+/* VERSIÓN 3 — El Invernadero Bíblico */
+.augustGameZone{max-width:1050px;margin:auto}
+.gameZoneHero{
+  padding:34px 22px;border-radius:30px;text-align:center;color:#fff;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.18),transparent 25%),
+    linear-gradient(135deg,#86596b,#b77b8e 52%,#7f917b);
+  box-shadow:0 20px 42px rgba(79,49,62,.20);margin-bottom:20px
+}
+.gameZoneLabel{font-size:.7rem;font-weight:900;letter-spacing:.18em;background:rgba(255,255,255,.17);padding:7px 12px;border-radius:999px}
+.gameZoneHero h2{color:#fff!important;font:700 clamp(1.8rem,5vw,2.7rem) Georgia,serif;margin:13px 0 8px}
+.gameZoneHero>p{max-width:650px;margin:0 auto;line-height:1.55}
+.gameZoneStats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:650px;margin:24px auto 0}
+.gameZoneStats div{padding:14px 8px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+.gameZoneStats strong{display:block;font-size:1.5rem}.gameZoneStats span{font-size:.72rem}
+.gameGardenShelf{
+  display:grid;grid-template-columns:minmax(180px,.65fr) 1.35fr;gap:18px;align-items:center;
+  padding:22px;border-radius:24px;background:rgba(255,255,255,.87);border:1px solid rgba(154,103,123,.17);
+  box-shadow:0 12px 30px rgba(83,54,66,.09)
+}
+.shelfEyebrow{font-size:.65rem;font-weight:900;letter-spacing:.16em;color:#a06b7d}
+.gameGardenShelf h3{margin:6px 0}.gameGardenShelf p{margin:0;color:#806a73}
+.augustFlowerShelf{min-height:92px;display:flex!important;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px;padding:15px;background:linear-gradient(180deg,#fffaf5,#efe5dc);border-radius:18px}
+.augustFlowerShelf .flowerReward{font-size:1.65rem;display:inline-grid;place-items:center;width:43px;height:43px;border-radius:50%;background:#fff;box-shadow:0 6px 12px rgba(76,48,59,.10)}
+.gameTypeLegend{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 12px}
+.gameTypeLegend span{padding:8px 11px;border-radius:999px;background:#f5e7eb;color:#785363;font-size:.76rem;font-weight:800}
+.augustGameFilters{justify-content:center;margin-bottom:18px}
+.augustGamesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.augustGameCard{
+  position:relative;padding:22px;border-radius:25px;background:rgba(255,255,255,.94);
+  border:1px solid rgba(158,107,127,.16);box-shadow:0 12px 28px rgba(81,52,64,.10);overflow:hidden
+}
+.augustGameCard.done{background:linear-gradient(145deg,#fff,#eef4ea);border-color:rgba(112,144,105,.35)}
+.gameCardTop{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gameDay{font-size:.66rem;font-weight:900;letter-spacing:.14em;color:#9d687c}
+.gameKind{font-size:.7rem;font-weight:800;background:#f5e7eb;color:#765062;padding:7px 9px;border-radius:999px}
+.gameIcon{font-size:2.5rem;margin:20px 0 7px}.augustGameCard h3{font:700 1.35rem Georgia,serif;color:#684857;margin:0 0 9px}
+.gamePrompt{min-height:68px;color:#6f5c65;line-height:1.5}
+.augustGameCard textarea{min-height:88px}
+.gameActions{display:flex;gap:8px;flex-wrap:wrap}
+.augustAnswer{margin:12px 0}.gameCompleteBtn{width:100%;margin-top:12px}
+@media(max-width:640px){
+  .gameZoneStats{grid-template-columns:1fr 1fr}.gameZoneStats div:last-child{grid-column:1/-1}
+  .gameGardenShelf{grid-template-columns:1fr}.augustGamesGrid{grid-template-columns:1fr}
+}
+
+
+/* Revisión final — Creadora sin contenido duplicado */
+.creatorAugustClean{overflow:hidden;padding:0 0 26px!important}
+.creatorAugustClean .creatorAugustImage{
+  width:100%;display:block;margin:0!important;border-radius:24px 24px 0 0!important
+}
+.creatorPersonalNote{padding:24px 24px 10px;max-width:680px;margin:auto}
+.creatorPersonalNote p{font-size:1rem;line-height:1.65;color:#6d5862}
+.creatorSignature{font:italic 1.35rem Georgia,serif!important;color:#a0677c!important;margin-bottom:4px}
+.creatorContactCard{
+  width:calc(100% - 40px);max-width:590px;margin:12px auto 20px;padding:18px;
+  display:grid;gap:10px;border-radius:20px;background:linear-gradient(145deg,#fff8f4,#f5e5e9);
+  border:1px solid rgba(159,105,125,.18);box-sizing:border-box
+}
+.contactEyebrow{font-size:.68rem;font-weight:900;letter-spacing:.15em;color:#9d687b}
+.creatorContactCard a,.creatorContactCard>span:not(.contactEyebrow){
+  display:block;color:#704f5e;text-decoration:none;font-weight:750;overflow-wrap:anywhere
+}
+.creatorActionRow{
+  width:calc(100% - 40px);max-width:590px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;box-sizing:border-box
+}
+.creatorActionButton{
+  width:100%!important;min-height:54px!important;margin:0!important;padding:12px 14px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;
+  box-sizing:border-box!important;white-space:normal!important;line-height:1.25!important;border-radius:18px!important;
+  overflow:hidden!important
+}
+.creatorSupportLink{display:flex;width:100%;text-decoration:none;box-sizing:border-box}
+.creatorSupportLink .creatorActionButton{height:100%}
+@media(max-width:540px){
+  .creatorActionRow{grid-template-columns:1fr}
+  .creatorContactCard,.creatorActionRow{width:calc(100% - 28px)}
+}
+
+/* Certificado exclusivo de agosto */
+.augustCertificateSection{max-width:900px;margin:auto}
+.certificateIntro{text-align:center;margin-bottom:20px}
+.certificateEdition{font-size:.7rem;font-weight:900;letter-spacing:.18em;color:#a16c7e}
+.certificateIntro h2{font:700 clamp(1.8rem,5vw,2.5rem) Georgia,serif;color:#6c4b59;margin:8px 0}
+.certificateNamePanel{
+  max-width:650px;margin:0 auto 20px;padding:16px 18px;border-radius:18px;
+  background:rgba(255,255,255,.88);border:1px solid rgba(157,105,125,.18)
+}
+.certificateNamePanel label{display:block;font-weight:800;color:#735462;margin-bottom:8px}
+.augustCertificate{
+  position:relative;max-width:780px;min-height:920px;margin:0 auto;padding:70px 58px 56px!important;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:
+    linear-gradient(rgba(255,250,247,.94),rgba(250,239,238,.96)),
+    url("portada-agosto-premium.png") center/cover;
+  border:12px double #c99a70!important;border-radius:8px!important;
+  box-shadow:0 24px 50px rgba(79,49,61,.20)!important;box-sizing:border-box;overflow:hidden
+}
+.augustCertificate:before,.augustCertificate:after{
+  content:"";position:absolute;width:160px;height:160px;border:2px solid rgba(177,118,139,.26);border-radius:50%
+}
+.augustCertificate:before{left:-80px;top:-80px}.augustCertificate:after{right:-80px;bottom:-80px}
+.certificateOrnament{font-size:1.45rem;letter-spacing:.18em;color:#9b6b7d}
+.topOrnament{position:absolute;top:26px}.bottomOrnament{position:absolute;bottom:22px}
+.certificateSeal{
+  width:76px;height:76px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#b6778e,#7e5365);color:#fff;font:700 1.45rem Georgia,serif;
+  border:5px double #f5dcc0;box-shadow:0 8px 20px rgba(74,43,56,.22);margin-bottom:20px
+}
+.certificateSmallTitle{font-size:.68rem!important;font-weight:900;letter-spacing:.18em;color:#9c6a7c!important}
+.augustCertificate h1{font:700 clamp(2.15rem,6vw,3.6rem) Georgia,serif!important;color:#714c5c!important;margin:12px 0!important}
+.certificatePresented{margin:7px 0!important;font:italic 1.15rem Georgia,serif;color:#92717e!important}
+.certificateDisplayName{
+  width:90%;padding:9px 10px 12px;border-bottom:2px solid #c59473;
+  font:italic 700 clamp(2rem,6vw,3.2rem) Georgia,serif;color:#9b526e;overflow-wrap:anywhere
+}
+.certificateReason{margin:22px 0 8px!important;color:#6f5b64!important}
+.augustCertificate h2{font:700 clamp(1.55rem,4vw,2.2rem) Georgia,serif!important;color:#6f4c5a!important;margin:5px 0!important}
+.certificateMonth{font-size:.8rem!important;font-weight:900;letter-spacing:.2em;color:#a86f82!important}
+.certificateVerseAugust{
+  max-width:580px;margin:28px auto;padding:17px 22px;border-radius:18px;
+  background:rgba(255,248,239,.86);border-left:5px solid #d0a05f;
+  color:#654f58;font-size:1rem;line-height:1.55
+}
+.certificateFooterAugust{
+  width:100%;display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:26px;align-items:end
+}
+.certificateFooterAugust>div{display:grid;gap:7px}
+.certificateFooterAugust span{padding-bottom:6px;border-bottom:1px solid #9a7180;color:#704f5d;font-weight:750}
+.certificateFooterAugust small{font-size:.68rem;color:#8e747e}
+.certificateSignatureBlock span{font:italic 1.2rem Georgia,serif}
+.certificatePrintButton{display:block;margin:22px auto!important;min-width:280px}
+@media(max-width:620px){
+  .augustCertificate{min-height:760px;padding:58px 20px 48px!important;border-width:7px!important}
+  .certificateFooterAugust{grid-template-columns:1fr;gap:20px}
+  .certificateDisplayName{width:100%}
+}
+@media print{
+  body *{visibility:hidden!important}
+  #certificateBox,#certificateBox *{visibility:visible!important}
+  #certificateBox{position:absolute;left:0;top:0;width:100%;max-width:none;min-height:100vh;box-shadow:none!important}
+}
+
+
+/* Certificado desbloqueable al completar 31 devocionales */
+.certificateLockPanel{
+  max-width:700px;margin:20px auto;padding:34px 24px;border-radius:28px;text-align:center;
+  background:
+    radial-gradient(circle at 50% 0,rgba(255,255,255,.95),transparent 40%),
+    linear-gradient(145deg,#f8e8ec,#f5eadf);
+  border:1px solid rgba(159,105,125,.20);box-shadow:0 18px 40px rgba(80,50,63,.12)
+}
+.certificateLockIcon{
+  width:82px;height:82px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;
+  font-size:2rem;background:linear-gradient(145deg,#b77b90,#7e5365);box-shadow:0 10px 22px rgba(78,48,61,.20)
+}
+.certificateLockEyebrow{font-size:.68rem;font-weight:900;letter-spacing:.16em;color:#9b687a}
+.certificateLockPanel h3{font:700 clamp(1.5rem,4vw,2rem) Georgia,serif;color:#684957;margin:10px 0}
+.certificateLockPanel p{max-width:560px;margin:0 auto;color:#705c65;line-height:1.55}
+.certificateUnlockProgress{max-width:520px;margin:24px auto 0}
+.certificateUnlockTrack{
+  height:15px;border-radius:999px;background:#ead9df;overflow:hidden;
+  box-shadow:inset 0 1px 4px rgba(74,45,58,.14)
+}
+.certificateUnlockTrack span{
+  display:block;height:100%;width:0;border-radius:inherit;
+  background:linear-gradient(90deg,#b8758d,#d9a26c,#85967e);transition:width .7s ease
+}
+.certificateUnlockProgress strong{display:block;margin-top:10px;color:#775563;font-size:.86rem}
+.certificateCelebration{
+  max-width:700px;margin:20px auto;padding:25px;border-radius:24px;text-align:center;
+  background:linear-gradient(145deg,#fff8ef,#f6e5eb);border:1px solid rgba(207,159,94,.35);
+  box-shadow:0 15px 35px rgba(89,55,69,.13);animation:certificateBloom .7s ease
+}
+.celebrationConfetti{font-size:1.8rem;letter-spacing:.12em;animation:celebrationFloat 1.8s ease-in-out infinite alternate}
+.certificateCelebration h3{font:700 1.8rem Georgia,serif;color:#784f60;margin:8px 0}
+.certificateCelebration p{margin:0;color:#705c65}
+.certificateUnlockedContent[hidden],.certificateCelebration[hidden],.certificateLockPanel[hidden]{display:none!important}
+.certificateUnlockedContent{animation:certificateBloom .8s ease}
+@keyframes certificateBloom{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes celebrationFloat{to{transform:translateY(-5px)}}

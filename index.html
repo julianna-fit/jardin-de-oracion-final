@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jardín de Oración — Agosto 2026</title>
-<link rel="stylesheet" href="styles.css?v=20260731-caja-promesas">
+<link rel="stylesheet" href="styles.css?v=20260731-certificado-desbloqueable">
 <link rel="manifest" href="manifest.json">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
 <script>
@@ -38,16 +38,16 @@ gtag('config', 'G-46QY175SK2');
   </div>
 </div>
 <audio id="backgroundMusic" loop preload="auto">
-  <source src="musica-oracion-original.mp3" type="audio/mpeg">
+  <source src="musica-oracion-original.mp3?v=20260731-nueva" type="audio/mpeg">
 </audio>
 <button id="musicToggle" class="musicToggle" type="button" onclick="toggleBackgroundMusic()" aria-label="Activar música" title="Activar o silenciar música">🔇 Música</button>
 <header class="augustHero premiumAugustHero" aria-label="Portada de agosto">
   <div class="heroOverlay"></div>
   <div class="heroContent">
-    <p class="editionLabel">EDICIÓN AGOSTO 2026</p>
+    <p class="editionLabel heroHtmlEdition">EDICIÓN AGOSTO 2026</p>
     <div id="timeGreeting" class="timeGreeting">🌅 Amanecer con Dios</div>
-    <h1>Jardín de Oración</h1>
-    <h2>Dios restaura mi corazón</h2>
+    <h1 class="heroHtmlTitle">Jardín de Oración</h1>
+    <h2 class="heroHtmlTheme">Dios restaura mi corazón</h2>
     <p class="heroMessage">Un mes para sanar, confiar y comenzar de nuevo en las manos de Dios.</p>
     <div class="heroVerse">“Él sana a los quebrantados de corazón.”<br><b>Salmo 147:3</b></div>
   </div>
@@ -99,7 +99,7 @@ gtag('config', 'G-46QY175SK2');
   <div class="card center editionArchive">
     <h3>📚 Ediciones mensuales</h3>
     <p>La edición de julio queda guardada y podrás consultarla cuando quieras.</p>
-    <a class="editionLink" href="ediciones/julio/index.html">← Ver edición de julio</a>
+    <a class="editionLink" href="edicion-julio.html">← Ver edición de julio</a>
   </div>
   <div class="grid">
     <button class="tile" onclick="show('devocional')">📖<span>Devocional</span></button>
@@ -200,19 +200,38 @@ gtag('config', 'G-46QY175SK2');
   <div id="journalStats" class="journalStats"></div>
   <div id="journalBox" class="journalPath"></div>
 </section>
-<section id="juegos" class="tab">
-  <h2>🏆 Juegos Bíblicos Diarios</h2>
-  <div class="card center">
-    <h3>🌸 Jardín Espiritual</h3>
-    <div id="gardenBox" class="gardenBox"></div>
-    <p id="gameProgressText">Juegos completados: 0/31</p>
+<section id="juegos" class="tab augustGameZone">
+  <div class="gameZoneHero">
+    <span class="gameZoneLabel">NUEVO EN AGOSTO</span>
+    <h2>🌷 El Invernadero Bíblico</h2>
+    <p>Cada día encontrarás una actividad diferente para jugar, recordar la Palabra y cultivar tu corazón.</p>
+    <div class="gameZoneStats">
+      <div><strong id="gameCompletedCount">0</strong><span>completados</span></div>
+      <div><strong id="gameFlowerCount">0</strong><span>flores ganadas</span></div>
+      <div><strong>31</strong><span>retos de agosto</span></div>
+    </div>
   </div>
-  <div class="filters">
-    <button onclick="filterGames('todos')">🌿 Todos</button>
-    <button onclick="filterGames('pendientes')">🕊️ Pendientes</button>
-    <button onclick="filterGames('completados')">🌸 Completados</button>
+
+  <div class="gameGardenShelf">
+    <div>
+      <span class="shelfEyebrow">MI COLECCIÓN</span>
+      <h3>Flores del Invernadero</h3>
+      <p id="gameProgressText">Juegos completados: 0/31</p>
+    </div>
+    <div id="gardenBox" class="gardenBox augustFlowerShelf"></div>
   </div>
-  <div id="gamesBox"></div>
+
+  <div class="gameTypeLegend">
+    <span>🧩 Completa</span><span>🔀 Ordena</span><span>🔎 Descubre</span>
+    <span>❓ Trivia</span><span>🌱 Aplica</span>
+  </div>
+
+  <div class="filters augustGameFilters">
+    <button onclick="filterGames('todos')">Todos</button>
+    <button onclick="filterGames('pendientes')">Pendientes</button>
+    <button onclick="filterGames('completados')">Completados</button>
+  </div>
+  <div id="gamesBox" class="augustGamesGrid"></div>
 </section>
 
 <section id="calendario" class="tab">
@@ -368,7 +387,7 @@ gtag('config', 'G-46QY175SK2');
         <div class="archiveNote">Tu edición de julio permanece intacta y separada de agosto.</div>
       </div>
       <div class="magazineActions">
-        <a class="editionLink premiumEditionLink" href="ediciones/julio/index.html">📖 Abrir julio</a>
+        <a class="editionLink premiumEditionLink" href="edicion-julio.html">📖 Abrir julio</a>
       </div>
     </article>
   </div>
@@ -445,15 +464,26 @@ gtag('config', 'G-46QY175SK2');
 
 <section id="creadora" class="tab">
   <h2>🌷 Sobre la Creadora</h2>
-  <div class="card center creatorCard premiumCreatorCard">
+  <div class="card center creatorCard premiumCreatorCard creatorAugustClean">
     <img src="creadora-agosto.png" alt="Julianna Guerrero, creadora de Jardín de Oración" class="creatorAugustImage">
-    <p class="creatorScript">Creado con cariño por</p>
-    <h3>Julianna Guerrero</h3>
-    <p>Un ministerio creado con amor y oración para acercar cada corazón a Dios.</p>
-    <p class="verse">“Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón.”<br><b>Salmo 37:4</b></p>
-    <button class="primary" onclick="if(navigator.share){navigator.share({title:'Jardín de Oración',url:'https://jardindeoracion.org'});}else{navigator.clipboard.writeText('https://jardindeoracion.org');alert('Enlace copiado 💜');}">📲 Compartir App</button>
-    <a href="https://cash.app/$yuyu07" target="_blank" rel="noopener"><button class="primary">❤️ Apoyar este ministerio</button></a>
+    <div class="creatorPersonalNote">
+      <p>Gracias por permitir que este ministerio llegue hasta tu corazón. Mi oración es que cada visita a este jardín te recuerde que Dios todavía restaura, sostiene y hace nuevas todas las cosas.</p>
+      <p class="creatorSignature">Con cariño, Julianna</p>
+    </div>
+
+    <div class="creatorContactCard">
+      <span class="contactEyebrow">CONTACTO DEL MINISTERIO</span>
+      <a href="tel:+16163373036">📱 (616) 337-3036</a>
+      <a href="mailto:jardindeoracion26@gmail.com">✉️ jardindeoracion26@gmail.com</a>
+      <span>🌐 jardindeoracion.org</span>
+    </div>
+
+    <div class="creatorActionRow">
+      <button class="primary creatorActionButton" onclick="if(navigator.share){navigator.share({title:'Jardín de Oración',url:'https://jardindeoracion.org'});}else{navigator.clipboard.writeText('https://jardindeoracion.org');alert('Enlace copiado 💜');}">📲 Compartir App</button>
+      <a class="creatorSupportLink" href="https://cash.app/$yuyu07" target="_blank" rel="noopener"><span class="primary creatorActionButton">❤️ Apoyar este ministerio</span></a>
+    </div>
   </div>
+
   <div class="card">
     <h3>💌 Enviar petición de oración</h3>
     <p>Esta petición será enviada al grupo de oración. Solo tú y los intercesores podrán verla.</p>
@@ -469,18 +499,68 @@ gtag('config', 'G-46QY175SK2');
   </div>
 </section>
 
-<section id="certificado" class="tab">
-  <h2>🏆 Certificado Espiritual</h2>
-  <div class="certificate" id="certificateBox">
-    <div class="certFlowers">🌸 🌿 🦋 🌷 💜</div>
-    <h1>¡Felicidades!</h1>
-    <p>Has completado los 31 días de la edición de agosto.</p>
-    <h2>Jardín de Oración</h2>
-    <p><b>Dios restaura mi corazón</b></p>
-    <p class="verse">“El que comenzó en vosotros la buena obra, la perfeccionará.”<br><b>Filipenses 1:6</b></p>
+<section id="certificado" class="tab augustCertificateSection">
+  <div class="certificateIntro">
+    <span class="certificateEdition">EDICIÓN AGOSTO 2026</span>
+    <h2>🏆 Certificado de Restauración</h2>
+    <p>Un recuerdo especial del camino que recorriste con Dios durante este mes.</p>
   </div>
-  <button class="primary" onclick="window.print()">Imprimir / Guardar certificado</button>
+
+  <div id="certificateLockPanel" class="certificateLockPanel">
+    <div class="certificateLockIcon">🔒</div>
+    <span class="certificateLockEyebrow">CERTIFICADO BLOQUEADO</span>
+    <h3>Tu certificado florecerá al completar el mes</h3>
+    <p>Completa los 31 devocionales de agosto para desbloquear tu Certificado de Restauración.</p>
+    <div class="certificateUnlockProgress">
+      <div class="certificateUnlockTrack"><span id="certificateUnlockBar"></span></div>
+      <strong id="certificateUnlockText">0 de 31 devocionales completados</strong>
+    </div>
+  </div>
+
+  <div id="certificateCelebration" class="certificateCelebration" hidden>
+    <div class="celebrationConfetti" aria-hidden="true">✨ 🌸 🎉 🌷 ✨</div>
+    <h3>¡Lo lograste!</h3>
+    <p>Completaste los 31 días. Tu Certificado de Restauración ha sido desbloqueado.</p>
+  </div>
+
+  <div id="certificateUnlockedContent" class="certificateUnlockedContent" hidden>
+  <div class="certificateNamePanel">
+    <label for="certificateName">Escribe el nombre que aparecerá en el certificado:</label>
+    <input id="certificateName" placeholder="Tu nombre completo" oninput="updateAugustCertificate()">
+  </div>
+
+  <div class="certificate augustCertificate" id="certificateBox">
+    <div class="certificateOrnament topOrnament">🌿 ✨ 🌸 ✨ 🌿</div>
+    <div class="certificateSeal">JD</div>
+    <p class="certificateSmallTitle">JARDÍN DE ORACIÓN OTORGA EL PRESENTE</p>
+    <h1>Certificado de Restauración</h1>
+    <p class="certificatePresented">a</p>
+    <div id="certificateDisplayName" class="certificateDisplayName">Mujer de Fe</div>
+    <p class="certificateReason">por completar con perseverancia los 31 días de</p>
+    <h2>Dios restaura mi corazón</h2>
+    <p class="certificateMonth">AGOSTO 2026</p>
+
+    <div class="certificateVerseAugust">
+      “He aquí que yo hago cosa nueva; pronto saldrá a luz.”<br>
+      <b>Isaías 43:19</b>
+    </div>
+
+    <div class="certificateFooterAugust">
+      <div>
+        <span id="certificateDateLine"></span>
+        <small>Fecha de finalización</small>
+      </div>
+      <div class="certificateSignatureBlock">
+        <span>Julianna Guerrero</span>
+        <small>Creadora de Jardín de Oración</small>
+      </div>
+    </div>
+    <div class="certificateOrnament bottomOrnament">🦋 🌷 🌿 🌷 🦋</div>
+  </div>
+
+  <button id="certificatePrintButton" class="primary certificatePrintButton" onclick="printAugustCertificate()">🖨️ Imprimir o guardar certificado</button>
   <p class="soft center" id="certificateStatus"></p>
+  </div>
 </section>
 
 <section id="privacidad" class="tab">
@@ -501,6 +581,6 @@ gtag('config', 'G-46QY175SK2');
   <textarea name="peticion"></textarea>
   <input type="text" name="fecha">
 </form>
-<script src="app.js?v=20260731-caja-promesas"></script>
+<script src="app.js?v=20260731-certificado-desbloqueable"></script>
 </body>
 </html>

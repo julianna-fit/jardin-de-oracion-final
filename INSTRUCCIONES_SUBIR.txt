@@ -9,3 +9,5 @@ JARDÍN DE ORACIÓN — EDICIÓN AGOSTO 2026
 
 Archivo principal: index.html
 Edición anterior: ediciones/julio/index.html
+
+IMPORTANTE: Esta versión incluye edicion-julio.html en la raíz. Súbelo junto con los demás archivos para que el botón «Ver edición de julio» funcione sin depender de subir carpetas.
