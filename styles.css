@@ -982,26 +982,3 @@ nav{
   -webkit-clip-path:none!important;
   border-radius:24px 24px 0 0!important;
 }
-.creatorCompleteVerse{
-  width:calc(100% - 40px);
-  max-width:590px;
-  margin:18px auto 4px;
-  padding:18px 20px;
-  box-sizing:border-box;
-  border-radius:20px;
-  background:linear-gradient(145deg,#fff7ef,#f8e7e8);
-  border-left:5px solid #d0a05f;
-  color:#654f58;
-  font:500 1rem/1.55 Georgia,serif;
-  text-align:center;
-  box-shadow:0 10px 24px rgba(80,50,63,.08);
-}
-.creatorCompleteVerse strong{
-  display:block;
-  margin-top:8px;
-  font-family:inherit;
-  color:#7b4f61;
-}
-@media(max-width:540px){
-  .creatorCompleteVerse{width:calc(100% - 28px);padding:16px 14px}
-}
