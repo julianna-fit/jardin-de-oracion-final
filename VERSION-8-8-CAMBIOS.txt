@@ -1,0 +1,6 @@
+VERSIÓN 8.8
+- 31 palabras distintas en el círculo inicial.
+- 31 introducciones únicas conectadas con el tema de cada día.
+- 31 frases de respiración/reflexión diferentes.
+- Se conserva el diseño, progreso y contenido corregido de la versión anterior.
+- Nuevo archivo app-v88.js para evitar caché.
