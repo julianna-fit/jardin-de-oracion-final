@@ -1039,3 +1039,60 @@ body.hopeModalOpen{overflow:hidden}
 .hopePromiseBlock{background:#fff5e7;border-radius:18px;padding:18px;margin-top:14px;border-bottom:0}
 .hopeModalActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}
 @media(max-width:560px){.hopeHeroV8{padding:25px 14px}.hopeTopicsGrid{grid-template-columns:1fr}.hopeModalPanel{padding:24px 17px}.hopeModalActions>*{width:100%}}
+
+/* VERSIÓN 8.1 — portada completa y contraste nocturno */
+@media (min-width: 901px){
+  .portadaDefinitiva,.finalCleanHero,.augustHero{
+    min-height:980px!important;
+    height:auto!important;
+    background-size:contain!important;
+    background-position:center top!important;
+    background-repeat:no-repeat!important;
+    background-color:#f6d8c6!important;
+  }
+}
+@media (max-width:900px){
+  .portadaDefinitiva,.finalCleanHero,.augustHero{
+    min-height:760px!important;
+    background-size:cover!important;
+    background-position:center top!important;
+  }
+}
+
+/* Forzar buena lectura en ambiente nocturno */
+body.nightMode .card,
+body.night-mode .card,
+body.darkMode .card,
+body.dark-mode .card,
+body[data-time-theme="night"] .card,
+body[data-theme="night"] .card{
+  color:#5f4652!important;
+  background:rgba(255,250,247,.97)!important;
+}
+body.nightMode .card h1,body.nightMode .card h2,body.nightMode .card h3,body.nightMode .card h4,
+body.night-mode .card h1,body.night-mode .card h2,body.night-mode .card h3,body.night-mode .card h4,
+body.darkMode .card h1,body.darkMode .card h2,body.darkMode .card h3,body.darkMode .card h4,
+body.dark-mode .card h1,body.dark-mode .card h2,body.dark-mode .card h3,body.dark-mode .card h4,
+body[data-time-theme="night"] .card h1,body[data-time-theme="night"] .card h2,body[data-time-theme="night"] .card h3,body[data-time-theme="night"] .card h4,
+body[data-theme="night"] .card h1,body[data-theme="night"] .card h2,body[data-theme="night"] .card h3,body[data-theme="night"] .card h4{
+  color:#7b3f56!important;
+}
+body.nightMode .card p,body.nightMode .card li,body.nightMode .card span,
+body.night-mode .card p,body.night-mode .card li,body.night-mode .card span,
+body.darkMode .card p,body.darkMode .card li,body.darkMode .card span,
+body.dark-mode .card p,body.dark-mode .card li,body.dark-mode .card span,
+body[data-time-theme="night"] .card p,body[data-time-theme="night"] .card li,body[data-time-theme="night"] .card span,
+body[data-theme="night"] .card p,body[data-theme="night"] .card li,body[data-theme="night"] .card span{
+  color:#624f58!important;
+  opacity:1!important;
+}
+body.nightMode nav button,body.night-mode nav button,body.darkMode nav button,body.dark-mode nav button,
+body[data-time-theme="night"] nav button,body[data-theme="night"] nav button{
+  color:#6c4052!important;
+  background:#fff3ef!important;
+  opacity:1!important;
+}
+body.nightMode .welcomeCard *,body.night-mode .welcomeCard *,body.darkMode .welcomeCard *,body.dark-mode .welcomeCard *,
+body[data-time-theme="night"] .welcomeCard *,body[data-theme="night"] .welcomeCard *{
+  opacity:1!important;
+}
