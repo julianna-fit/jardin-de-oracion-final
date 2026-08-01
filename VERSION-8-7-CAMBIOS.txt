@@ -1,0 +1,6 @@
+VERSIÓN 8.7
+- Se reescribieron las secciones “Para la mujer que hoy está…” de los 31 devocionales.
+- Se reescribieron las secciones “Conociendo más a Dios” según cada versículo.
+- Cada día tiene una introducción y un cierre diferentes.
+- Se conserva todo el diseño, progreso y funcionamiento anterior.
+- Nuevo archivo app-v87.js para evitar caché.
