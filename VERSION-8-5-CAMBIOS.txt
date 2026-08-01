@@ -1,0 +1,1 @@
+Se restauró el listado de los 31 devocionales y se conservaron los estados Por comenzar, En progreso y Completado.

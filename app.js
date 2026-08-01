@@ -47,46 +47,39 @@ function migrateAugustStorage(){
 migrateAugustStorage();
 function el(id){return document.getElementById(id)}
 function show(id){if(id==='esperanza')setTimeout(renderHopeBank,0);if(id==='promesas')setTimeout(initializePromiseBox,0);if(id==='insignias')setTimeout(renderBadges,0);if(id==='biblioteca')setTimeout(updateLibraryProgress,0);if(id==='certificado')setTimeout(updateCertificateUnlock,0);document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); const target=el(id); if(target) target.classList.add('active'); if(id==='devocional')renderDevos(); if(id==='juegos')renderGames(); if(id==='calendario')renderCalendar(); if(id==='promesas')renderPromises(); if(id==='anio')renderBibleYear(); if(id==='progreso')renderProgress(); if(id==='diario')renderJournal(); window.scrollTo({top:0,behavior:'smooth'})}
-function normalizeDevoProgress(){
-  const current=get('doneDevos',[]);
-  const legacyKeys=[
-    'doneDevos','agosto2026_doneDevos','jardin:agosto2026:doneDevos',
-    'jardin:agosto-2026:doneDevos','jardin:agosto:doneDevos'
-  ];
-  let merged=Array.isArray(current)?current.map(Number):[];
-  legacyKeys.forEach(key=>{
-    try{
-      const raw=localStorage.getItem(key);
-      if(raw!==null){
-        const value=JSON.parse(raw);
-        if(Array.isArray(value))merged.push(...value.map(Number));
-      }
-    }catch(e){}
-  });
-  merged=[...new Set(merged.filter(n=>Number.isInteger(n)&&n>=0&&n<devos.length))];
-  set('doneDevos',merged);
-  return merged;
-}
 function renderDevos(){
-  const done=normalizeDevoProgress();
-  const prayed=(get('momentPrayed',[])||[]).map(Number);
+  const doneRaw=get('doneDevos',[]);
+  const prayedRaw=get('momentPrayed',[]);
   const decisions=get('momentDecisions',{})||{};
   const notes=get('momentNotes',{})||{};
-  const box=el('devoBox'); if(!box)return;
-  box.innerHTML=devos.map((d,i)=>{
+  const done=Array.isArray(doneRaw)?doneRaw.map(Number).filter(Number.isInteger):[];
+  const prayed=Array.isArray(prayedRaw)?prayedRaw.map(Number).filter(Number.isInteger):[];
+  const box=el('devoBox');
+  if(!box)return;
+
+  let cards='';
+  devos.forEach((d,i)=>{
     const completed=done.includes(i);
-    const inProgress=!completed&&(prayed.includes(i)||Boolean(decisions[i])||Boolean(notes[i]));
-    const status=completed?'Completado ✓':inProgress?'En progreso':'Por comenzar';
-    const bloom=completed?'🌸':inProgress?'🌷':'🌱';
-    const buttonText=completed?'Volver a leer':inProgress?'Continuar mi momento':'Comenzar mi momento';
-    return `<article class="momentDayCard ${completed?'done':inProgress?'inProgress':''}">
-      <div class="momentDayTop"><span class="badge">Día ${d.day}</span><span class="momentStatus">${status}</span></div>
-      <div class="momentDayBloom">${bloom}</div>
-      <h3>${d.title}</h3><p class="momentVersePreview">${d.verse}</p>
-      ${decisions[i]?`<span class="momentDecisionPreview">${escapeHtml(decisions[i])}</span>`:''}
-      <button class="primary" onclick="openMoment(${i},0)">${buttonText}</button>
-    </article>`;
-  }).join('');
+    const inProgress=!completed && (prayed.includes(i) || Boolean(decisions[i]) || Boolean(notes[i]));
+    const status=completed?'Completado ✓':(inProgress?'En progreso':'Por comenzar');
+    const bloom=completed?'🌸':(inProgress?'🌷':'🌱');
+    const buttonText=completed?'Volver a leer':(inProgress?'Continuar mi momento':'Comenzar mi momento');
+    const stateClass=completed?'done':(inProgress?'inProgress':'');
+    const decision=decisions[i]
+      ? '<span class="momentDecisionPreview">'+escapeHtml(decisions[i])+'</span>'
+      : '';
+
+    cards += '<article class="momentDayCard '+stateClass+'">'
+      + '<div class="momentDayTop"><span class="badge">Día '+d.day+'</span>'
+      + '<span class="momentStatus">'+status+'</span></div>'
+      + '<div class="momentDayBloom">'+bloom+'</div>'
+      + '<h3>'+d.title+'</h3>'
+      + '<p class="momentVersePreview">'+d.verse+'</p>'
+      + decision
+      + '<button class="primary" onclick="openMoment('+i+',0)">'+buttonText+'</button>'
+      + '</article>';
+  });
+  box.innerHTML=cards;
 }
 let activeMoment=0, activeMomentStep=0;
 const momentChoices=['Hoy confiaré','Hoy perdonaré','Hoy descansaré en Dios','Hoy seré agradecida','Hoy obedeceré'];
@@ -678,3 +671,5 @@ async function shareHopeTopic(id){
   try{if(navigator.share)await navigator.share({title:t.title,text});else if(navigator.clipboard){await navigator.clipboard.writeText(text);alert('Contenido copiado.');}}catch(e){}
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(renderHopeBank,120));
+
+window.addEventListener('load',()=>setTimeout(renderDevos,80));
