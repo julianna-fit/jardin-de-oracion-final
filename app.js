@@ -47,16 +47,46 @@ function migrateAugustStorage(){
 migrateAugustStorage();
 function el(id){return document.getElementById(id)}
 function show(id){if(id==='esperanza')setTimeout(renderHopeBank,0);if(id==='promesas')setTimeout(initializePromiseBox,0);if(id==='insignias')setTimeout(renderBadges,0);if(id==='biblioteca')setTimeout(updateLibraryProgress,0);if(id==='certificado')setTimeout(updateCertificateUnlock,0);document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); const target=el(id); if(target) target.classList.add('active'); if(id==='devocional')renderDevos(); if(id==='juegos')renderGames(); if(id==='calendario')renderCalendar(); if(id==='promesas')renderPromises(); if(id==='anio')renderBibleYear(); if(id==='progreso')renderProgress(); if(id==='diario')renderJournal(); window.scrollTo({top:0,behavior:'smooth'})}
+function normalizeDevoProgress(){
+  const current=get('doneDevos',[]);
+  const legacyKeys=[
+    'doneDevos','agosto2026_doneDevos','jardin:agosto2026:doneDevos',
+    'jardin:agosto-2026:doneDevos','jardin:agosto:doneDevos'
+  ];
+  let merged=Array.isArray(current)?current.map(Number):[];
+  legacyKeys.forEach(key=>{
+    try{
+      const raw=localStorage.getItem(key);
+      if(raw!==null){
+        const value=JSON.parse(raw);
+        if(Array.isArray(value))merged.push(...value.map(Number));
+      }
+    }catch(e){}
+  });
+  merged=[...new Set(merged.filter(n=>Number.isInteger(n)&&n>=0&&n<devos.length))];
+  set('doneDevos',merged);
+  return merged;
+}
 function renderDevos(){
-  const done=get('doneDevos',[]), prayed=get('momentPrayed',[]), decisions=get('momentDecisions',{});
+  const done=normalizeDevoProgress();
+  const prayed=(get('momentPrayed',[])||[]).map(Number);
+  const decisions=get('momentDecisions',{})||{};
+  const notes=get('momentNotes',{})||{};
   const box=el('devoBox'); if(!box)return;
-  box.innerHTML=devos.map((d,i)=>`<article class="momentDayCard ${done.includes(i)?'done':''}">
-    <div class="momentDayTop"><span class="badge">Día ${d.day}</span><span class="momentStatus">${done.includes(i)?'Florecido ✓':(prayed.includes(i)?'Oración hecha':'Por comenzar')}</span></div>
-    <div class="momentDayBloom">${done.includes(i)?'🌸':prayed.includes(i)?'🌷':'🌱'}</div>
-    <h3>${d.title}</h3><p class="momentVersePreview">${d.verse}</p>
-    ${decisions[i]?`<span class="momentDecisionPreview">${escapeHtml(decisions[i])}</span>`:''}
-    <button class="primary" onclick="openMoment(${i},0)">${done.includes(i)?'Volver a este momento':'Comenzar mi momento'}</button>
-  </article>`).join('');
+  box.innerHTML=devos.map((d,i)=>{
+    const completed=done.includes(i);
+    const inProgress=!completed&&(prayed.includes(i)||Boolean(decisions[i])||Boolean(notes[i]));
+    const status=completed?'Completado ✓':inProgress?'En progreso':'Por comenzar';
+    const bloom=completed?'🌸':inProgress?'🌷':'🌱';
+    const buttonText=completed?'Volver a leer':inProgress?'Continuar mi momento':'Comenzar mi momento';
+    return `<article class="momentDayCard ${completed?'done':inProgress?'inProgress':''}">
+      <div class="momentDayTop"><span class="badge">Día ${d.day}</span><span class="momentStatus">${status}</span></div>
+      <div class="momentDayBloom">${bloom}</div>
+      <h3>${d.title}</h3><p class="momentVersePreview">${d.verse}</p>
+      ${decisions[i]?`<span class="momentDecisionPreview">${escapeHtml(decisions[i])}</span>`:''}
+      <button class="primary" onclick="openMoment(${i},0)">${buttonText}</button>
+    </article>`;
+  }).join('');
 }
 let activeMoment=0, activeMomentStep=0;
 const momentChoices=['Hoy confiaré','Hoy perdonaré','Hoy descansaré en Dios','Hoy seré agradecida','Hoy obedeceré'];
@@ -80,9 +110,14 @@ function renderMomentStep(){
   box.innerHTML=`<div class="momentProgress">${dots}</div>${body}<div class="momentNav">${activeMomentStep?'<button class="secondary" onclick="momentBack()">← Atrás</button>':'<span></span>'}<button class="primary" onclick="momentNext()">${activeMomentStep===4?'Finalizar mi encuentro':'Continuar →'}</button></div>`;
 }
 function finishMoment(){
-  const i=activeMoment;let done=get('doneDevos',[]);if(!done.includes(i))done.push(i);set('doneDevos',done);
-  const box=el('momentContent');if(box)box.innerHTML=`<div class="momentFinish"><div class="petals">🌸　🌷　🌸</div><span class="momentKicker">ENCUENTRO COMPLETADO</span><h2>Que Su paz permanezca contigo</h2><p>Has terminado tu momento con Dios de hoy. La semilla que recibiste seguirá creciendo en tu corazón.</p><button class="primary" onclick="closeMoment()">Volver a mi jardín</button></div>`;
-  renderCalendar();renderProgress();updateLibraryProgress();
+  const i=activeMoment;
+  let done=get('doneDevos',[]);
+  done=done.map(Number).filter(Number.isInteger);
+  if(!done.includes(i))done.push(i);
+  set('doneDevos',[...new Set(done)]);
+  const box=el('momentContent');
+  if(box)box.innerHTML=`<div class="momentFinish"><div class="petals">🌸　🌷　🌸</div><span class="momentKicker">ENCUENTRO COMPLETADO</span><h2>Que Su paz permanezca contigo</h2><p class="momentFinishMessage">Has terminado tu momento con Dios de hoy. La semilla que recibiste seguirá creciendo en tu corazón. Que el Señor fortalezca tu fe, renueve tu esperanza y te acompañe en cada paso de este nuevo día.</p><button class="primary" onclick="closeMoment()">🌿 Volver a mi jardín</button></div>`;
+  renderDevos();renderCalendar();renderProgress();updateLibraryProgress();
 }
 function toggleDevo(i){
   let a=get('doneDevos',[]);

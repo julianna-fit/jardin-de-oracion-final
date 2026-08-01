@@ -1,0 +1,7 @@
+VERSIÓN 8.4
+1. Texto inclusivo para toda mujer en la introducción de devocionales.
+2. Nuevo texto de “Momentos con Dios”.
+3. Mensaje final legible en modo noche.
+4. Estados visibles: Por comenzar, En progreso y Completado.
+5. Botones: Comenzar, Continuar y Volver a leer.
+6. Migración adicional del progreso guardado en versiones anteriores.
