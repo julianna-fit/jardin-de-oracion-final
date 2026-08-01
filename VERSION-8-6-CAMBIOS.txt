@@ -1,0 +1,5 @@
+VERSIÓN 8.6
+- Los 31 devocionales están escritos directamente en index.html.
+- Se muestran aunque JavaScript tarde o falle al cargar.
+- app-v86.js actualiza los estados Por comenzar, En progreso y Completado.
+- Nuevo nombre de JavaScript para evitar la caché anterior.
