@@ -1004,3 +1004,38 @@ nav{
 .baseVersionBadge{flex:0 0 auto;width:82px;height:82px;border-radius:50%;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#a36b80,#765064);color:#fff;font-weight:900;font-size:.78rem;letter-spacing:.07em;box-shadow:0 8px 18px rgba(77,48,61,.2)}
 .permanentBaseCard h3{margin:0 0 6px;color:#684957}.permanentBaseCard p{margin:0;color:#715d66;line-height:1.5}
 @media(max-width:580px){.permanentBaseCard{align-items:flex-start}.baseVersionBadge{width:66px;height:66px;font-size:.68rem}}
+
+/* VERSIÓN 8 — Banco de Esperanza 2.0 */
+.hopeHeroV8{padding:32px 22px;border-radius:30px;text-align:center;background:linear-gradient(145deg,#f7e5e9,#f5eadf,#e9e2ef);border:1px solid rgba(154,104,124,.18);box-shadow:0 18px 38px rgba(80,50,63,.11);margin-bottom:18px}
+.hopeHeroV8>span{font-size:.68rem;font-weight:900;letter-spacing:.16em;color:#9f687c}
+.hopeHeroV8 h2{font:700 clamp(1.8rem,5vw,2.55rem) Georgia,serif;color:#694956;margin:9px 0}
+.hopeHeroV8 p{max-width:680px;margin:0 auto 18px;color:#735f68;line-height:1.58}
+.hopeHeroV8 input{max-width:680px;margin:auto;background:rgba(255,255,255,.94);border:1px solid rgba(151,100,120,.22);border-radius:18px;padding:15px 17px;font-size:1rem;box-shadow:0 8px 18px rgba(75,48,59,.07)}
+.hopeCategoryFilters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 10px}
+.hopeCategoryFilters button{border:1px solid rgba(151,100,120,.2);background:#fff7f4;color:#765362;border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}
+.hopeCategoryFilters button.active{background:#875b6c;color:white;border-color:#875b6c}
+.hopeResultsCount{text-align:center;color:#876c77;font-size:.84rem;margin:8px 0 16px}
+.hopeTopicsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px}
+.hopeTopicCardV8{padding:21px;border-radius:24px;background:rgba(255,255,255,.94);border:1px solid rgba(155,104,123,.16);box-shadow:0 12px 28px rgba(80,50,63,.09);display:flex;flex-direction:column;align-items:flex-start}
+.hopeTopicIconV8{font-size:2.25rem;margin-bottom:10px}
+.hopeTopicCategoryV8{display:inline-block;padding:6px 9px;border-radius:999px;background:#f3e4e9;color:#956579;font-size:.66rem;font-weight:900;letter-spacing:.08em}
+.hopeTopicCardV8 h3{font:700 1.3rem Georgia,serif;color:#674856;margin:10px 0 8px}
+.hopeTopicCardV8 p{color:#725f67;line-height:1.5;flex:1}
+.hopeTopicVerseV8{font-size:.8rem;font-weight:850;color:#9b6a7c;margin:8px 0 14px}
+.hopeTopicCardV8 .primary{width:100%}
+.hopeModal{position:fixed;inset:0;z-index:10000;background:rgba(42,28,35,.62);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(7px)}
+.hopeModal.open{display:flex}
+body.hopeModalOpen{overflow:hidden}
+.hopeModalPanel{position:relative;width:min(760px,100%);max-height:91vh;overflow:auto;padding:30px 25px;border-radius:28px;background:linear-gradient(160deg,#fff,#fff8f4);box-shadow:0 30px 70px rgba(32,19,25,.32)}
+.hopeModalClose{position:sticky;top:0;float:right;z-index:2;width:42px;height:42px;border:0;border-radius:50%;background:#f0e0e6;color:#744f5e;font-size:1.7rem;cursor:pointer}
+.hopeModalIcon{font-size:3rem;margin-top:4px}
+.hopeModalPanel h2{font:700 clamp(2rem,6vw,3rem) Georgia,serif;color:#674755;margin:9px 0 18px}
+.hopeKeyVerse{padding:18px;border-radius:19px;background:linear-gradient(145deg,#f7e6eb,#fff4e9);border-left:5px solid #c99663;margin:16px 0}
+.hopeKeyVerse b,.hopeKeyVerse span{display:block}.hopeKeyVerse span{margin-top:6px;color:#765563;font-weight:800}
+.hopeDetailBlock{padding:18px 0;border-bottom:1px solid rgba(151,103,121,.14)}
+.hopeDetailBlock h3{margin:0 0 8px;color:#704e5d}.hopeDetailBlock p{margin:0;color:#66555d;line-height:1.65}
+.hopeVerseChips{display:flex;gap:8px;flex-wrap:wrap}.hopeVerseChips span{padding:8px 11px;border-radius:999px;background:#f3e5e9;color:#765362;font-weight:750;font-size:.8rem}
+.hopePrayerBlock{background:#f8eef1;border-radius:18px;padding:18px;margin-top:14px;border-bottom:0}
+.hopePromiseBlock{background:#fff5e7;border-radius:18px;padding:18px;margin-top:14px;border-bottom:0}
+.hopeModalActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}
+@media(max-width:560px){.hopeHeroV8{padding:25px 14px}.hopeTopicsGrid{grid-template-columns:1fr}.hopeModalPanel{padding:24px 17px}.hopeModalActions>*{width:100%}}

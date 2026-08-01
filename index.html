@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jardín de Oración — Agosto 2026</title>
-<link rel="stylesheet" href="styles.css?v=20260731-v7">
+<link rel="stylesheet" href="styles.css?v=20260731-v8-hope">
 <link rel="manifest" href="manifest.json?v=20260731-v7">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46QY175SK2"></script>
 <script>
@@ -316,18 +316,16 @@ gtag('config', 'G-46QY175SK2');
 </section>
 
 
-<section id="esperanza" class="tab">
-  <h2>🤍 Banco de Esperanza</h2>
-  <div class="card center hopeIntro">
-    <h3>Recursos para el momento que estás atravesando</h3>
-    <p>Escoge la situación que más se parece a la tuya. Aquí encontrarás una palabra breve, una acción segura y una promesa bíblica para hoy.</p>
+<section id="esperanza" class="tab hopeBankV8">
+  <div class="hopeHeroV8">
+    <span>BANCO DE ESPERANZA 2.0</span>
+    <h2>🤍 ¿Cómo te sientes hoy?</h2>
+    <p>Busca una palabra o explora los temas. Encontrarás versículos, una reflexión, una oración y un paso de fe para este día.</p>
+    <input id="hopeSearch" type="search" placeholder="Ej.: ansiedad, cansancio, hijos, matrimonio..." oninput="renderHopeBank()">
   </div>
-  <div class="hopeGrid">
-    <div class="card hopeCard"><h3>💍 Dificultades en el matrimonio</h3><p>No tienes que cargar sola con una relación difícil. Ora, busca conversaciones respetuosas, establece límites sanos y pide apoyo sabio.</p><p class="verse"><b>Santiago 1:5</b></p></div>
-    <div class="card hopeCard"><h3>👩‍👧 Preocupación por los hijos</h3><p>Escucha antes de corregir, protege la paz del hogar y recuerda que Dios ama a tus hijos más profundamente de lo que puedes imaginar.</p><p class="verse"><b>Isaías 54:13</b></p></div>
-    <div class="card hopeCard"><h3>🕊️ Después del divorcio</h3><p>Tu duelo merece tiempo y compasión. El final de una relación no es el final de tu identidad, tu propósito ni tu futuro con Dios.</p><p class="verse"><b>Salmo 147:3</b></p></div>
-    <div class="card hopeCard"><h3>🌷 Soltería con propósito</h3><p>Tu vida no está en pausa. Este tiempo puede llenarse de crecimiento, amistades sanas, servicio, descanso y sueños nuevos.</p><p class="verse"><b>Colosenses 2:10</b></p></div>
-  </div>
+  <div id="hopeCategoryFilters" class="hopeCategoryFilters"></div>
+  <div id="hopeResultsCount" class="hopeResultsCount"></div>
+  <div id="hopeTopicsGrid" class="hopeTopicsGrid"></div>
   <div class="card safetyNote"><h3>🛡️ Tu seguridad importa</h3><p>La fe nunca exige soportar violencia, amenazas, coerción o control. En una situación de peligro, aléjate a un lugar seguro y busca ayuda inmediata de personas confiables o de los servicios de emergencia de tu localidad.</p></div>
 </section>
 
@@ -611,6 +609,12 @@ gtag('config', 'G-46QY175SK2');
   <input type="text" name="fecha">
 </form>
 <script src="app-core.js?v=20260731-v7"></script>
-  <script src="app.js?v=20260731-v7"></script>
+  <script src="app.js?v=20260731-v8-hope"></script>
+<div id="hopeModal" class="hopeModal" aria-hidden="true">
+  <div class="hopeModalPanel">
+    <button class="hopeModalClose" type="button" onclick="closeHopeTopic()" aria-label="Cerrar">×</button>
+    <div id="hopeModalContent"></div>
+  </div>
+</div>
 </body>
 </html>
