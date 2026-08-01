@@ -1,0 +1,5 @@
+VERSIÓN 8.3
+- Corrección aplicada al selector real: body.time-night
+- Texto oscuro visible dentro de tarjetas claras
+- Menú legible en modo noche
+- Nuevo archivo styles-v83.css para evitar caché
